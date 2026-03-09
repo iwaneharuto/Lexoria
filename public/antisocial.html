@@ -9,21 +9,17 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--gold2:#d4af72;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8}
-/* NAV */
 nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
 .logo span{color:var(--gold)}
 .back{font-size:.78rem;color:var(--slate);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:6px;transition:color .2s}
 .back:hover{color:var(--ink)}
-/* LAYOUT */
 .wrap{max-width:760px;margin:0 auto;padding:68px 24px 100px}
-/* HEADER */
 .doc-hd{margin-bottom:52px;padding-bottom:36px;border-bottom:2px solid var(--border)}
 .ey{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .ey::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
 .doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
 .doc-date{font-size:.74rem;color:var(--slate)}
-/* SECTIONS */
 .sec{margin-bottom:40px}
 .sec h2{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:16px}
 .sec p{font-size:.86rem;color:#374151;line-height:1.95;margin-bottom:10px}
@@ -32,7 +28,9 @@ nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);paddi
 .sec li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:3px}
 .sec a{color:var(--gold);text-decoration:underline}
 .lead{background:#fff;border-left:4px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px;margin-bottom:44px;font-size:.86rem;color:var(--ink2);line-height:1.95}
-/* FOOTER */
+.contact-box{background:#fff;border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin-top:8px}
+.contact-box .email{font-size:1rem;font-weight:600;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:8px}
+.contact-box .note{font-size:.78rem;color:var(--slate);line-height:1.8}
 footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .fl{display:flex;gap:20px;flex-wrap:wrap}
 .fl a{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
@@ -53,7 +51,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <p class="doc-date">制定日：2025年1月1日</p>
   </div>
   <div class="lead">
-    IntakeAI（以下「当社」）は、市民社会の秩序や安全に脅威を与える反社会的勢力との関係を一切遮断し、これらの勢力を利用したサービスの提供を断固として拒絶します。当社はこの方針を全役員・従業員および業務委託先が遵守するよう徹底します。
+    IntakeAI（以下「当社」）は、市民社会の秩序や安全に脅威を与える反社会的勢力との関係を一切遮断し、これらの勢力を利用したサービスの提供を断固として拒絶します。
   </div>
   <div class="sec">
     <h2>1. 基本姿勢</h2>
@@ -65,18 +63,21 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <li>反社会的勢力による本サービスの利用申込みを拒否し、既に利用している場合は契約を解除します。</li>
       <li>反社会的勢力からの不当要求・圧力に対しては、断固として拒絶します。</li>
       <li>反社会的勢力への資金提供・便宜供与は、いかなる理由があっても行いません。</li>
-      <li>不当要求が生じた場合は、警察・暴力追放運動推進センター・弁護士等の外部専門機関と速やかに連携して対応します。</li>
+      <li>不当要求が生じた場合は、警察・暴力追放運動推進センター・弁護士等の外部専門機関と連携して対応します。</li>
       <li>反社会的勢力との関係遮断にあたっては、法的措置を含むあらゆる手段を講じます。</li>
     </ul>
   </div>
   <div class="sec">
     <h2>3. 利用規約との関係</h2>
-    <p>反社会的勢力による本サービスの利用は、<a href="./terms.html">利用規約</a>第4条（禁止事項）により禁止されています。当社は、利用者が反社会的勢力に該当すると判明した場合、予告なくサービスの提供を停止し、契約を解除することができます。</p>
+    <p>反社会的勢力による本サービスの利用は、<a href="./terms.html">利用規約</a>第7条（禁止事項）により禁止されています。当社は、利用者が反社会的勢力に該当すると判明した場合、予告なくサービスの提供を停止し、契約を解除することができます。</p>
   </div>
   <div class="sec">
-    <h2>4. お問い合わせ</h2>
-    <p>本方針に関するお問い合わせは以下までご連絡ください。</p>
-    <p>📧 <a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a></p>
+    <h2>お問い合わせ</h2>
+    <p>本ポリシーに関するご質問・ご要望は、以下のメールアドレスまでお気軽にご連絡ください。通常2営業日以内にご返答いたします。</p>
+    <div class="contact-box">
+      <a class="email" href="mailto:iwaharu.422@outlook.jp">📧 iwaharu.422@outlook.jp</a>
+      <p class="note">受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）<br>返答まで2営業日程度お時間をいただく場合があります。</p>
+    </div>
   </div>
 </div>
 <footer>
