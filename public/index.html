@@ -310,6 +310,20 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;letter-spacing:.04em}
 .footer-link:hover{color:rgba(255,255,255,.8)}
 
+/* ── FAQ ── */
+.faq-sec{background:#fff;padding:100px 48px;border-top:1px solid var(--border)}
+.faq-inner{max-width:900px;margin:0 auto}
+.faq-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:48px;margin-top:0}
+.faq-cat-title{font-family:"Noto Serif JP",serif;font-size:.88rem;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.faq-cat-title::before{content:"";display:block;width:20px;height:1px;background:var(--gold)}
+.faq-item{border-bottom:1px solid var(--border);padding:0}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:16px 0;font-size:.88rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:inherit;line-height:1.6}
+.faq-q .arrow{flex-shrink:0;font-size:.75rem;color:var(--gold);transition:transform .3s}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-a{font-size:.82rem;color:var(--slate);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:16px}
+.faq-a a{color:var(--gold);text-decoration:underline}
+
 /* responsive */
 @media(max-width:900px){
   nav{padding:16px 20px}
@@ -327,6 +341,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   footer{padding:24px;flex-direction:column;text-align:center}
   .pricing-grid{grid-template-columns:1fr}
   .pricing-sec{padding:64px 24px}
+  .faq-sec{padding:64px 24px}
+  .faq-cats{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -474,6 +490,118 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録する（月額 ¥9,800）→</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="faq-sec">
+    <div class="faq-inner">
+      <div class="sec-ey" style="justify-content:center">FAQ</div>
+      <h2 class="sec-ttl" style="text-align:center;margin-bottom:56px">よくあるお問い合わせ</h2>
+      <div class="faq-cats">
+
+        <!-- サービスについて -->
+        <div>
+          <div class="faq-cat-title">🗂 サービスについて</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">IntakeAIはどのようなサービスですか？<span class="arrow">▼</span></button>
+            <div class="faq-a">弁護士・法律事務所向けに、初回相談メモをAIが自動で整理するWebツールです。事実関係・依頼者の主張・想定される論点・追加で確認すべき事項の4項目に分類し、PDF出力まで対応しています。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">無料プランと有料プランの違いは何ですか？<span class="arrow">▼</span></button>
+            <div class="faq-a">無料プランはAI整理を月5件まで利用できます。有料プラン（月額¥9,800）では利用回数が無制限になり、関連条文の自動引用・優先サポートなど高精度な分析が利用できます。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">法的助言として使えますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">いいえ。本サービスはあくまでも情報整理の補助ツールです。AI出力は参考情報であり、法的助言・法律意見書の代替にはなりません。最終的な法的判断は弁護士ご自身が行ってください。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">架空の相談内容で試せますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">はい、架空の相談内容でお試しいただけます。まずはダミーの事案でご体験いただくことを推奨しています。実際の依頼者情報や機密情報の入力はお控えください。</div>
+          </div>
+        </div>
+
+        <!-- データ・セキュリティ -->
+        <div>
+          <div class="faq-cat-title">🔒 データ・セキュリティ</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">入力した相談内容はどこに保存されますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">入力された相談内容はサーバーに保存されません。AI処理後はデータが保持されません。履歴として保存する場合も、お使いのブラウザ内（ローカルストレージ）にのみ記録されます。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">弁護士秘密との関係はどうなりますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">本サービスはサーバーに相談内容を保存しないため、情報漏洩のリスクを最小化しています。ただし、依頼者の機密情報の入力に際しては各事務所の情報管理規程・弁護士倫理に従ってご判断ください。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">通信は暗号化されていますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">はい。本サービスはHTTPS通信を使用しており、ブラウザとサーバー間の通信は暗号化されています。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">アクセス解析（Google Analytics）は使っていますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">はい、サービス改善のためGoogle Analytics 4を利用しています。ただし、入力された相談内容はGA4に送信されません。収集するのはページ閲覧数やボタンのクリック数など匿名の利用統計のみです。詳しくは<a href="./privacy.html" target="_blank">プライバシーポリシー</a>をご参照ください。</div>
+          </div>
+        </div>
+
+        <!-- 支払いと請求 -->
+        <div>
+          <div class="faq-cat-title">💳 支払いと請求</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">支払い方法は何が使えますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">クレジットカード（Visa・Mastercard・American Express・JCB）がご利用いただけます。決済はStripeが処理し、カード情報は本サービスのサーバーに保存されません。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">請求はいつ行われますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">有料プラン登録日を起算日として、毎月同日に自動で請求されます。請求書はStripeから登録メールアドレスへ送付されます。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">いつでも解約できますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。解約はStripeのカスタマーポータル、またはお問い合わせメールにてご連絡ください。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">領収書・適格請求書は発行されますか？<span class="arrow">▼</span></button>
+            <div class="faq-a">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ</a>ください。</div>
+          </div>
+        </div>
+
+        <!-- 技術・動作環境 -->
+        <div>
+          <div class="faq-cat-title">⚙️ 技術・動作環境</div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">対応しているブラウザは何ですか？<span class="arrow">▼</span></button>
+            <div class="faq-a">Google Chrome・Safari・Microsoft Edge・Firefoxの最新バージョンに対応しています。Internet Explorerは非対応です。スマートフォン・タブレットからもご利用いただけます。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">アプリのインストールは必要ですか？<span class="arrow">▼</span></button>
+            <div class="faq-a">不要です。インターネットブラウザからアクセスするだけでご利用いただけます。インストール・設定等の作業は一切ありません。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">AI整理の精度はどの程度ですか？<span class="arrow">▼</span></button>
+            <div class="faq-a">大規模言語モデル（LLM）を使用しており、一般的な法律相談のメモ整理には高い精度を発揮します。ただし、AI出力の正確性を完全に保証するものではなく、必ず弁護士ご自身による確認が必要です。有料プランではより高精度なモデルを使用します。</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">問題が発生した場合の問い合わせ先は？<span class="arrow">▼</span></button>
+            <div class="faq-a"><a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a> までメールにてご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -681,6 +809,15 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 <div class="toast" id="toast"></div>
 
 <script>
+// ── FAQ accordion ──────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // 同カテゴリ内の他を閉じる
+  item.closest('div').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
 // ── analytics ─────────────────────────
 function track(eventName, params) {
   if (typeof gtag === 'function') {
