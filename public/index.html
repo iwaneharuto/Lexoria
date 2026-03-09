@@ -310,20 +310,20 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;letter-spacing:.04em}
 .footer-link:hover{color:rgba(255,255,255,.8)}
 
-/* ── FAQ ── */
-.faq-sec{background:#fff;padding:100px 48px;border-top:1px solid var(--border)}
-.faq-inner{max-width:900px;margin:0 auto}
-.faq-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:48px;margin-top:0}
-.faq-cat-title{font-family:"Noto Serif JP",serif;font-size:.88rem;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.faq-cat-title::before{content:"";display:block;width:20px;height:1px;background:var(--gold)}
-.faq-item{border-bottom:1px solid var(--border);padding:0}
-.faq-q{width:100%;text-align:left;background:none;border:none;padding:16px 0;font-size:.88rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:inherit;line-height:1.6}
-.faq-q .arrow{flex-shrink:0;font-size:.75rem;color:var(--gold);transition:transform .3s}
-.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
-.faq-a{font-size:.82rem;color:var(--slate);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
-.faq-item.open .faq-a{max-height:300px;padding-bottom:16px}
-.faq-a a{color:var(--gold);text-decoration:underline}
 
+/* ── FAQ ── */
+.faq-sec{background:var(--bg);padding:100px 48px;border-top:1px solid var(--border)}
+.faq-wrap{max-width:1000px;margin:0 auto}
+.faq-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 64px;margin-top:0}
+.faq-cat-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.faq-cat-label::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-btn{width:100%;text-align:left;background:none;border:none;padding:15px 0;font-size:.86rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:inherit;line-height:1.6}
+.faq-chevron{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--gold);transition:transform .3s,background .2s}
+.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--gold);color:#fff;border-color:var(--gold)}
+.faq-ans{font-size:.8rem;color:var(--slate);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .35s ease,padding-bottom .3s}
+.faq-item.open .faq-ans{max-height:260px;padding-bottom:14px}
+.faq-ans a{color:var(--gold);text-decoration:underline}
 /* responsive */
 @media(max-width:900px){
   nav{padding:16px 20px}
@@ -341,8 +341,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   footer{padding:24px;flex-direction:column;text-align:center}
   .pricing-grid{grid-template-columns:1fr}
   .pricing-sec{padding:64px 24px}
-  .faq-sec{padding:64px 24px}
-  .faq-cats{grid-template-columns:1fr}
+  .faq-sec{padding:64px 20px}
+  .faq-cats{grid-template-columns:1fr;gap:36px}
 }
 </style>
 </head>
@@ -495,110 +495,94 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   </section>
 
 
-  <!-- FAQ -->
-  <section class="faq-sec">
-    <div class="faq-inner">
-      <div class="sec-ey" style="justify-content:center">FAQ</div>
-      <h2 class="sec-ttl" style="text-align:center;margin-bottom:56px">よくあるお問い合わせ</h2>
+  <!-- ── FAQ ───────────────────────────── -->
+  <section class="faq-sec" id="faq">
+    <div class="faq-wrap">
+      <div class="sec-ey">FAQ</div>
+      <h2 class="sec-ttl">よくあるお問い合わせ</h2>
       <div class="faq-cats">
 
         <!-- サービスについて -->
         <div>
-          <div class="faq-cat-title">🗂 サービスについて</div>
-
+          <div class="faq-cat-label">🗂 サービスについて</div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">IntakeAIはどのようなサービスですか？<span class="arrow">▼</span></button>
-            <div class="faq-a">弁護士・法律事務所向けに、初回相談メモをAIが自動で整理するWebツールです。事実関係・依頼者の主張・想定される論点・追加で確認すべき事項の4項目に分類し、PDF出力まで対応しています。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">IntakeAIとはどのようなサービスですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">弁護士・法律事務所向けに、初回相談メモをAIが自動で4項目（事実関係・依頼者の主張・想定される論点・確認事項）に整理するWebツールです。PDF出力・履歴保存にも対応しています。インストール不要、ブラウザだけで動作します。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">無料プランと有料プランの違いは何ですか？<span class="arrow">▼</span></button>
-            <div class="faq-a">無料プランはAI整理を月5件まで利用できます。有料プラン（月額¥9,800）では利用回数が無制限になり、関連条文の自動引用・優先サポートなど高精度な分析が利用できます。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">無料プランと有料プランの違いは？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">無料プランはAI整理を月5件まで利用できます。有料プラン（月額¥9,800）では利用回数が無制限となり、関連条文の自動引用・より高精度なAIモデルが使用できます。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">法的助言として使えますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">いいえ。本サービスはあくまでも情報整理の補助ツールです。AI出力は参考情報であり、法的助言・法律意見書の代替にはなりません。最終的な法的判断は弁護士ご自身が行ってください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">法的助言として利用できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">いいえ。本サービスはあくまでも情報整理の補助ツールです。AI出力は参考情報であり、法的助言・法律意見書の代替にはなりません。最終的な法的判断は弁護士ご自身が行ってください。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">架空の相談内容で試せますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">はい、架空の相談内容でお試しいただけます。まずはダミーの事案でご体験いただくことを推奨しています。実際の依頼者情報や機密情報の入力はお控えください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">架空の相談内容でも試せますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。架空の相談内容でも機能をフルにお試しいただけます。実際の依頼者情報や機密情報を入力せず、まずはダミーの事案でご体験されることを推奨しています。</div>
           </div>
         </div>
 
         <!-- データ・セキュリティ -->
         <div>
-          <div class="faq-cat-title">🔒 データ・セキュリティ</div>
-
+          <div class="faq-cat-label">🔒 データ・セキュリティ</div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">入力した相談内容はどこに保存されますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">入力された相談内容はサーバーに保存されません。AI処理後はデータが保持されません。履歴として保存する場合も、お使いのブラウザ内（ローカルストレージ）にのみ記録されます。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">入力した相談内容はどこに保存されますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">入力内容はサーバーに保存されません。AI処理後はデータが保持されません。履歴として保存する場合も、お使いのブラウザ内（ローカルストレージ）にのみ記録されます。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">弁護士秘密との関係はどうなりますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">本サービスはサーバーに相談内容を保存しないため、情報漏洩のリスクを最小化しています。ただし、依頼者の機密情報の入力に際しては各事務所の情報管理規程・弁護士倫理に従ってご判断ください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">弁護士秘密との関係はどうなりますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">本サービスはサーバーに相談内容を保存しないため、情報漏洩リスクを最小化しています。ただし、依頼者の機密情報の入力に際しては各事務所の情報管理規程・弁護士倫理に従いご判断ください。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">通信は暗号化されていますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">はい。本サービスはHTTPS通信を使用しており、ブラウザとサーバー間の通信は暗号化されています。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">通信は暗号化されていますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。本サービスはHTTPS通信を使用しており、ブラウザ間の通信は暗号化されています。入力された相談内容がGoogle Analyticsに送信されることはありません。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">アクセス解析（Google Analytics）は使っていますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">はい、サービス改善のためGoogle Analytics 4を利用しています。ただし、入力された相談内容はGA4に送信されません。収集するのはページ閲覧数やボタンのクリック数など匿名の利用統計のみです。詳しくは<a href="./privacy.html" target="_blank">プライバシーポリシー</a>をご参照ください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">他の事務所の情報が見られる心配はありますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">ありません。各アカウントのデータはブラウザのローカルストレージに個別に保存されており、他のユーザーからアクセスすることは一切できません。</div>
           </div>
         </div>
 
         <!-- 支払いと請求 -->
         <div>
-          <div class="faq-cat-title">💳 支払いと請求</div>
-
+          <div class="faq-cat-label">💳 支払いと請求</div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">支払い方法は何が使えますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">クレジットカード（Visa・Mastercard・American Express・JCB）がご利用いただけます。決済はStripeが処理し、カード情報は本サービスのサーバーに保存されません。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">利用できる支払い方法は？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">クレジットカード（Visa・Mastercard・American Express・JCB）がご利用いただけます。決済はStripeが処理し、カード情報は本サービスのサーバーに保存されません。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">請求はいつ行われますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">有料プラン登録日を起算日として、毎月同日に自動で請求されます。請求書はStripeから登録メールアドレスへ送付されます。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">請求はいつ行われますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">有料プラン登録日を起算日として、毎月同日に自動で請求されます。請求書はStripeから登録メールアドレスへ自動送付されます。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">いつでも解約できますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。解約はStripeのカスタマーポータル、またはお問い合わせメールにてご連絡ください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">いつでも解約できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ</a>よりご連絡ください。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">領収書・適格請求書は発行されますか？<span class="arrow">▼</span></button>
-            <div class="faq-a">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="/cdn-cgi/l/email-protection#2c455b4d444d5e5902181e1e6c4359584043434702465c">お問い合わせ</a>ください。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">領収書・適格請求書は発行されますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ</a>ください。</div>
           </div>
         </div>
 
         <!-- 技術・動作環境 -->
         <div>
-          <div class="faq-cat-title">⚙️ 技術・動作環境</div>
-
+          <div class="faq-cat-label">⚙️ 技術・動作環境</div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">対応しているブラウザは何ですか？<span class="arrow">▼</span></button>
-            <div class="faq-a">Google Chrome・Safari・Microsoft Edge・Firefoxの最新バージョンに対応しています。Internet Explorerは非対応です。スマートフォン・タブレットからもご利用いただけます。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">対応しているブラウザは？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">Chrome・Safari・Edge・Firefoxの最新バージョンに対応しています。スマートフォン・タブレットからもご利用いただけます。Internet Explorerは非対応です。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">アプリのインストールは必要ですか？<span class="arrow">▼</span></button>
-            <div class="faq-a">不要です。インターネットブラウザからアクセスするだけでご利用いただけます。インストール・設定等の作業は一切ありません。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">アプリのインストールは必要ですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">不要です。ブラウザからURLにアクセスするだけでご利用いただけます。インストールや初期設定等の作業は一切ありません。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">AI整理の精度はどの程度ですか？<span class="arrow">▼</span></button>
-            <div class="faq-a">大規模言語モデル（LLM）を使用しており、一般的な法律相談のメモ整理には高い精度を発揮します。ただし、AI出力の正確性を完全に保証するものではなく、必ず弁護士ご自身による確認が必要です。有料プランではより高精度なモデルを使用します。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">AI整理にかかる時間はどのくらいですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">通常10〜30秒程度で整理結果が表示されます。有料プランは高精度モデルを使用するため、やや長くなる場合があります。</div>
           </div>
-
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">問題が発生した場合の問い合わせ先は？<span class="arrow">▼</span></button>
-            <div class="faq-a"><a href="/cdn-cgi/l/email-protection#8fe6f8eee7eefdfaa1bbbdbdcfe0fafbe3e0e0e4a1e5ff"><span class="__cf_email__" data-cfemail="8be2fceae3eaf9fea5bfb9b9cbe4feffe7e4e4e0a5e1fb">[email&#160;protected]</span></a> までメールにてご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+            <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans"><a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a> までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
           </div>
         </div>
 
@@ -809,13 +793,12 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── FAQ accordion ──────────────────────
-function toggleFaq(btn) {
+function faqOpen(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
-  // 同カテゴリ内の他を閉じる
-  item.closest('div').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  item.closest('.faq-cats').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
 
@@ -1290,4 +1273,9 @@ document.getElementById('upg-modal').addEventListener('click', function(e) {
   if (e.target === this) closeUpgrade();
 });
 
-// ── scroll
+// ── scroll animations ──────────────────
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }), {threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
