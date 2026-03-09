@@ -9,21 +9,17 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--gold2:#d4af72;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8}
-/* NAV */
 nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
 .logo span{color:var(--gold)}
 .back{font-size:.78rem;color:var(--slate);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:6px;transition:color .2s}
 .back:hover{color:var(--ink)}
-/* LAYOUT */
 .wrap{max-width:760px;margin:0 auto;padding:68px 24px 100px}
-/* HEADER */
 .doc-hd{margin-bottom:52px;padding-bottom:36px;border-bottom:2px solid var(--border)}
 .ey{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .ey::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
 .doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
 .doc-date{font-size:.74rem;color:var(--slate)}
-/* SECTIONS */
 .sec{margin-bottom:40px}
 .sec h2{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:16px}
 .sec p{font-size:.86rem;color:#374151;line-height:1.95;margin-bottom:10px}
@@ -32,7 +28,9 @@ nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);paddi
 .sec li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:3px}
 .sec a{color:var(--gold);text-decoration:underline}
 .lead{background:#fff;border-left:4px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px;margin-bottom:44px;font-size:.86rem;color:var(--ink2);line-height:1.95}
-/* FOOTER */
+.contact-box{background:#fff;border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin-top:8px}
+.contact-box .email{font-size:1rem;font-weight:600;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:8px}
+.contact-box .note{font-size:.78rem;color:var(--slate);line-height:1.8}
 footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .fl{display:flex;gap:20px;flex-wrap:wrap}
 .fl a{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
@@ -60,7 +58,17 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <p>本利用規約（以下「本規約」）は、IntakeAI（以下「本サービス」）の利用に関する条件を定めるものです。本サービスをご利用いただくことで、本規約に同意したものとみなします。</p>
   </div>
   <div class="sec">
-    <h2>第2条（本サービスの性質）</h2>
+    <h2>第2条（アカウント）</h2>
+    <ul>
+      <li>本サービスのご利用にはアカウント登録が必要です。</li>
+      <li>登録情報は正確・最新の情報を入力してください。</li>
+      <li>アカウントの管理は利用者の責任において行ってください。</li>
+      <li>アカウントの不正利用が判明した場合は直ちにご連絡ください。</li>
+      <li>1人の利用者が複数のアカウントを保有することを禁止します。</li>
+    </ul>
+  </div>
+  <div class="sec">
+    <h2>第3条（本サービスの性質）</h2>
     <ul>
       <li>本サービスは情報整理を補助するためのツールであり、法的助言や法的結論を提供するものではありません。</li>
       <li>AI出力の正確性・完全性・適法性を保証するものではありません。</li>
@@ -68,7 +76,21 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </ul>
   </div>
   <div class="sec">
-    <h2>第3条（利用者の責任）</h2>
+    <h2>第4条（料金・支払い）</h2>
+    <ul>
+      <li>無料プランは月5件までAI整理をご利用いただけます。</li>
+      <li>有料プラン（月額¥9,800）は登録日を起算日として毎月自動更新されます。</li>
+      <li>支払いはStripeを通じたクレジットカード決済に限ります。</li>
+      <li>月途中での解約による日割り返金は行いません。</li>
+      <li>料金は予告のうえ変更する場合があります。</li>
+    </ul>
+  </div>
+  <div class="sec">
+    <h2>第5条（解約）</h2>
+    <p>有料プランはいつでも解約できます。解約後は次回更新日まで有料機能をご利用いただけます。解約をご希望の場合は下記お問い合わせ先までご連絡ください。</p>
+  </div>
+  <div class="sec">
+    <h2>第6条（利用者の責任）</h2>
     <ul>
       <li>入力する情報について、適法に取り扱う責任を負います。</li>
       <li>依頼者等の個人情報・機密情報の取り扱いは、弁護士法・個人情報保護法等の関連法令を遵守してください。</li>
@@ -76,34 +98,45 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </ul>
   </div>
   <div class="sec">
-    <h2>第4条（禁止事項）</h2>
+    <h2>第7条（禁止事項）</h2>
     <ul>
       <li>反社会的勢力またはその関係者による利用</li>
       <li>違法な目的または公序良俗に反する目的での利用</li>
       <li>本サービスのシステムへの不正アクセス・妨害行為</li>
       <li>第三者の権利（著作権・プライバシー等）を侵害する利用</li>
       <li>AI出力をそのまま法的書面・意見書等として使用すること</li>
+      <li>アカウントの第三者への譲渡・共有</li>
+      <li>本サービスのリバースエンジニアリング・複製</li>
     </ul>
   </div>
   <div class="sec">
-    <h2>第5条（サービスの変更・停止）</h2>
+    <h2>第8条（知的財産権）</h2>
+    <p>本サービスに関する知的財産権は運営者に帰属します。利用者が入力した相談メモの著作権は利用者に帰属しますが、サービス改善目的での匿名利用について同意したものとみなします（ただし相談内容はサーバー保存されないため実質的に収集されません）。</p>
+  </div>
+  <div class="sec">
+    <h2>第9条（サービスの変更・停止）</h2>
     <p>運営者は、システムのメンテナンス・改善・その他やむを得ない事由により、予告なくサービスの内容を変更し、または提供を一時停止・終了することがあります。</p>
   </div>
   <div class="sec">
-    <h2>第6条（免責事項）</h2>
+    <h2>第10条（免責事項）</h2>
     <ul>
       <li>運営者に重大な過失がない限り、本サービスの利用により生じた損害について責任を負いません。</li>
       <li>AI出力の誤り・不正確さによる損害について責任を負いません。</li>
       <li>本サービスの停止・中断・終了による損害について責任を負いません。</li>
+      <li>第三者サービス（Stripe・Google Analytics等）に起因する損害について責任を負いません。</li>
     </ul>
   </div>
   <div class="sec">
-    <h2>第7条（準拠法・管轄）</h2>
+    <h2>第11条（準拠法・管轄）</h2>
     <p>本規約は日本法に準拠します。本サービスに関する紛争については、東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
   </div>
   <div class="sec">
     <h2>お問い合わせ</h2>
-    <p>📧 <a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a></p>
+    <p>本ポリシーに関するご質問・ご要望は、以下のメールアドレスまでお気軽にご連絡ください。通常2営業日以内にご返答いたします。</p>
+    <div class="contact-box">
+      <a class="email" href="mailto:iwaharu.422@outlook.jp">📧 iwaharu.422@outlook.jp</a>
+      <p class="note">受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）<br>返答まで2営業日程度お時間をいただく場合があります。</p>
+    </div>
   </div>
 </div>
 <footer>
