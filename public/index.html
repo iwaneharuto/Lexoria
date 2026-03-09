@@ -16,6 +16,15 @@
   gtag('js', new Date());
   gtag('config', 'G-8F7LVCTWX0');
 </script>
+<script>
+// track関数の早期定義（HTML内のonclickより先に読み込む）
+function track(eventName, params) {
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params || {});
+  }
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -368,7 +377,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <div>
         <div class="eyebrow">AI Legal Assistant</div>
         <h1>初回相談メモを<br><em>すばやく整理</em></h1>
-        <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、数分で完了。</p>
+        <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、<strong>平均15秒</strong>で完了。</p>
         <button class="btn-gold" onclick="track('click_try_free',{location:'hero'});go('auth','register')">無料で試す</button>
         <div class="trust-badges">
           <span class="trust-badge"><span class="ti">✏️</span>架空の相談内容で試せます</span>
@@ -405,7 +414,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   </section>
 
   <div class="stats">
-    <div class="stat"><span class="stat-n">3<small style="font-size:1.5rem">分</small></span><div class="stat-l">平均整理時間</div></div>
+    <div class="stat"><span class="stat-n">15<small style="font-size:1.5rem">秒</small></span><div class="stat-l">平均整理時間</div></div>
     <div class="stat"><span class="stat-n">4</span><div class="stat-l">自動生成される整理項目</div></div>
     <div class="stat"><span class="stat-n">PDF</span><div class="stat-l">ワンクリックで出力</div></div>
     <div class="stat"><span class="stat-n">∞</span><div class="stat-l">保存できる相談履歴</div></div>
@@ -470,6 +479,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
             <li>✓ AI整理：月5件まで</li>
             <li>✓ PDF出力</li>
             <li>✓ 履歴保存：直近5件</li>
+            <li>✓ 平均整理時間：約15秒</li>
             <li class="dim">✗ 無制限利用</li>
             <li class="dim">✗ 優先サポート</li>
           </ul>
@@ -483,7 +493,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
             <li>✓ AI整理：<strong>無制限</strong></li>
             <li>✓ PDF出力</li>
             <li>✓ 履歴保存：<strong>無制限</strong></li>
-            <li>✓ 関連条文の自動引用</li>
+            <li>✓ 関連条文の自動引用・判例参照</li>
             <li>✓ 優先サポート</li>
           </ul>
           <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録する（月額 ¥9,800）→</a>
@@ -577,7 +587,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">AI整理にかかる時間はどのくらいですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">通常10〜30秒程度で整理結果が表示されます。有料プランは高精度モデルを使用するため、やや長くなる場合があります。</div>
+            <div class="faq-ans">無料プランは平均15秒程度で整理結果が表示されます。有料プランは関連条文・判例の参照を含む高精度な分析を行うため、30〜60秒程度かかる場合があります。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
@@ -792,7 +802,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── FAQ accordion ──────────────────────
 function faqOpen(btn) {
   const item = btn.closest('.faq-item');
@@ -800,20 +810,6 @@ function faqOpen(btn) {
   item.closest('.faq-cats').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
-
-// ── fade-up observer ───────────────────
-(function(){
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
-  }, {threshold:0.1});
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  // LP画面に戻ったときも再実行
-  document.addEventListener('click', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-    }, 100);
-  });
-})();
 
 // ── analytics ─────────────────────────
 function track(eventName, params) {
@@ -831,9 +827,13 @@ let result = null;
 
 // ── routing ────────────────────────────
 function go(screen, sub) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('on');
+    s.style.display = 'none';
+  });
   const el = document.getElementById('screen-' + screen);
   el.classList.add('on');
+  el.style.display = screen === 'auth' ? 'flex' : 'block';
   window.scrollTo(0, 0);
   if (screen === 'auth' && sub) authTab(sub === 'register' ? 'reg' : sub);
 }
@@ -977,19 +977,16 @@ async function analyze() {
 - issues: 法的論点を箇条書き（・）で3〜4点（条文引用なし）
 - todo: 箇条書き（・）で確認すべき書類・情報を3〜4点`;
 
-  const proSystem = `あなたは日本の法律に精通したベテラン弁護士のアシスタントAIです。
-入力された初回相談メモを、法的観点から詳細かつ正確に4項目へ整理してください。
-必ず以下のJSON形式のみで返答してください（前置き・後文・マークダウン不要）：
-{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項"}
+  const proSystem = `日本法に精通した弁護士アシスタントとして、相談メモを4項目のJSONのみで返答。前置き不要。
+{"facts":"","claims":"","issues":"","todo":""}
+・facts: 時系列順3〜4点
+・claims: 主張・根拠2〜3点
+・issues: 法的論点3〜4点、各末尾に（関連条文：○法○条。参考判例：最判○年○月○日）
+・todo: 優先順に確認事項3〜4点
+各項目は箇条書き（・）`;
 
-各項目の記載ルール：
-- facts: 箇条書き（・）で日時・当事者・経緯・背景を時系列順に4〜6点、具体的かつ正確に
-- claims: 箇条書き（・）で依頼者の主張・法的請求の根拠・希望する解決策を3〜5点
-- issues: 法的論点を箇条書き（・）で4〜6点。各論点の末尾に必ず「（関連条文：○○法○条、○条等）」の形式で正確な日本法の条文を引用すること。判例や通説上の重要論点も漏れなく拾うこと
-- todo: 箇条書き（・）で次回面談までに確認・収集すべき書類・証拠・情報を4〜6点。優先順位の高い順に記載すること`;
-
-  const model    = isPro ? 'claude-sonnet-4-20250514' : 'claude-haiku-4-5-20251001';
-  const maxTok   = isPro ? 1200 : 600;
+  const model    = isPro ? 'claude-haiku-4-5-20251001' : 'claude-haiku-4-5-20251001';
+  const maxTok   = isPro ? 800 : 400;
   const system   = isPro ? proSystem : freeSystem;
 
   try {
@@ -1287,4 +1284,8 @@ function toast(msg) {
 
 // ── upgrade modal bg click ─────────────
 document.getElementById('upg-modal').addEventListener('click', function(e) {
-  if (e.target ==
+  if (e.target == this) closeUpgrade();
+});
+</script>
+</body>
+</html>
