@@ -888,7 +888,11 @@ function doLogin() {
 
 function logout() { me = null; result = null; go('lp'); toast('ログアウトしました'); }
 
+// ── テスト用：特定メールを強制有料扱い ──
+const PRO_TEST_EMAILS = ['iwaharu.422@outlook.jp'];
+
 function enterApp(u) {
+  if (PRO_TEST_EMAILS.includes(u.email)) u.isPro = true;
   me = u;
   document.getElementById('uname').textContent = u.name + ' さん';
   go('app');
