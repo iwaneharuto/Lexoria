@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--gold2:#d4af72;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
+:root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8}
 nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
@@ -20,7 +20,13 @@ nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);paddi
 .ey::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
 .doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
 .doc-date{font-size:.74rem;color:var(--slate)}
-.sec{margin-bottom:40px}
+.toc{background:#fff;border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:44px}
+.toc-ttl{font-size:.72rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.toc ol{padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.toc li{font-size:.82rem;color:var(--slate);line-height:1.7}
+.toc a{color:var(--slate);text-decoration:none;transition:color .2s}
+.toc a:hover{color:var(--gold)}
+.sec{margin-bottom:44px}
 .sec h2{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:16px}
 .sec p{font-size:.86rem;color:#374151;line-height:1.95;margin-bottom:10px}
 .sec ul{list-style:none;display:flex;flex-direction:column;gap:10px;padding-left:2px}
@@ -28,15 +34,20 @@ nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);paddi
 .sec li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:3px}
 .sec a{color:var(--gold);text-decoration:underline}
 .lead{background:#fff;border-left:4px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px;margin-bottom:44px;font-size:.86rem;color:var(--ink2);line-height:1.95}
+.warn{background:#fff8f0;border-left:4px solid #e59443;border-radius:0 4px 4px 0;padding:14px 18px;font-size:.82rem;color:#92400e;line-height:1.85;margin-bottom:16px}
+.tbl{width:100%;border-collapse:collapse;margin-top:8px}
+.tbl th,.tbl td{font-size:.84rem;padding:12px 16px;border:1px solid var(--border);line-height:1.8;vertical-align:top}
+.tbl th{background:#fff;font-weight:600;color:var(--ink2);width:36%;font-family:'Noto Serif JP',serif}
+.tbl td{color:#374151}
 .contact-box{background:#fff;border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin-top:8px}
-.contact-box .email{font-size:1rem;font-weight:600;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:8px}
+.contact-box .email{font-size:1rem;font-weight:600;color:var(--gold);text-decoration:none;display:block;margin-bottom:8px}
 .contact-box .note{font-size:.78rem;color:var(--slate);line-height:1.8}
 footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fl{display:flex;gap:20px;flex-wrap:wrap}
-.fl a{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.fl{display:flex;gap:16px;flex-wrap:wrap}
+.fl a{font-size:.7rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
 .fl a:hover{color:rgba(255,255,255,.8)}
 footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
-@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}footer{padding:20px;flex-direction:column;text-align:center}}
+@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}footer{padding:20px;flex-direction:column;text-align:center}.tbl th{width:40%}}
 </style>
 </head>
 <body>
@@ -50,83 +61,117 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <h1>プライバシーポリシー</h1>
     <p class="doc-date">最終更新日：2025年1月1日</p>
   </div>
-  <div class="sec">
+  <div class="toc">
+    <div class="toc-ttl">目次</div>
+    <ol>
+      <li><a href="#s1">基本方針</a></li>
+      <li><a href="#s2">サービス内容の説明</a></li>
+      <li><a href="#s3">取得する情報と取得方法</a></li>
+      <li><a href="#s4">相談内容の取り扱い（データ取り扱いポリシー）</a></li>
+      <li><a href="#s5">情報の利用目的</a></li>
+      <li><a href="#s6">第三者への提供</a></li>
+      <li><a href="#s7">アクセス解析（Google Analytics）</a></li>
+      <li><a href="#s8">Cookieの使用</a></li>
+      <li><a href="#s9">セキュリティ</a></li>
+      <li><a href="#s10">未成年者の利用</a></li>
+      <li><a href="#s11">個人情報の開示・訂正・削除</a></li>
+      <li><a href="#s12">特定商取引法に基づく表記（参照）</a></li>
+      <li><a href="#s13">ポリシーの変更</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ol>
+  </div>
+  <div class="sec" id="s1">
     <h2>1. 基本方針</h2>
     <p>IntakeAI（以下「本サービス」）は、利用者のプライバシーを尊重し、個人情報の適切な保護に努めます。本ポリシーは、本サービスにおける情報の取り扱いについて説明するものです。</p>
   </div>
-  <div class="sec">
-    <h2>2. 取得する情報と取得方法</h2>
+  <div class="sec" id="s2">
+    <h2>2. サービス内容の説明</h2>
+    <p>本サービスは、弁護士・法律事務所スタッフを主な対象とした、初回相談メモのAI自動整理ツールです。</p>
     <ul>
-      <li>アカウント登録時に取得する情報：お名前・メールアドレス・パスワード（ハッシュ化）</li>
-      <li>サービス利用時に取得する情報：AI整理の実行回数・利用プラン情報</li>
-      <li>アクセス解析で取得する情報：ページ閲覧数・ボタンクリック数等の匿名統計（Google Analytics 4）</li>
-      <li>入力された相談内容はサーバーに保存されず、AI処理後にデータは保持されません。</li>
+      <li>入力された相談メモをAIが「事実関係・依頼者の主張・想定される論点・追加で確認すべき事項」の4項目に自動整理します</li>
+      <li>整理結果はPDFとしてダウンロード、またはブラウザ内の履歴に保存できます</li>
+      <li>無料プランは月5件まで、プロプラン（月額¥9,800）は無制限でご利用いただけます</li>
+      <li>本サービスのAI出力は情報整理の補助を目的とするものであり、法的助言・法律意見ではありません</li>
     </ul>
   </div>
-  <div class="sec">
-    <h2>3. 入力された相談内容の取り扱い</h2>
+  <div class="sec" id="s3">
+    <h2>3. 取得する情報と取得方法</h2>
     <ul>
-      <li>入力された相談内容は、当社のサーバーに保存されません。</li>
-      <li>AI処理のためにAPIへ送信されますが、処理完了後にデータは保持されません。</li>
-      <li>履歴機能を利用した場合、データはお使いのブラウザのローカルストレージにのみ保存されます。</li>
-      <li>個人情報・機密情報を含む実際の相談内容を入力しないことを強く推奨します。</li>
+      <li>アカウント登録時：お名前・メールアドレス・パスワード（ハッシュ化）</li>
+      <li>サービス利用時：AI整理の実行回数・利用プラン情報</li>
+      <li>アクセス解析：ページ閲覧数・ボタンクリック数等の匿名統計（Google Analytics 4）</li>
+      <li>決済情報：Stripeが管理します。当社はカード番号等の決済情報を保持しません</li>
+      <li>入力された相談内容はサーバーに保存されません</li>
     </ul>
   </div>
-  <div class="sec">
-    <h2>4. 情報の利用目的</h2>
+  <div class="sec" id="s4">
+    <h2>4. 相談内容の取り扱い（データ取り扱いポリシー）</h2>
+    <div class="warn">⚠️ 実際の依頼者の個人情報・機密情報を含む相談内容は入力しないことを強く推奨します。</div>
+    <ul>
+      <li>入力された相談内容は、当社のサーバーに一切保存されません</li>
+      <li>AI処理のためAnthropicのAPIへ送信されますが、処理完了後にデータは保持されません</li>
+      <li>AnthropicのAPIポリシーにより、APIへ送信されたデータはモデルの学習に使用されません</li>
+      <li>履歴保存機能を使用した場合、データはお使いのブラウザのローカルストレージにのみ保存され、当社サーバーには送信されません</li>
+      <li>ブラウザのキャッシュ削除やログアウトにより、保存された履歴は消去されます</li>
+      <li>当社スタッフが入力内容を閲覧することはありません</li>
+    </ul>
+  </div>
+  <div class="sec" id="s5">
+    <h2>5. 情報の利用目的</h2>
     <ul>
       <li>本サービスの提供・運営・本人確認</li>
       <li>サービスの品質改善・機能開発</li>
       <li>利用状況の分析（匿名化された統計情報として）</li>
       <li>重要なお知らせ・サービス変更等のご連絡</li>
       <li>お問い合わせへの対応</li>
+      <li>料金の請求・決済処理</li>
     </ul>
   </div>
-  <div class="sec">
-    <h2>5. 第三者への提供</h2>
+  <div class="sec" id="s6">
+    <h2>6. 第三者への提供</h2>
     <p>取得した情報は、以下の場合を除き第三者に提供しません。</p>
     <ul>
       <li>法令に基づき開示が必要な場合</li>
       <li>利用者本人の同意がある場合</li>
-      <li>サービス提供に必要な委託先（AI処理APIプロバイダー・決済事業者等）への提供（契約に基づき適切に管理）</li>
+      <li>Anthropic（AIモデルAPI提供元）：相談メモの処理に限り送信。処理後は保持されません</li>
+      <li>Stripe（決済処理）：有料プランの決済処理に限り使用</li>
+      <li>Google（アクセス解析）：匿名化された利用統計の収集に限り使用</li>
     </ul>
   </div>
-  <div class="sec">
-    <h2>6. アクセス解析（Google Analytics）</h2>
-    <p>本サービスでは、サービス改善を目的としてGoogle Analytics 4（GA4）を利用しています。</p>
-    <ul>
-      <li>Google AnalyticsはCookieを使用してサイトの利用状況を収集します。</li>
-      <li>収集される情報は匿名化されており、個人を特定するものではありません。</li>
-      <li>入力された相談内容はGA4に送信されません。</li>
-      <li>詳細は<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのプライバシーポリシー</a>をご参照ください。</li>
-    </ul>
+  <div class="sec" id="s7">
+    <h2>7. アクセス解析（Google Analytics）</h2>
+    <p>本サービスではGoogle Analytics 4（GA4）を使用しています。収集される情報は匿名化されており、個人を特定するものではありません。入力された相談内容はGA4に送信されません。詳細は<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのプライバシーポリシー</a>をご参照ください。</p>
   </div>
-  <div class="sec">
-    <h2>7. Cookieの使用</h2>
-    <p>本サービスはアクセス解析のためにCookieを使用しています。ブラウザの設定によりCookieを無効にすることができますが、一部の機能が正常に動作しない場合があります。</p>
+  <div class="sec" id="s8">
+    <h2>8. Cookieの使用</h2>
+    <p>本サービスはアクセス解析目的でCookieを使用しています。ブラウザ設定によりCookieを無効にできますが、一部の機能が正常に動作しない場合があります。</p>
   </div>
-  <div class="sec">
-    <h2>8. セキュリティ</h2>
+  <div class="sec" id="s9">
+    <h2>9. セキュリティ</h2>
     <p>本サービスはHTTPS通信による暗号化など、情報の安全管理に適切な措置を講じます。ただし、インターネット上での完全な安全性を保証するものではありません。</p>
   </div>
-  <div class="sec">
-    <h2>9. 未成年者の利用</h2>
+  <div class="sec" id="s10">
+    <h2>10. 未成年者の利用</h2>
     <p>本サービスは弁護士・法律事務所スタッフを対象とするものであり、18歳未満の方の利用は想定しておりません。</p>
   </div>
-  <div class="sec">
-    <h2>10. 個人情報の開示・訂正・削除</h2>
-    <p>利用者は、ご自身の個人情報の開示・訂正・削除をご要望いただけます。ご希望の場合は下記お問い合わせ先までご連絡ください。</p>
+  <div class="sec" id="s11">
+    <h2>11. 個人情報の開示・訂正・削除</h2>
+    <p>利用者はご自身の個人情報の開示・訂正・削除をご要望いただけます。アカウントの削除を希望される場合も、下記お問い合わせ先までご連絡ください。</p>
   </div>
-  <div class="sec">
-    <h2>11. ポリシーの変更</h2>
-    <p>本ポリシーは、法令の変更やサービスの改善に伴い、予告なく変更される場合があります。重要な変更がある場合はサービス上でお知らせします。変更後のポリシーは本ページに掲載します。</p>
+  <div class="sec" id="s12">
+    <h2>12. 特定商取引法に基づく表記（参照）</h2>
+    <p>本サービスは有料プランを提供する通信販売サービスです。販売事業者・価格・支払方法・解約条件等の詳細は<a href="./tokusho.html">特定商取引法に基づく表記</a>をご参照ください。返金条件については<a href="./refund.html">返金ポリシー</a>をご参照ください。</p>
   </div>
-  <div class="sec">
+  <div class="sec" id="s13">
+    <h2>13. ポリシーの変更</h2>
+    <p>本ポリシーは、法令の変更やサービスの改善に伴い変更される場合があります。重要な変更がある場合はサービス上でお知らせします。変更後のポリシーは本ページに掲載します。</p>
+  </div>
+  <div class="sec" id="contact">
     <h2>お問い合わせ</h2>
-    <p>本ポリシーに関するご質問・ご要望は、以下のメールアドレスまでお気軽にご連絡ください。通常2営業日以内にご返答いたします。</p>
+    <p>ご不明な点・ご要望・解約のお申し込みは以下までご連絡ください。通常2営業日以内にご返答いたします。</p>
     <div class="contact-box">
       <a class="email" href="mailto:iwaharu.422@outlook.jp">📧 iwaharu.422@outlook.jp</a>
-      <p class="note">受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）<br>返答まで2営業日程度お時間をいただく場合があります。</p>
+      <p class="note">受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）</p>
     </div>
   </div>
 </div>
@@ -135,6 +180,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   <div class="fl">
     <a href="./privacy.html">プライバシーポリシー</a>
     <a href="./terms.html">利用規約</a>
+    <a href="./tokusho.html">特定商取引法に基づく表記</a>
+    <a href="./refund.html">返金ポリシー</a>
     <a href="./antisocial.html">反社会的勢力への基本方針</a>
   </div>
   <p>© 2025 IntakeAI. All rights reserved.</p>
