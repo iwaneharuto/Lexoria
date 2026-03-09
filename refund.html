@@ -7,30 +7,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
+:root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8}
 nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
 .logo span{color:var(--gold)}
-.back{font-size:.78rem;color:var(--slate);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back{font-size:.78rem;color:var(--slate);text-decoration:none;letter-spacing:.04em;transition:color .2s}
 .back:hover{color:var(--ink)}
 .wrap{max-width:760px;margin:0 auto;padding:68px 24px 100px}
 .doc-hd{margin-bottom:52px;padding-bottom:36px;border-bottom:2px solid var(--border)}
 .ey{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .ey::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
-.doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
+h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
 .doc-date{font-size:.74rem;color:var(--slate)}
 .toc{background:#fff;border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:44px}
 .toc-ttl{font-size:.72rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;font-weight:600}
-.toc ol{padding-left:18px;display:flex;flex-direction:column;gap:6px}
-.toc li{font-size:.82rem;color:var(--slate);line-height:1.7}
-.toc a{color:var(--slate);text-decoration:none;transition:color .2s}
+.toc ol{padding-left:18px}
+.toc li{font-size:.82rem;color:var(--slate);line-height:2}
+.toc a{color:var(--slate);text-decoration:none}
 .toc a:hover{color:var(--gold)}
 .sec{margin-bottom:44px}
 .sec h2{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:16px}
-.sec p{font-size:.86rem;color:#374151;line-height:1.95;margin-bottom:10px}
+.sec p,.sec li{font-size:.86rem;color:#374151;line-height:1.95}
+.sec p{margin-bottom:10px}
 .sec ul{list-style:none;display:flex;flex-direction:column;gap:10px;padding-left:2px}
-.sec li{font-size:.86rem;color:#374151;display:flex;gap:12px;line-height:1.8}
+.sec li{display:flex;gap:12px}
 .sec li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:3px}
 .sec a{color:var(--gold);text-decoration:underline}
 .lead{background:#fff;border-left:4px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px;margin-bottom:44px;font-size:.86rem;color:var(--ink2);line-height:1.95}
@@ -40,20 +41,20 @@ nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);paddi
 .tbl th{background:#fff;font-weight:600;color:var(--ink2);width:36%;font-family:'Noto Serif JP',serif}
 .tbl td{color:#374151}
 .contact-box{background:#fff;border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin-top:8px}
-.contact-box .email{font-size:1rem;font-weight:600;color:var(--gold);text-decoration:none;display:block;margin-bottom:8px}
-.contact-box .note{font-size:.78rem;color:var(--slate);line-height:1.8}
-footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fl{display:flex;gap:16px;flex-wrap:wrap}
-.fl a{font-size:.7rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
-.fl a:hover{color:rgba(255,255,255,.8)}
-footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
-@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}footer{padding:20px;flex-direction:column;text-align:center}.tbl th{width:40%}}
+.contact-box a{font-size:1rem;font-weight:600;color:var(--gold);display:block;margin-bottom:8px}
+.contact-box p{font-size:.78rem;color:var(--slate);line-height:1.8}
+.ft{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-links{display:flex;gap:16px;flex-wrap:wrap}
+.ft-links a{font-size:.7rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:#fff}
+.ft p{font-size:.72rem;color:rgba(255,255,255,.3)}
+@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}.ft{padding:20px;flex-direction:column;text-align:center}.tbl th{width:40%}}
 </style>
 </head>
 <body>
 <nav>
-  <a class="logo" href="./index.html">Intake<span>AI</span></a>
-  <a class="back" href="./index.html">← トップへ戻る</a>
+  <a class="logo" href="/index">Intake<span>AI</span></a>
+  <a class="back" href="/index">← トップへ戻る</a>
 </nav>
 <div class="wrap">
   <div class="doc-hd">
@@ -72,63 +73,58 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <li><a href="#contact">お問い合わせ</a></li>
     </ol>
   </div>
-  <div class="lead">
-    IntakeAIはデジタルサービスの性質上、原則として返金を行っておりません。ただし、以下の条件に該当する場合は個別にご対応いたします。
-  </div>
-  <div class="sec" id="s1">
-    <h2>1. 原則</h2>
-    <p>本サービスはデジタルコンテンツ・SaaSサービスであり、サービスの性質上、お申し込み後の返金は原則としてお受けしておりません。</p>
-  </div>
-  <div class="sec" id="s2">
-    <h2>2. 返金対応する場合</h2>
+  <div class="lead">IntakeAIはデジタルサービスの性質上、原則として返金を行っておりません。ただし以下の条件に該当する場合は個別にご対応いたします。</div>
+  <div class="sec" id="s1"><h2>1. 原則</h2><p>本サービスはデジタルコンテンツ・SaaSサービスであり、サービスの性質上、お申し込み後の返金は原則としてお受けしておりません。</p></div>
+  <div class="sec" id="s2"><h2>2. 返金対応する場合</h2>
     <ul>
       <li>当社の重大な過失によりサービスが1週間以上継続して利用できなかった場合</li>
       <li>請求金額に誤りがあった場合</li>
       <li>二重請求が発生した場合</li>
     </ul>
-    <p>上記に該当する場合は<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ先</a>までご連絡ください。確認の上、対応いたします。</p>
   </div>
-  <div class="sec" id="s3">
-    <h2>3. 返金対応しない場合</h2>
+  <div class="sec" id="s3"><h2>3. 返金対応しない場合</h2>
     <ul>
       <li>月途中での解約（日割り返金はいたしません）</li>
       <li>サービスを利用しなかった期間</li>
       <li>AIの出力内容・品質への不満</li>
       <li>お客様の操作ミスや環境に起因する問題</li>
-      <li>無料プランの範囲内で利用された場合</li>
     </ul>
   </div>
-  <div class="sec" id="s4">
-    <h2>4. 返金の手続き</h2>
+  <div class="sec" id="s4"><h2>4. 返金の手続き</h2>
     <ul>
       <li>返金対象と判断した場合、Stripe経由でご請求いただいたカードへ返金いたします</li>
-      <li>返金処理には通常5〜14営業日かかります（カード会社により異なります）</li>
+      <li>返金処理には通常5〜14営業日かかります</li>
       <li>返金申請の期限は請求日から30日以内とします</li>
     </ul>
   </div>
-  <div class="sec" id="s5">
-    <h2>5. 解約について</h2>
-    <p>有料プランはいつでも解約できます。解約後は次回更新日まで有料機能をご利用いただけます。解約のお申し込みは下記お問い合わせ先へメールにてお受けしております。詳細は<a href="./terms.html">利用規約</a>第8条もご参照ください。</p>
-  </div>
+  <div class="sec" id="s5"><h2>5. 解約について</h2><p>有料プランはいつでも解約できます。解約後は次回更新日まで有料機能をご利用いただけます。詳細は<a href="/terms">利用規約</a>第8条をご参照ください。</p></div>
   <div class="sec" id="contact">
     <h2>お問い合わせ</h2>
-    <p>ご不明な点・ご要望・解約のお申し込みは以下までご連絡ください。通常2営業日以内にご返答いたします。</p>
+    <p>ご不明な点・解約のお申し込みは以下までご連絡ください。通常2営業日以内にご返答いたします。</p>
     <div class="contact-box">
-      <a class="email" href="mailto:iwaharu.422@outlook.jp">📧 iwaharu.422@outlook.jp</a>
-      <p class="note">受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）</p>
+      <a href="#" data-mail>メールアドレスを読み込み中...</a>
+      <p>受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）</p>
     </div>
   </div>
 </div>
-<footer>
-  <a href="./index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;text-decoration:none;letter-spacing:.04em">Intake<span style="color:#b8975a">AI</span></a>
-  <div class="fl">
-    <a href="./privacy.html">プライバシーポリシー</a>
-    <a href="./terms.html">利用規約</a>
-    <a href="./tokusho.html">特定商取引法に基づく表記</a>
-    <a href="./refund.html">返金ポリシー</a>
-    <a href="./antisocial.html">反社会的勢力への基本方針</a>
+<footer class="ft">
+  <a href="/index" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;text-decoration:none;letter-spacing:.04em">Intake<span style="color:#b8975a">AI</span></a>
+  <div class="ft-links">
+    <a href="/privacy">プライバシーポリシー</a>
+    <a href="/terms">利用規約</a>
+    <a href="/tokusho">特定商取引法に基づく表記</a>
+    <a href="/refund">返金ポリシー</a>
+    <a href="/antisocial">反社会的勢力への基本方針</a>
   </div>
   <p>© 2025 IntakeAI. All rights reserved.</p>
 </footer>
+<script>
+(function(){
+  var e='iwaharu.422'+'@'+'outlook.jp';
+  document.querySelectorAll('a[data-mail]').forEach(function(a){
+    a.href='mailto:'+e; if(!a.dataset.nolabel) a.textContent=e;
+  });
+})();
+</script>
 </body>
 </html>
