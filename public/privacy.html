@@ -7,140 +7,114 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;
-  --cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef;
-}
+:root{--ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--gold2:#d4af72;--cream:#faf8f4;--slate:#6b7280;--border:#e8e2d8;--bg:#f7f4ef}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8}
-
 /* NAV */
 nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
-.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.04em}
 .logo span{color:var(--gold)}
-.back-btn{font-size:.8rem;color:var(--slate);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
-.back-btn:hover{color:var(--ink)}
-
+.back{font-size:.78rem;color:var(--slate);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back:hover{color:var(--ink)}
 /* LAYOUT */
-.wrap{max-width:760px;margin:0 auto;padding:60px 24px 100px}
-
+.wrap{max-width:760px;margin:0 auto;padding:68px 24px 100px}
 /* HEADER */
-.doc-hd{margin-bottom:48px;padding-bottom:32px;border-bottom:2px solid var(--border)}
-.doc-eyebrow{font-size:.7rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.doc-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
-.doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:600;color:var(--ink);margin-bottom:12px}
-.doc-date{font-size:.78rem;color:var(--slate)}
-
+.doc-hd{margin-bottom:52px;padding-bottom:36px;border-bottom:2px solid var(--border)}
+.ey{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ey::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.doc-hd h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:10px}
+.doc-date{font-size:.74rem;color:var(--slate)}
 /* SECTIONS */
-.doc-sec{margin-bottom:40px}
-.doc-sec h2{font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:600;color:var(--ink);padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:14px}
-.doc-sec p{font-size:.88rem;color:#374151;line-height:1.9;margin-bottom:10px}
-.doc-sec ul{list-style:none;display:flex;flex-direction:column;gap:8px;padding-left:4px}
-.doc-sec ul li{font-size:.88rem;color:#374151;display:flex;gap:10px;line-height:1.8}
-.doc-sec ul li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:2px}
-.doc-sec a{color:var(--gold);text-decoration:underline}
-
+.sec{margin-bottom:40px}
+.sec h2{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;padding:10px 0 10px 16px;border-left:4px solid var(--gold);margin-bottom:16px}
+.sec p{font-size:.86rem;color:#374151;line-height:1.95;margin-bottom:10px}
+.sec ul{list-style:none;display:flex;flex-direction:column;gap:10px;padding-left:2px}
+.sec li{font-size:.86rem;color:#374151;display:flex;gap:12px;line-height:1.8}
+.sec li::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:3px}
+.sec a{color:var(--gold);text-decoration:underline}
+.lead{background:#fff;border-left:4px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px;margin-bottom:44px;font-size:.86rem;color:var(--ink2);line-height:1.95}
 /* FOOTER */
 footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-footer .logo{color:#fff;font-size:1.2rem}
+.fl{display:flex;gap:20px;flex-wrap:wrap}
+.fl a{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.fl a:hover{color:rgba(255,255,255,.8)}
 footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
-.footer-links{display:flex;gap:20px}
-.footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
-.footer-link:hover{color:rgba(255,255,255,.8)}
-
-@media(max-width:600px){
-  nav{padding:14px 20px}
-  .wrap{padding:40px 16px 80px}
-  footer{padding:20px;flex-direction:column;text-align:center}
-}
+@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}footer{padding:20px;flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
-
 <nav>
-  <a class="logo" href="./intakeai-lp.html">Intake<span>AI</span></a>
-  <a class="back-btn" href="./intakeai-lp.html">← トップへ戻る</a>
+  <a class="logo" href="./index.html">Intake<span>AI</span></a>
+  <a class="back" href="./index.html">← トップへ戻る</a>
 </nav>
-
 <div class="wrap">
   <div class="doc-hd">
-    <div class="doc-eyebrow">Legal</div>
+    <div class="ey">Legal</div>
     <h1>プライバシーポリシー</h1>
     <p class="doc-date">最終更新日：2025年1月1日</p>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>1. 基本方針</h2>
-    <p>IntakeAI（以下「本サービス」）は、利用者のプライバシーを尊重し、個人情報の保護に努めます。本ポリシーは、本サービスにおける情報の取り扱いについて説明するものです。</p>
+    <p>IntakeAI（以下「本サービス」）は、利用者のプライバシーを尊重し、個人情報の適切な保護に努めます。本ポリシーは、本サービスにおける情報の取り扱いについて説明するものです。</p>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>2. 入力された相談内容の取り扱い</h2>
-    <p>本サービスに入力された相談内容（テキスト）は、以下のとおり取り扱います。</p>
     <ul>
       <li>入力された相談内容は、当社のサーバーに保存されません。</li>
       <li>AI処理のためにAPIへ送信されますが、処理完了後にデータは保持されません。</li>
-      <li>履歴機能を利用した場合、データはお使いのブラウザのローカルストレージにのみ保存されます。外部サーバーへの送信は行いません。</li>
-      <li>個人情報や機密情報を含む実際の相談内容を入力しないことを推奨します。架空の内容でも機能をお試しいただけます。</li>
+      <li>履歴機能を利用した場合、データはお使いのブラウザのローカルストレージにのみ保存されます。</li>
+      <li>個人情報・機密情報を含む実際の相談内容を入力しないことを推奨します。</li>
     </ul>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>3. アクセス解析（Google Analytics）</h2>
-    <p>本サービスでは、サービスの改善を目的としてGoogle Analytics 4（GA4）を利用する場合があります。</p>
+    <p>本サービスでは、サービス改善を目的としてGoogle Analytics 4（GA4）を利用しています。</p>
     <ul>
       <li>Google Analyticsは、Cookieを使用してサイトの利用状況を収集します。</li>
       <li>収集される情報は匿名化されており、個人を特定するものではありません。</li>
-      <li>入力された相談内容はGoogle Analyticsに送信されません。</li>
-      <li>計測するイベントは、ページ閲覧・ボタンクリック・AI分析の実行回数等に限られます。</li>
-      <li>Google Analyticsの利用規約・プライバシーポリシーについては、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのポリシー</a>をご参照ください。</li>
+      <li>入力された相談内容はGA4に送信されません。</li>
+      <li>計測するのはページ閲覧・ボタンクリック・AI分析の実行回数等に限られます。</li>
+      <li>詳細は<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのプライバシーポリシー</a>をご参照ください。</li>
     </ul>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>4. 情報の利用目的</h2>
-    <p>収集した情報は、以下の目的のために利用します。</p>
     <ul>
       <li>本サービスの提供および運営</li>
       <li>サービスの品質改善・機能開発</li>
       <li>利用状況の分析（匿名化された統計情報として）</li>
     </ul>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>5. 第三者への提供</h2>
-    <p>取得した情報は、以下の場合を除き、第三者に提供しません。</p>
+    <p>取得した情報は、以下の場合を除き第三者に提供しません。</p>
     <ul>
       <li>法令に基づき開示が必要な場合</li>
       <li>利用者本人の同意がある場合</li>
-      <li>サービス提供のために必要な委託先（AI処理APIプロバイダー等）への提供（契約に基づき適切に管理）</li>
+      <li>サービス提供に必要な委託先（AI処理APIプロバイダー等）への提供（契約に基づき適切に管理）</li>
     </ul>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>6. セキュリティ</h2>
-    <p>本サービスは、通信の暗号化（HTTPS）など、情報の安全管理に適切な措置を講じます。ただし、インターネット上での完全な安全性を保証するものではありません。</p>
+    <p>本サービスはHTTPS通信による暗号化など、情報の安全管理に適切な措置を講じます。ただし、インターネット上での完全な安全性を保証するものではありません。</p>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>7. ポリシーの変更</h2>
     <p>本ポリシーは、法令の変更やサービスの改善に伴い、予告なく変更される場合があります。変更後のポリシーは本ページに掲載します。</p>
   </div>
-
-  <div class="doc-sec">
+  <div class="sec">
     <h2>8. お問い合わせ</h2>
-    <p>本ポリシーに関するお問い合わせは、以下のメールアドレスまでご連絡ください。</p>
+    <p>本ポリシーに関するお問い合わせは以下までご連絡ください。</p>
     <p>📧 <a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a></p>
   </div>
 </div>
-
 <footer>
-  <a class="logo" href="./intakeai-lp.html">Intake<span style="color:#b8975a">AI</span></a>
-  <div class="footer-links">
-    <a class="footer-link" href="./privacy.html">プライバシーポリシー</a>
-    <a class="footer-link" href="./terms.html">利用規約</a>
+  <a href="./index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;text-decoration:none;letter-spacing:.04em">Intake<span style="color:#b8975a">AI</span></a>
+  <div class="fl">
+    <a href="./privacy.html">プライバシーポリシー</a>
+    <a href="./terms.html">利用規約</a>
+    <a href="./antisocial.html">反社会的勢力への基本方針</a>
   </div>
   <p>© 2025 IntakeAI. All rights reserved.</p>
 </footer>
-
 </body>
 </html>
