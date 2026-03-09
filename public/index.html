@@ -566,11 +566,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">いつでも解約できますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ</a>よりご連絡ください。</div>
+            <div class="faq-ans">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。<a href="/cdn-cgi/l/email-protection#dcb5abbdb4bdaea9f2e8eeee9cb3a9a8b0b3b3b7f2b6ac">お問い合わせ</a>よりご連絡ください。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">領収書・適格請求書は発行されますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="mailto:iwaharu.422@outlook.jp">お問い合わせ</a>ください。</div>
+            <div class="faq-ans">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="/cdn-cgi/l/email-protection#71180610191003045f454343311e04051d1e1e1a5f1b01">お問い合わせ</a>ください。</div>
           </div>
         </div>
 
@@ -591,7 +591,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans"><a href="mailto:iwaharu.422@outlook.jp">iwaharu.422@outlook.jp</a> までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+            <div class="faq-ans"><a href="/cdn-cgi/l/email-protection#553c22343d3427207b616767153a2021393a3a3e7b3f25"><span class="__cf_email__" data-cfemail="9df4eafcf5fcefe8b3a9afafddf2e8e9f1f2f2f6b3f7ed">[email&#160;protected]</span></a> までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
           </div>
         </div>
 
@@ -624,11 +624,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   <footer>
     <div class="logo">Intake<span>AI</span></div>
     <div class="footer-links">
-      <a class="footer-link" href="/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="footer-link" href="/terms.html" target="_blank" rel="noopener">利用規約</a>
-      <a class="footer-link" href="/tokusho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a>
-      <a class="footer-link" href="/refund.html" target="_blank" rel="noopener">返金ポリシー</a>
-      <a class="footer-link" href="/antisocial.html" target="_blank" rel="noopener">反社会的勢力への基本方針</a>
+      <a class="footer-link" href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="footer-link" href="/terms" target="_blank" rel="noopener">利用規約</a>
+      <a class="footer-link" href="/tokusho" target="_blank" rel="noopener">特定商取引法に基づく表記</a>
+      <a class="footer-link" href="/refund" target="_blank" rel="noopener">返金ポリシー</a>
+      <a class="footer-link" href="/antisocial" target="_blank" rel="noopener">反社会的勢力への基本方針</a>
     </div>
     <p>© 2025 IntakeAI. All rights reserved.</p>
   </footer>
@@ -803,8 +803,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 </div>
 
 <div class="toast" id="toast"></div>
-
 <script>
+
 // ── FAQ accordion ──────────────────────
 function faqOpen(btn) {
   const item = btn.closest('.faq-item');
@@ -829,13 +829,9 @@ let result = null;
 
 // ── routing ────────────────────────────
 function go(screen, sub) {
-  document.querySelectorAll('.screen').forEach(s => {
-    s.classList.remove('on');
-    s.style.display = 'none';
-  });
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
   const el = document.getElementById('screen-' + screen);
   el.classList.add('on');
-  el.style.display = screen === 'auth' ? 'flex' : 'block';
   window.scrollTo(0, 0);
   if (screen === 'auth' && sub) authTab(sub === 'register' ? 'reg' : sub);
 }
@@ -890,11 +886,7 @@ function doLogin() {
 
 function logout() { me = null; result = null; go('lp'); toast('ログアウトしました'); }
 
-// ── テスト用：特定メールを強制有料扱い ──
-const PRO_TEST_EMAILS = ['iwaharu.422@outlook.jp'];
-
 function enterApp(u) {
-  if (PRO_TEST_EMAILS.includes(u.email)) u.isPro = true;
   me = u;
   document.getElementById('uname').textContent = u.name + ' さん';
   go('app');
@@ -979,16 +971,19 @@ async function analyze() {
 - issues: 法的論点を箇条書き（・）で3〜4点（条文引用なし）
 - todo: 箇条書き（・）で確認すべき書類・情報を3〜4点`;
 
-  const proSystem = `日本法に精通した弁護士アシスタントとして、相談メモを4項目のJSONのみで返答。前置き不要。
-{"facts":"","claims":"","issues":"","todo":""}
-・facts: 時系列順3〜4点
-・claims: 主張・根拠2〜3点
-・issues: 法的論点3〜4点、各末尾に（関連条文：○法○条。参考判例：最判○年○月○日）
-・todo: 優先順に確認事項3〜4点
-各項目は箇条書き（・）`;
+  const proSystem = `あなたは日本の法律に精通したベテラン弁護士のアシスタントAIです。
+入力された初回相談メモを、法的観点から詳細かつ正確に4項目へ整理してください。
+必ず以下のJSON形式のみで返答してください（前置き・後文・マークダウン不要）：
+{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項"}
 
-  const model    = isPro ? 'claude-haiku-4-5-20251001' : 'claude-haiku-4-5-20251001';
-  const maxTok   = isPro ? 800 : 400;
+各項目の記載ルール：
+- facts: 箇条書き（・）で日時・当事者・経緯・背景を時系列順に4〜6点、具体的かつ正確に
+- claims: 箇条書き（・）で依頼者の主張・法的請求の根拠・希望する解決策を3〜5点
+- issues: 法的論点を箇条書き（・）で4〜6点。各論点の末尾に必ず「（関連条文：○○法○条、○条等）」の形式で正確な日本法の条文を引用すること。判例や通説上の重要論点も漏れなく拾うこと
+- todo: 箇条書き（・）で次回面談までに確認・収集すべき書類・証拠・情報を4〜6点。優先順位の高い順に記載すること`;
+
+  const model    = isPro ? 'claude-sonnet-4-20250514' : 'claude-haiku-4-5-20251001';
+  const maxTok   = isPro ? 1200 : 600;
   const system   = isPro ? proSystem : freeSystem;
 
   try {
@@ -1281,7 +1276,7 @@ function save() { localStorage.setItem('iai_users', JSON.stringify(users)); }
 function toast(msg) {
   const el = document.getElementById('toast');
   el.textContent = msg; el.classList.add('on');
-  setTimeout(() => el.classsList.remove('on'), 2800);
+  setTimeout(() => el.classList.remove('on'), 2800);
 }
 
 // ── upgrade modal bg click ─────────────
