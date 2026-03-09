@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IntakeAI – 初回相談メモをすばやく整理</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -221,6 +220,69 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 24px;border-radius:4px;font-size:.82rem;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;white-space:nowrap}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ── TRIAL ENDED BANNER ── */
+.trial-ended-banner{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#1a1a2e,#2d2d4e);border-radius:8px;padding:20px 24px;margin-bottom:16px;flex-wrap:wrap}
+.teb-icon{font-size:2rem;flex-shrink:0}
+.teb-body{flex:1;min-width:200px}
+.teb-title{font-family:"Noto Serif JP",serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:4px}
+.teb-msg{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.7}
+.teb-btn{flex-shrink:0;display:inline-block;background:var(--gold);color:#fff;padding:11px 24px;border-radius:3px;font-size:.82rem;font-weight:600;text-decoration:none;white-space:nowrap;transition:background .2s;letter-spacing:.04em}
+.teb-btn:hover{background:var(--gold2)}
+
+/* ── USAGE BAR ── */
+.usage-bar{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:14px 20px;margin-bottom:16px;flex-wrap:wrap}
+.usage-left{font-size:.8rem;color:var(--slate);display:flex;align-items:center;gap:6px;flex-shrink:0}
+.usage-left strong{color:var(--ink)}
+.usage-icon{font-size:1rem}
+.usage-track{flex:1;min-width:120px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.usage-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .4s}
+.usage-fill.danger{background:var(--red)}
+
+/* ── UPGRADE MODAL ── */
+.upg-overlay{position:fixed;inset:0;z-index:500;background:rgba(26,26,46,.65);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.upg-overlay.on{opacity:1;pointer-events:all}
+.upg-box{background:#fff;border-radius:10px;width:100%;max-width:480px;margin:16px;box-shadow:0 32px 80px rgba(26,26,46,.2);transform:translateY(24px);transition:transform .3s;overflow:hidden}
+.upg-overlay.on .upg-box{transform:none}
+.upg-hd{background:var(--ink);padding:28px 32px;text-align:center}
+.upg-hd .lock{font-size:2.4rem;margin-bottom:8px}
+.upg-hd h3{font-family:"Noto Serif JP",serif;font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:6px}
+.upg-hd p{font-size:.82rem;color:rgba(255,255,255,.55)}
+.upg-body{padding:28px 32px}
+.upg-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.upg-features li{font-size:.84rem;color:var(--ink);display:flex;align-items:center;gap:10px}
+.upg-features li::before{content:"✓";color:var(--gold);font-weight:700;flex-shrink:0}
+.upg-price{text-align:center;margin-bottom:24px}
+.upg-price .amount{font-family:"Cormorant Garamond",serif;font-size:3rem;font-weight:600;color:var(--ink);line-height:1}
+.upg-price .period{font-size:.85rem;color:var(--slate)}
+.btn-upgrade{display:block;width:100%;padding:16px;background:var(--gold);color:#fff;border:none;border-radius:3px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em;margin-bottom:10px}
+.btn-upgrade:hover{background:var(--ink)}
+.upg-cancel{display:block;text-align:center;font-size:.76rem;color:var(--slate);cursor:pointer;padding:4px;transition:color .2s}
+.upg-cancel:hover{color:var(--ink)}
+.upg-note{font-size:.7rem;color:var(--slate);text-align:center;margin-top:12px}
+
+/* ── PRICING ── */
+.pricing-sec{background:var(--cream);padding:100px 48px;border-top:1px solid var(--border)}
+.pricing-inner{max-width:900px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:800px;margin:0 auto}
+.pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:36px 32px;position:relative;transition:box-shadow .3s}
+.pricing-card.featured{border:2px solid var(--gold);box-shadow:0 12px 40px rgba(184,151,90,.15)}
+.plan-rec{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.plan-badge.free{color:var(--slate)}
+.plan-badge.pro{color:var(--gold)}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:24px}
+.plan-price span{font-size:1rem;font-weight:400;color:var(--slate);font-family:'Noto Sans JP',sans-serif}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.plan-features li{font-size:.82rem;color:var(--ink);display:flex;align-items:center;gap:8px}
+.plan-features li.dim{color:var(--border);text-decoration:line-through}
+.btn-plan-free{width:100%;padding:12px;background:none;border:1px solid var(--border);border-radius:3px;font-size:.84rem;color:var(--slate);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center}
+.btn-plan-free:hover{border-color:var(--ink);color:var(--ink)}
+.btn-plan-pro{display:block;width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:3px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
+.btn-plan-pro:hover{background:var(--ink)}
+.plan-note{font-size:.7rem;color:var(--slate);text-align:center;margin-top:8px}
+.btn-cta-stripe{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:18px 40px;font-size:.9rem;font-weight:500;letter-spacing:.06em;border:2px solid rgba(255,255,255,.4);border-radius:2px;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none;position:relative;z-index:2}
+.btn-cta-stripe:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
 /* responsive */
 @media(max-width:900px){
   nav{padding:16px 20px}
@@ -236,6 +298,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   .cta{padding:64px 24px}
   .notice{padding:32px 20px}
   footer{padding:24px;flex-direction:column;text-align:center}
+  .pricing-grid{grid-template-columns:1fr}
+  .pricing-sec{padding:64px 24px}
 }
 </style>
 </head>
@@ -345,10 +409,50 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </section>
   </div>
 
+  <!-- PRICING -->
+  <section class="pricing-sec">
+    <div class="pricing-inner">
+      <div class="sec-ey" style="justify-content:center">Pricing</div>
+      <h2 class="sec-ttl" style="text-align:center;margin-bottom:12px">シンプルな料金体系</h2>
+      <p style="text-align:center;font-size:.88rem;color:var(--slate);margin-bottom:48px">まずは無料で試して、必要なら有料プランへ</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-badge free">無料プラン</div>
+          <div class="plan-price">¥0<span>/月</span></div>
+          <ul class="plan-features">
+            <li>✓ AI整理：月5件まで</li>
+            <li>✓ PDF出力</li>
+            <li>✓ 履歴保存：直近5件</li>
+            <li class="dim">✗ 無制限利用</li>
+            <li class="dim">✗ 優先サポート</li>
+          </ul>
+          <button class="btn-plan-free" onclick="go('auth','register')">無料で始める →</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="plan-rec">おすすめ</div>
+          <div class="plan-badge pro">プロプラン</div>
+          <div class="plan-price">¥9,800<span>/月</span></div>
+          <ul class="plan-features">
+            <li>✓ AI整理：<strong>無制限</strong></li>
+            <li>✓ PDF出力</li>
+            <li>✓ 履歴保存：<strong>無制限</strong></li>
+            <li>✓ 関連条文の自動引用</li>
+            <li>✓ 優先サポート</li>
+          </ul>
+          <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録する（月額 ¥9,800）→</a>
+          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="cta">
-    <h2>今すぐ無料で試してみる</h2>
+    <h2>まずは試してみる</h2>
     <p>アカウント登録は1分。クレジットカード不要。</p>
-    <button class="btn-cta" onclick="go('auth','register')">無料で試す</button>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2">
+      <button class="btn-cta" onclick="go('auth','register')">無料で試す</button>
+      <a class="btn-cta-stripe" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録 ¥9,800/月</a>
+    </div>
   </section>
 
   <section class="notice">
@@ -450,6 +554,21 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
     <!-- 入力パネル -->
     <div class="apanel on" id="panel-inp">
+      <div id="usage-bar" class="usage-bar">
+        <div class="usage-left">
+          <span class="usage-icon">📊</span>
+          今月の無料利用：<strong id="usage-count">0</strong> / 5件
+        </div>
+        <div class="usage-track"><div class="usage-fill" id="usage-fill"></div></div>
+      </div>
+      <div id="trial-ended-banner" class="trial-ended-banner" style="display:none">
+        <div class="teb-icon">🔒</div>
+        <div class="teb-body">
+          <div class="teb-title">無料トライアルが終了しました</div>
+          <div class="teb-msg">無料利用（5件）をすべて使い切りました。引き続き利用する場合は有料プランをご利用ください。</div>
+        </div>
+        <a class="teb-btn" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料プランへ →</a>
+      </div>
       <div class="card">
         <label class="card-label">相談メモ</label>
         <textarea id="memo" class="textarea" placeholder="初回相談で聞き取った内容を入力してください。&#10;&#10;例）&#10;・依頼者：会社員（35歳男性）&#10;・相談内容：昨年10月に交通事故に遭い、相手方は任意保険未加入&#10;・現在通院中（整形外科）で休業損害が発生している&#10;・相手方は過失を認めているが示談額に合意できていない"></textarea>
@@ -484,6 +603,35 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <!-- 履歴パネル -->
     <div class="apanel" id="panel-hist">
       <div id="hist-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL -->
+<div class="upg-overlay" id="upg-modal">
+  <div class="upg-box">
+    <div class="upg-hd">
+      <div class="lock">🔒</div>
+      <h3>無料プランの上限に達しました</h3>
+      <p>今月の無料利用（5件）をすべて使い切りました</p>
+    </div>
+    <div class="upg-body">
+      <div class="upg-price">
+        <div class="amount">¥9,800</div>
+        <div class="period">/ 月（税込）</div>
+      </div>
+      <ul class="upg-features">
+        <li>AI整理が<strong>無制限</strong>で使い放題</li>
+        <li>履歴の無制限保存・検索</li>
+        <li>関連条文の自動引用</li>
+        <li>PDF出力（無制限）</li>
+        <li>優先サポート</li>
+      </ul>
+      <a class="btn-upgrade" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">
+        プロプランに登録する →
+      </a>
+      <span class="upg-cancel" onclick="closeUpgrade()">今は無料プランを続ける</span>
+      <div class="upg-note">🔒 Stripeの安全な決済ページへ遷移します</div>
     </div>
   </div>
 </div>
@@ -535,7 +683,7 @@ function register() {
   if (pass !== pass2)               { err('e-reg-pass2'); ok = false; }
   if (!ok) return;
   if (users[email])                 { err('e-reg-email', 'このメールアドレスはすでに登録されています'); return; }
-  users[email] = { name, email, pass, history: [] };
+  users[email] = { name, email, pass, history: [], usageCount: 0, isPro: false };
   save();
   toast('アカウントを作成しました！');
   enterApp(users[email]);
@@ -560,6 +708,47 @@ function enterApp(u) {
   document.getElementById('uname').textContent = u.name + ' さん';
   go('app');
   renderHist();
+  updateUsageBar();
+}
+
+function updateUsageBar() {
+  if (!me) return;
+  const u = users[me.email];
+  const count = u.usageCount || 0;
+  const isPro = u.isPro || false;
+  const bar = document.getElementById('usage-bar');
+  const countEl = document.getElementById('usage-count');
+  const fill = document.getElementById('usage-fill');
+  if (isPro) {
+    bar.innerHTML = '<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">プロプラン</strong>　AI整理：無制限</div>';
+    return;
+  }
+  countEl.textContent = count;
+  const pct = Math.min(count / 5 * 100, 100);
+  fill.style.width = pct + '%';
+  fill.className = 'usage-fill' + (count >= 5 ? ' danger' : '');
+  const banner = document.getElementById('trial-ended-banner');
+  const card   = document.querySelector('#panel-inp .card');
+  if (count >= 5) {
+    document.getElementById('btn-go').disabled = true;
+    document.getElementById('btn-go').textContent = '🔒 有料プランへアップグレード';
+    document.getElementById('btn-go').onclick = openUpgrade;
+    banner.style.display = 'flex';
+    if (card) card.style.opacity = '.45';
+  } else {
+    document.getElementById('btn-go').disabled = false;
+    document.getElementById('btn-go').textContent = '🤖 AIで整理する';
+    document.getElementById('btn-go').onclick = analyze;
+    banner.style.display = 'none';
+    if (card) card.style.opacity = '1';
+  }
+}
+
+function openUpgrade() {
+  document.getElementById('upg-modal').classList.add('on');
+}
+function closeUpgrade() {
+  document.getElementById('upg-modal').classList.remove('on');
 }
 
 // ── app tabs ───────────────────────────
@@ -575,48 +764,80 @@ function appTab(t) {
 async function analyze() {
   const memo = document.getElementById('memo').value.trim();
   if (!memo) { toast('相談メモを入力してください'); return; }
+  const u = users[me.email];
+  const isPro = u.isPro || false;
+  if (!isPro && (u.usageCount || 0) >= 5) { openUpgrade(); return; }
 
   document.getElementById('res-wrap').style.display = 'block';
   document.getElementById('res-loading').style.display = 'block';
   document.getElementById('res-card').style.display = 'none';
   document.getElementById('btn-go').disabled = true;
 
+  // ── プラン別プロンプト設定 ──────────────────
+  const freeSystem = `あなたは日本の弁護士の初回相談メモを整理するAIアシスタントです。
+入力された相談メモを以下の4項目に整理してください。
+必ず以下のJSON形式のみで返答してください（前置き・後文・マークダウン不要）：
+{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点","todo":"追加で確認すべき事項"}
+
+各項目の記載ルール：
+- facts: 箇条書き（・）で時系列・当事者・経緯を3〜4点、簡潔に
+- claims: 箇条書き（・）で依頼者が求めること・希望する解決策を2〜3点
+- issues: 法的論点を箇条書き（・）で3〜4点（条文引用なし）
+- todo: 箇条書き（・）で確認すべき書類・情報を3〜4点`;
+
+  const proSystem = `あなたは日本の法律に精通したベテラン弁護士のアシスタントAIです。
+入力された初回相談メモを、法的観点から詳細かつ正確に4項目へ整理してください。
+必ず以下のJSON形式のみで返答してください（前置き・後文・マークダウン不要）：
+{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項"}
+
+各項目の記載ルール：
+- facts: 箇条書き（・）で日時・当事者・経緯・背景を時系列順に4〜6点、具体的かつ正確に
+- claims: 箇条書き（・）で依頼者の主張・法的請求の根拠・希望する解決策を3〜5点
+- issues: 法的論点を箇条書き（・）で4〜6点。各論点の末尾に必ず「（関連条文：○○法○条、○条等）」の形式で正確な日本法の条文を引用すること。判例や通説上の重要論点も漏れなく拾うこと
+- todo: 箇条書き（・）で次回面談までに確認・収集すべき書類・証拠・情報を4〜6点。優先順位の高い順に記載すること`;
+
+  const model    = isPro ? 'claude-sonnet-4-20250514' : 'claude-haiku-4-5-20251001';
+  const maxTok   = isPro ? 1200 : 600;
+  const system   = isPro ? proSystem : freeSystem;
+
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 1500,
-        system: `あなたは日本の弁護士の初回相談メモを整理するAIアシスタントです。
-入力された相談メモを以下の4項目に分類してください。
-必ず以下のJSON形式のみで返答してください（前置き・後文・マークダウン不要）：
-{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項"}
-
-各項目の記載ルール：
-- facts: 箇条書き（・）で時系列・当事者・経緯を3〜5点
-- claims: 箇条書き（・）で依頼者が求めること・希望する解決策を3〜4点
-- issues: 法的論点を箇条書き（・）で3〜5点。各論点の末尾に「（関連条文：民法○条、○条等）」の形式で日本の法律の関連条文を必ず引用すること
-- todo: 箇条書き（・）で次回面談までに確認・収集すべき書類・情報を3〜5点`,
+        model, max_tokens: maxTok, system,
         messages: [{ role: 'user', content: `以下の相談メモを整理してください：\n\n${memo}` }]
       })
     });
     const data = await res.json();
     const text = data.content.map(c => c.text || '').join('');
     const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-    result = { memo, ...parsed, date: new Date().toISOString() };
+    result = { memo, ...parsed, date: new Date().toISOString(), isPro };
   } catch {
-    result = {
-      memo,
-      facts:  '・依頼者は会社員（35歳男性）\n・昨年10月に交通事故に遭う\n・相手方は任意保険未加入\n・現在整形外科に通院中\n・休業損害が発生している',
-      claims: '・相手方の過失責任を認めさせること\n・適正な損害賠償額の支払いを求める\n・早期の示談解決を希望している',
-      issues: '・過失割合の確定（関連条文：民法709条、722条）\n・損害額（治療費・休業損害・慰謝料）の算定（関連条文：民法709条、710条、722条）\n・任意保険未加入時の強制執行可能性（関連条文：自動車損害賠償保障法3条、民事執行法143条以下）\n・示談の有効性と錯誤・詐欺による取消可能性（関連条文：民法95条、96条）',
-      todo:   '・交通事故証明書の取得\n・診断書・診療録の確認\n・休業損害証明書の準備\n・相手方の資力・財産状況の調査\n・これまでの交渉経緯を示す書面・記録の収集',
-      date: new Date().toISOString()
-    };
+    if (isPro) {
+      result = {
+        memo, isPro: true,
+        facts:  '・依頼者は会社員（35歳男性、既婚）\n・昨年10月15日、帰宅途中に交差点で相手方車両と衝突\n・相手方は任意保険未加入（自賠責保険のみ）\n・事故後より整形外科に通院中（頸椎捻挫・腰部挫傷）\n・事故による欠勤で休業損害が発生している\n・相手方は過失を認めているが提示示談額に依頼者が不満',
+        claims: '・相手方の不法行為責任に基づく損害賠償請求\n・治療費・通院交通費・休業損害・慰謝料の全額賠償\n・適正な過失割合の認定による示談解決\n・相手方の任意保険未加入を踏まえた実効的な回収',
+        issues: '・過失割合の確定（信号機の状況・車線・速度等が争点）（関連条文：民法709条、722条2項）\n・損害額の算定－治療費・休業損害・傷害慰謝料・後遺障害慰謝料（関連条文：民法709条、710条、711条）\n・自賠責保険の限度額（傷害：120万円）超過分の請求方法（関連条文：自動車損害賠償保障法3条、16条）\n・任意保険未加入時の強制執行手続き（財産開示・第三者情報取得）（関連条文：民事執行法197条以下）\n・既往症・素因減額の有無（関連条文：民法722条2項、最判H8.10.29）\n・示談後の追加請求可能性と留保条項の要否（関連条文：民法696条）',
+        todo:   '・交通事故証明書（自動車安全運転センター発行）の取得\n・診断書・診療録・画像データ（MRI・レントゲン）の収集\n・休業損害証明書（勤務先作成）の準備\n・修理費見積書・物損関係書類の確認\n・相手方の資産状況調査（不動産登記・預金等）\n・ドライブレコーダー映像・目撃者情報の保全',
+        date: new Date().toISOString()
+      };
+    } else {
+      result = {
+        memo, isPro: false,
+        facts:  '・依頼者は会社員（35歳男性）\n・昨年10月に交通事故に遭う\n・相手方は任意保険未加入\n・現在整形外科に通院中\n・休業損害が発生している',
+        claims: '・相手方の過失責任の認定\n・適正な損害賠償額の支払いを求める\n・示談による早期解決を希望',
+        issues: '・過失割合の確定\n・損害額（治療費・休業損害・慰謝料）の算定\n・任意保険未加入時の強制執行可能性\n・示談交渉の進め方',
+        todo:   '・交通事故証明書の取得\n・診断書・診療録の確認\n・休業損害証明書の準備\n・相手方の資力確認',
+        date: new Date().toISOString()
+      };
+    }
   } finally {
     showResult(result);
     autoSave(result);
     document.getElementById('btn-go').disabled = false;
+    updateUsageBar();
   }
 }
 
@@ -625,6 +846,18 @@ function showResult(r) {
   document.getElementById('r-claims').textContent = r.claims;
   document.getElementById('r-issues').textContent = r.issues;
   document.getElementById('r-todo').textContent   = r.todo;
+
+  // プランに応じてラベル・バッジを切り替え
+  const issuesLbl = document.querySelector('#r-issues').closest('.res-item').querySelector('.res-lbl');
+  const resTtl    = document.querySelector('.res-ttl');
+  if (r.isPro) {
+    issuesLbl.textContent = '想定される論点と関連条文';
+    resTtl.innerHTML = 'AI整理結果 <span style="font-size:.65rem;background:var(--gold);color:#fff;padding:2px 8px;border-radius:10px;font-weight:500;letter-spacing:.06em;vertical-align:middle">✨ Pro</span>';
+  } else {
+    issuesLbl.textContent = '想定される論点';
+    resTtl.textContent = 'AI整理結果';
+  }
+
   document.getElementById('res-loading').style.display = 'none';
   document.getElementById('res-card').style.display    = 'block';
 }
@@ -793,11 +1026,20 @@ function exportPDF() {
 // ── history ────────────────────────────
 function autoSave(r) {
   if (!r || !me) return;
-  const hist = users[me.email].history || [];
+  const u = users[me.email];
+  const hist = u.history || [];
   hist.unshift({ ...r, id: Date.now() });
-  users[me.email].history = hist;
+  u.history = hist;
+  if (!u.isPro) u.usageCount = (u.usageCount || 0) + 1;
   save();
-  toast('整理完了・履歴に自動保存しました ✅');
+  updateUsageBar();
+  const remaining = u.isPro ? '∞' : Math.max(0, 5 - u.usageCount);
+  const msg = u.isPro
+    ? '整理完了・自動保存しました ✅'
+    : u.usageCount >= 5
+      ? '整理完了・自動保存しました（無料利用上限に達しました）'
+      : '整理完了・自動保存しました ✅（残り ' + remaining + '件）';
+  toast(msg);
 }
 
 function saveHist() {
@@ -849,6 +1091,11 @@ function toast(msg) {
   el.textContent = msg; el.classList.add('on');
   setTimeout(() => el.classList.remove('on'), 2800);
 }
+
+// ── upgrade modal bg click ─────────────
+document.getElementById('upg-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeUpgrade();
+});
 
 // ── scroll animations ──────────────────
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }), {threshold:.1});
