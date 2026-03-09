@@ -295,6 +295,21 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .btn-cta-stripe{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:18px 40px;font-size:.9rem;font-weight:500;letter-spacing:.06em;border:2px solid rgba(255,255,255,.4);border-radius:2px;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none;position:relative;z-index:2}
 .btn-cta-stripe:hover{background:rgba(255,255,255,.1);border-color:#fff}
 
+/* ── TRUST BADGES ── */
+.trust-badges{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+.trust-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--slate);background:rgba(255,255,255,.7);border:1px solid var(--border);border-radius:20px;padding:5px 12px;letter-spacing:.03em}
+.trust-badge .ti{color:var(--gold);font-size:.85rem}
+
+/* ── APP PRIVACY NOTE ── */
+.privacy-note{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;padding:10px 14px;background:var(--cream);border-radius:4px;border:1px solid var(--border)}
+.privacy-note span{font-size:.72rem;color:var(--slate);display:flex;align-items:center;gap:5px}
+.privacy-note span::before{content:'🔒';font-size:.8rem}
+
+/* ── FOOTER LINKS ── */
+.footer-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;letter-spacing:.04em}
+.footer-link:hover{color:rgba(255,255,255,.8)}
+
 /* responsive */
 @media(max-width:900px){
   nav{padding:16px 20px}
@@ -340,6 +355,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <h1>初回相談メモを<br><em>すばやく整理</em></h1>
         <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、数分で完了。</p>
         <button class="btn-gold" onclick="track('click_try_free',{location:'hero'});go('auth','register')">無料で試す</button>
+        <div class="trust-badges">
+          <span class="trust-badge"><span class="ti">✏️</span>架空の相談内容で試せます</span>
+          <span class="trust-badge"><span class="ti">🔒</span>入力内容は保存されません</span>
+          <span class="trust-badge"><span class="ti">⚡</span>AI処理後、データは保持されません</span>
+        </div>
       </div>
       <div class="fade-up">
         <div class="mock">
@@ -482,6 +502,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
   <footer>
     <div class="logo">Intake<span>AI</span></div>
+    <div class="footer-links">
+      <a class="footer-link" href="./privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="footer-link" href="./terms.html" target="_blank" rel="noopener">利用規約</a>
+    </div>
     <p>© 2025 IntakeAI. All rights reserved.</p>
   </footer>
 </div>
@@ -588,6 +612,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <div class="inp-actions">
           <button class="btn-analyze" id="btn-go" onclick="analyze()">🤖 AIで整理する</button>
           <button class="btn-sec" onclick="clearAll()">クリア</button>
+        </div>
+        <div class="privacy-note">
+          <span>架空の相談内容でお試しいただけます</span>
+          <span>入力内容はサーバーに保存されません</span>
+          <span>AI処理後、データは保持されません</span>
         </div>
       </div>
 
