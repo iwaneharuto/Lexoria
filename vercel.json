@@ -3,6 +3,20 @@
     "api/intake/organize.js": {
       "memory": 256,
       "maxDuration": 30
+    },
+    "api/invite/send.js": {
+      "memory": 128,
+      "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/blog/lawyer-intake-memo",          "destination": "/blog/lawyer-intake-memo.html" },
+    { "source": "/blog/legal-consultation-checklist", "destination": "/blog/legal-consultation-checklist.html" },
+    { "source": "/blog/legal-hearing-sheet",          "destination": "/blog/legal-hearing-sheet.html" },
+    { "source": "/blog/legal-consultation-organize",  "destination": "/blog/legal-consultation-organize.html" },
+    { "source": "/blog/lawyer-consultation-template", "destination": "/blog/lawyer-consultation-template.html" },
+    { "source": "/templates/legal-memo-template",     "destination": "/templates/legal-memo-template.html" },
+    { "source": "/templates/legal-hearing-sheet",     "destination": "/templates/legal-hearing-sheet.html" },
+    { "source": "/templates/legal-checklist-template","destination": "/templates/legal-checklist-template.html" }
+  ]
 }
