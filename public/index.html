@@ -1720,28 +1720,36 @@ async function analyze() {
       resultRaw.style.display = 'none';
     }
 
-    // ```json ... ``` を確実に除去（改行込み・複数行対応）
+    // ```json ``` を除去してからJSONパース
     const cleaned = data.result
       .replace(/^```json[\r\n]*/i, '')
-      .replace(/^```[\r\n]*/,    '')
-      .replace(/[\r\n]*```\s*$/, '')
+      .replace(/^```[\r\n]*/,      '')
+      .replace(/[\r\n]*```\s*$/,   '')
       .trim();
-    let parsed;
-    try { parsed = JSON.parse(cleaned); }
-    catch (parseErr) {
-      // JSON解析失敗でもテキストは表示済みなので継続
-      console.warn('[IntakeAI] 構造化パース失敗（テキストは表示済み）:', parseErr.message);
-      parsed = { facts: data.result, claims: '', issues: '', todo: '', nextActions: '', caseType: '', keyIssues: '', priority: '' };
+
+    let parsed = null;
+    try {
+      parsed = JSON.parse(cleaned);
+      console.log('parse done', Object.keys(parsed));
+    } catch (parseErr) {
+      console.warn('[IntakeAI] JSONパース失敗:', parseErr.message, '/ raw:', cleaned.slice(0, 200));
+      // パース失敗時は result-raw に生テキストを表示してエラーを投げる
+      const rawEl = document.getElementById('result-raw');
+      if (rawEl) { rawEl.textContent = data.result; rawEl.style.display = 'block'; }
+      throw new Error('AIの応答を解析できませんでした。再試行してください。');
     }
 
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-      throw new Error('AIの応答形式が不正です（object expected, got ' + typeof parsed + '）');
+      throw new Error('AIの応答形式が不正です（object expected）');
     }
+
+    // result-raw は非表示のまま
+    const rawEl2 = document.getElementById('result-raw');
+    if (rawEl2) rawEl2.style.display = 'none';
+
+    // showResult には parsed を直接渡す（memo/date/isPro はresultオブジェクトに別途保持）
     result = { memo, ...parsed, date: new Date().toISOString(), isPro };
-    document.getElementById('res-card').style.display   = 'block';
-    document.getElementById('res-loading').style.display = 'none';
-    document.getElementById('res-wrap').style.display   = 'block';
-    showResult(result);
+    showResult(parsed);
     autoSave(result);
     console.log('render done');
     track('analyze_success', { plan: isPro ? 'pro' : 'free' });
@@ -1772,35 +1780,31 @@ async function analyze() {
   return false;
 }
 
-function showResult(parsed) {
-  result = parsed;
+function showResult(p) {
+  // p は parsed オブジェクト（caseType/keyIssues/priority/facts/claims/issues/todo/nextActions）
 
   // ── ユーティリティ ────────────────────────────────
-  // 値を行の配列に正規化（配列 or 改行区切り文字列 → string[]）
   function toLines(val) {
-    if (!val) return [];
+    if (val == null || val === '') return [];
     if (Array.isArray(val)) return val.map(function(v){ return String(v).trim(); }).filter(Boolean);
     return String(val).split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
   }
-  // bullet list HTML
   function toBulletHTML(val) {
     var lines = toLines(val);
-    if (!lines.length) return '';
+    if (!lines.length) return '<span style="color:#aaa">—</span>';
     return lines.map(function(line) {
       var clean = line.replace(/^[・\-\*\d\.]+\s*/, '');
       return '<div class="res-line">・' + clean + '</div>';
     }).join('');
   }
-  // 単一テキスト
   function toText(val) {
-    if (!val) return '該当なし';
-    if (Array.isArray(val)) return val.join('　') || '該当なし';
+    if (val == null || val === '') return '該当なし';
+    if (Array.isArray(val)) return val.map(function(v){ return String(v).trim(); }).filter(Boolean).join('　') || '該当なし';
     return String(val).trim() || '該当なし';
   }
   function setHTML(id, html) {
     var el = document.getElementById(id);
-    if (!el) return;
-    if (html) { el.innerHTML = html; } else { el.textContent = '—'; }
+    if (el) el.innerHTML = html;
   }
   function setText(id, val) {
     var el = document.getElementById(id);
@@ -1810,37 +1814,40 @@ function showResult(parsed) {
   // ── 案件サマリー ─────────────────────────────────
   var sumEl = document.getElementById('r-summary');
   if (sumEl) {
-    setText('r-case-type',  toText(parsed.caseType));
-    setText('r-key-issues', toText(parsed.keyIssues));
-    setText('r-priority',   toText(parsed.priority));
+    setText('r-case-type',  toText(p.caseType));
+    setText('r-key-issues', toText(p.keyIssues));
+    setText('r-priority',   toText(p.priority));
     sumEl.style.display = 'grid';
   }
 
-  // ── 4グリッド ────────────────────────────────────
-  setHTML('r-facts',  toBulletHTML(parsed.facts)  || '—');
-  setHTML('r-claims', toBulletHTML(parsed.claims) || '—');
-  setHTML('r-issues', toBulletHTML(parsed.legalIssues || parsed.issues) || '—');
+  // ── 事実関係・依頼者の主張・想定論点 ───────────────
+  setHTML('r-facts',  toBulletHTML(p.facts));
+  setHTML('r-claims', toBulletHTML(p.claims));
+  setHTML('r-issues', toBulletHTML(p.issues || p.legalIssues));
 
-  // todo：ラベルバッジ化
+  // ── 確認対象事項（todo）─────────────────────────
   var todoEl = document.getElementById('r-todo-list');
   if (todoEl) {
-    var todoLines = toLines(parsed.actionItems || parsed.todo);
-    todoEl.innerHTML = todoLines.map(function(line) {
-      var clean = line.replace(/^[・\-\*]\s*/, '');
-      var tag = '', tagClass = '', rest = clean;
-      if      (/^要資料[：:]/.test(clean)) { tag = '要資料'; tagClass = 'todo-tag-doc'; rest = clean.replace(/^要資料[：:]\s*/, ''); }
-      else if (/^要確認[：:]/.test(clean)) { tag = '要確認'; tagClass = 'todo-tag-chk'; rest = clean.replace(/^要確認[：:]\s*/, ''); }
-      else if (/^要証拠[：:]/.test(clean)) { tag = '要証拠'; tagClass = 'todo-tag-ev';  rest = clean.replace(/^要証拠[：:]\s*/, ''); }
-      return '<div class="todo-line">' + (tag ? '<span class="todo-tag ' + tagClass + '">' + tag + '</span>' : '') + '<span>' + rest + '</span></div>';
-    }).join('') || '—';
+    var todoLines = toLines(p.todo);
+    if (!todoLines.length) {
+      todoEl.innerHTML = '<span style="color:#aaa">—</span>';
+    } else {
+      todoEl.innerHTML = todoLines.map(function(line) {
+        var clean = line.replace(/^[・\-\*]\s*/, '');
+        var tag = '', tagClass = '', rest = clean;
+        if      (/^要資料[：:]/.test(clean)) { tag = '要資料'; tagClass = 'todo-tag-doc'; rest = clean.replace(/^要資料[：:]\s*/, ''); }
+        else if (/^要確認[：:]/.test(clean)) { tag = '要確認'; tagClass = 'todo-tag-chk'; rest = clean.replace(/^要確認[：:]\s*/, ''); }
+        else if (/^要証拠[：:]/.test(clean)) { tag = '要証拠'; tagClass = 'todo-tag-ev';  rest = clean.replace(/^要証拠[：:]\s*/, ''); }
+        return '<div class="todo-line">' + (tag ? '<span class="todo-tag ' + tagClass + '">' + tag + '</span>' : '') + '<span>' + rest + '</span></div>';
+      }).join('');
+    }
   }
 
-  // ── 次にやること（nextActions → fallback: todo）────
+  // ── 初動で確認したい事項（nextActions → fallback: todo）
   var nextWrap = document.getElementById('r-next-wrap');
   var nextBody = document.getElementById('r-next-body');
   if (nextBody) {
-    var naSource = toLines(parsed.nextActions).length > 0 ? parsed.nextActions : parsed.todo;
-    var naLines  = toLines(naSource);
+    var naLines = toLines(p.nextActions).length > 0 ? toLines(p.nextActions) : toLines(p.todo);
     if (naLines.length) {
       nextBody.innerHTML = naLines.map(function(line) {
         var clean = line.replace(/^[・\-\*\d\.]+\s*/, '');
