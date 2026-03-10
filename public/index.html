@@ -355,7 +355,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 /* ── PRICING ── */
 .pricing-sec{background:var(--cream);padding:100px 48px;border-top:1px solid var(--border)}
-.pricing-inner{max-width:900px;margin:0 auto}
+.pricing-inner{max-width:1200px;margin:0 auto}
 .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
 .pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px 24px;position:relative;transition:box-shadow .3s}
 .pricing-card.featured{border:2px solid var(--gold);box-shadow:0 12px 40px rgba(184,151,90,.15)}
@@ -418,7 +418,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .faq-ans a{color:var(--gold);text-decoration:underline}
 /* responsive */
 @media(max-width:900px){
-  nav{padding:16px 20px}
+  nav{padding:16px 20px  .pricing-grid{grid-template-columns:1fr 1fr}
+}
   .nav-links{display:none}
   .hero{padding:120px 24px 60px}
   .hero-grid{grid-template-columns:1fr;gap:32px}
@@ -434,7 +435,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   .pricing-sec{padding:64px 24px}
   .faq-sec{padding:64px 20px}
   .faq-cats{grid-template-columns:1fr;gap:36px}
-  .pricing-grid{grid-template-columns:1fr 1fr}
+  
 }
 
 @media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
