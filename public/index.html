@@ -598,31 +598,39 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   <!-- PRICING -->
   <section class="pricing-sec" id="pricing">
     <div class="pricing-inner">
-      <div class="sec-ey" style="justify-content:center">Pricing</div>
-      <h2 class="sec-ttl" style="text-align:center;margin-bottom:10px">ご利用スタイルに合わせたプラン</h2>
-      <p style="text-align:center;font-size:.86rem;color:var(--slate);margin-bottom:40px">まずは無料で試し、必要に応じて個人利用または事務所導入プランをお選びください</p>
-
-      <!-- 導入タイプ分岐 -->
-      <div class="pricing-type-nav">
-        <div class="ptn-item">
-          <div class="ptn-label">Individual</div>
-          <div class="ptn-title">個人で使う方向け</div>
-          <div class="ptn-desc">弁護士1名での業務効率化に</div>
-        </div>
-        <div class="ptn-item ptn-team">
-          <div class="ptn-label">Office / Team</div>
-          <div class="ptn-title">事務所で複数人利用する方向け</div>
-          <div class="ptn-desc">チーム管理・メンバー招待に対応</div>
+      <!-- サービス概要ブロック -->
+      <div style="max-width:680px;margin:0 auto 56px;text-align:center">
+        <div class="sec-ey" style="justify-content:center">Pricing</div>
+        <h2 class="sec-ttl" style="margin-bottom:16px">弁護士・法律事務所向け料金プラン</h2>
+        <p style="font-size:.92rem;color:var(--ink2);line-height:1.9;margin-bottom:10px">初回相談メモを約10秒で整理し、要点整理・追加確認事項・PDF出力まで対応します。<br>弁護士・事務員・スタッフ問わず、事務所全体でご利用いただけます。</p>
+        <div style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;padding:14px 28px;background:linear-gradient(135deg,#f0f8f4,#f5f0ff);border:1px solid #c8e0d4;border-radius:6px">
+          <span style="font-size:.82rem;font-weight:600;color:var(--ink)">🎁 7日間の無料トライアル + 10回まで無料利用</span>
+          <span style="width:1px;height:14px;background:var(--border);display:inline-block"></span>
+          <span style="font-size:.76rem;color:var(--slate)">クレジットカード登録不要</span>
         </div>
       </div>
 
-      <!-- Free：お試しバー -->
+      <!-- 導入タイプ -->
+      <div class="pricing-type-nav" style="margin-bottom:40px">
+        <div class="ptn-item">
+          <div class="ptn-label">Free Trial</div>
+          <div class="ptn-title">まず試したい方向け</div>
+          <div class="ptn-desc">月5件・登録無料・CC不要</div>
+        </div>
+        <div class="ptn-item ptn-team">
+          <div class="ptn-label">Paid Plan</div>
+          <div class="ptn-title">事務所全体で導入したい方向け</div>
+          <div class="ptn-desc">AI整理無制限・メンバー管理対応</div>
+        </div>
+      </div>
+
+      <!-- Free お試しバー -->
       <div class="pricing-free-bar">
         <div class="pfb-left">
           <div class="pfb-icon">🆓</div>
           <div>
             <div class="pfb-title">無料プラン　¥0 / 月</div>
-            <div class="pfb-sub">クレジットカード不要・1分で登録完了</div>
+            <div class="pfb-sub">7日間 + 10回まで無料・CC不要・1分で登録完了</div>
           </div>
         </div>
         <div class="pfb-features">
@@ -634,94 +642,92 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       </div>
 
       <!-- 有料プラン -->
-      <div class="pricing-paid-hd">
+      <div class="pricing-paid-hd" style="margin-top:32px">
         <h3>有料プラン</h3>
-        <p>AI整理・PDF出力・履歴保存がすべて無制限。事務所規模に合わせてお選びください。</p>
+        <p>AI整理・PDF出力・履歴保存がすべて無制限。弁護士も事務員も同一アカウントで管理できます。</p>
       </div>
 
-      <div class="pricing-paid-grid">
+      <div class="pricing-paid-grid" style="grid-template-columns:1fr 1fr 1fr;max-width:1100px;margin:0 auto">
 
-        <!-- Pro -->
+        <!-- パーソナルプラン -->
         <div class="pricing-card">
           <div class="plan-head">
-            <div class="plan-tag pro">Pro — 個人向け</div>
-            <div class="plan-name">プロプラン</div>
-            <div class="plan-target">個人利用の弁護士向け</div>
+            <div class="plan-tag pro">Personal — 個人弁護士向け</div>
+            <div class="plan-name">パーソナルプラン</div>
+            <div class="plan-target">弁護士1名での個人利用向け</div>
           </div>
           <div class="plan-price-wrap">
             <div class="plan-price">¥9,800<sub>/月（税込）</sub></div>
-            <div class="plan-users-badge">👤 1名</div>
+            <div class="plan-users-badge">👤 1名固定</div>
           </div>
           <ul class="plan-features">
             <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
-            <li><span class="fi ok">✓</span> PDF出力</li>
-            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力・履歴保存：<span class="feat-highlight">無制限</span></li>
             <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
-            <li class="dim"><span class="fi ng">✗</span> チーム利用・メンバー管理</li>
+            <li class="dim"><span class="fi ng">✗</span> チーム利用・メンバー追加</li>
+            <li class="dim"><span class="fi ng">✗</span> 事務員・スタッフの追加</li>
           </ul>
-          <a class="btn-plan btn-pro" href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener">個人で登録する →</a>
+          <a class="btn-plan btn-pro" href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener">無料で試す →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
 
-        <!-- Office（主役・おすすめ） -->
-        <div class="pricing-card featured" style="margin-top:-16px">
-          <div class="plan-rec">事務所向けおすすめ</div>
-          <div class="plan-head" style="padding-top:10px">
-            <div class="plan-tag office">Office — 小規模事務所向け</div>
-            <div class="plan-name">オフィスプラン</div>
-            <div class="plan-target">2〜3名の法律事務所向け</div>
-          </div>
-          <div class="plan-price-wrap">
-            <div class="plan-price">¥24,800<sub>/月（税込）</sub></div>
-            <div class="plan-users-badge u-office">👥 最大3名　<span style="font-size:.85em;opacity:.85">1人あたり 約¥8,267</span></div>
-          </div>
-          <!-- Office 強調ポイント -->
-          <div class="office-points">
-            <div class="office-point">2〜3名の事務所に最適なサイズ</div>
-            <div class="office-point">Pro 3名分（¥29,400）より約16%お得</div>
-            <div class="office-point">チーム管理・メンバー招待に対応</div>
-          </div>
-          <ul class="plan-features">
-            <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
-            <li><span class="fi ok">✓</span> PDF出力</li>
-            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
-            <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
-            <li><span class="fi ok">✓</span> <span class="feat-highlight">優先サポート</span></li>
-            <li><span class="fi ok">✓</span> <span class="feat-highlight">チーム利用</span>・メンバー管理</li>
-          </ul>
-          <a class="btn-plan btn-office" href="https://buy.stripe.com/3cI5kC6ZV96Rcuf8fR4sE01" target="_blank" rel="noopener">事務所で導入する →</a>
-          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
-        </div>
-
-        <!-- Team -->
-        <div class="pricing-card team-card">
-          <div class="plan-rec rec-team">事務所全体向け</div>
-          <div class="plan-head" style="padding-top:10px">
-            <div class="plan-tag team">Team — 中規模事務所向け</div>
-            <div class="plan-name">チームプラン</div>
-            <div class="plan-target">4〜5名で共有したい事務所向け</div>
+        <!-- スモールプラン -->
+        <div class="pricing-card">
+          <div class="plan-head">
+            <div class="plan-tag office">Small — 小規模事務所向け</div>
+            <div class="plan-name">スモールプラン</div>
+            <div class="plan-target">弁護士・事務員あわせて5名まで</div>
           </div>
           <div class="plan-price-wrap">
             <div class="plan-price">¥39,800<sub>/月（税込）</sub></div>
-            <div class="plan-users-badge u-team">👥 最大5名　<span style="font-size:.85em;opacity:.85">1人あたり 約¥7,960</span></div>
+            <div class="plan-users-badge u-office">👥 最大5名　<span style="font-size:.85em;opacity:.85">1名あたり 約¥7,960</span></div>
           </div>
           <ul class="plan-features">
             <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
-            <li><span class="fi ok">✓</span> PDF出力</li>
-            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力・履歴保存：<span class="feat-highlight">無制限</span></li>
             <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
             <li><span class="fi ok">✓</span> <span class="feat-highlight">優先サポート</span></li>
-            <li><span class="fi ok">✓</span> <span class="feat-highlight">チーム利用</span>・メンバー管理</li>
-            <li><span class="fi ok">✓</span> <span class="feat-highlight">メンバー招待機能</span></li>
+            <li><span class="fi ok">✓</span> メンバー管理・招待機能</li>
+            <li><span class="fi ok">✓</span> 弁護士・事務員・スタッフ同一扱い</li>
           </ul>
-          <a class="btn-plan btn-team" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">複数人で導入する →</a>
+          <a class="btn-plan btn-office" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">事務所で無料トライアル →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
 
-      </div><!-- /pricing-paid-grid -->
+        <!-- ラージプラン -->
+        <div class="pricing-card team-card" style="margin-top:-12px">
+          <div class="plan-rec rec-team">複数弁護士・事務員向け</div>
+          <div class="plan-head" style="padding-top:10px">
+            <div class="plan-tag team">Large — 中規模事務所向け</div>
+            <div class="plan-name">ラージプラン</div>
+            <div class="plan-target">弁護士・事務員あわせて10名まで</div>
+          </div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">¥74,900<sub>/月（税込）</sub></div>
+            <div class="plan-users-badge u-team">👥 最大10名　<span style="font-size:.85em;opacity:.85">1名あたり 約¥7,490</span></div>
+          </div>
+          <!-- 割安感ポイント -->
+          <div class="office-points" style="background:#f0f4ff;border-left-color:#5a4a8a">
+            <div class="office-point" style="color:#4a3a7a">スモール2契約（¥79,600）より約6%割安</div>
+            <div class="office-point" style="color:#4a3a7a">1名あたり単価がスモールより低い</div>
+            <div class="office-point" style="color:#4a3a7a">事務所全体を一元管理</div>
+          </div>
+          <ul class="plan-features">
+            <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力・履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">優先サポート</span></li>
+            <li><span class="fi ok">✓</span> メンバー管理・招待機能</li>
+            <li><span class="fi ok">✓</span> 弁護士・事務員・スタッフ同一扱い</li>
+          </ul>
+          <a class="btn-plan btn-team" href="https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03" target="_blank" rel="noopener">チームで無料トライアル →</a>
+          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+        </div>
+
+      </div>
 
       <div class="pricing-hint">
-        人数が増えるほど1人あたりの費用が下がります。5名以上なら<strong>Teamプランが最もお得</strong>（1人あたり約¥7,960/月）。
+        登録人数が増えるほど1名あたりの費用が抑えられます。10名規模であれば<strong>ラージプランが合理的な選択</strong>です。
       </div>
     </div>
   </section>
@@ -743,7 +749,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">無料プランと有料プランの違いは？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">無料プランはAI整理を月5件まで利用できます。有料プランでは利用回数が無制限となり、関連条文の自動引用・より高精度なAIモデルが使用できます。Officeプラン（¥24,800/月）・Teamプラン（¥39,800/月）ではチーム利用・メンバー管理にも対応します。</div>
+            <div class="faq-ans">無料プランはAI整理を月5件まで利用できます。有料プランでは利用回数が無制限となり、関連条文の自動引用・より高精度なAIモデルが使用できます。パーソナルプラン（1名・¥9,800/月）は個人利用向け、スモールプラン（5名・¥39,800/月）・ラージプラン（10名・¥74,900/月）では弁護士・事務員を含むチームでの利用に対応します。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">法的助言として利用できますか？<span class="faq-chevron">▼</span></button>
@@ -868,7 +874,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">事務所の複数名でまとめて導入したい場合は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">オフィスプラン（3名まで・¥24,800/月）またはチームプラン（5名まで・¥39,800/月）をご利用ください。チーム管理・メンバー招待機能が使えます。ご不明な点はお問い合わせページよりご連絡ください。</div>
+            <div class="faq-ans">スモールプラン（5名まで・¥39,800/月）またはラージプラン（10名まで・¥74,900/月）をご利用ください。チーム管理・メンバー招待機能が使えます。ご不明な点はお問い合わせページよりご連絡ください。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">機能追加・改善の要望はどこに送ればいいですか？<span class="faq-chevron">▼</span></button>
@@ -1089,63 +1095,69 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 <!-- PLAN SELECT MODAL -->
 <div class="cmodal" id="plan-modal">
-  <div class="cmodal-box" style="max-width:440px">
-    <h3 style="margin-bottom:6px">プランを選択してください</h3>
-    <p style="font-size:.78rem;color:var(--slate);text-align:center;margin-bottom:20px">すべて税込・Stripeの安全な決済ページへ遷移します</p>
+  <div class="cmodal-box" style="max-width:480px">
+    <h3 style="margin-bottom:4px">プランを選択してください</h3>
+    <p style="font-size:.76rem;color:var(--slate);text-align:center;margin-bottom:20px">弁護士・事務員・スタッフ問わず、登録人数分のアカウントを使えます</p>
 
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
 
-      <!-- Pro -->
+      <!-- パーソナルプラン -->
       <a href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener"
-         onclick="track('click_plan_select',{plan:'pro'});closePlanModal()"
-         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
+         onclick="track('click_plan_select',{plan:'personal'});closePlanModal()"
+         style="display:block;padding:16px 20px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
          onmouseover="this.style.borderColor='var(--gold)';this.style.boxShadow='0 4px 16px rgba(184,151,90,.15)'"
          onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-        <div>
-          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:var(--gold);margin-bottom:2px">PRO</div>
-          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">プロプラン</div>
-          <div style="font-size:.72rem;color:var(--slate)">個人利用の弁護士向け・1名</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--ink)">¥9,800</div>
-          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
-        </div>
-      </a>
-
-      <!-- Office（おすすめ） -->
-      <a href="https://buy.stripe.com/3cI5kC6ZV96Rcuf8fR4sE01" target="_blank" rel="noopener"
-         onclick="track('click_plan_select',{plan:'office'});closePlanModal()"
-         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:2px solid #4a7c6f;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f0f8f4;position:relative"
-         onmouseover="this.style.boxShadow='0 4px 16px rgba(74,124,111,.2)'"
-         onmouseout="this.style.boxShadow='none'">
-        <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:3px 12px;border-radius:20px;white-space:nowrap">事務所向けおすすめ</div>
-        <div>
-          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:#4a7c6f;margin-bottom:2px">OFFICE</div>
-          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">オフィスプラン</div>
-          <div style="font-size:.72rem;color:var(--slate)">2〜3名の法律事務所向け・最大3名</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#4a7c6f">¥24,800</div>
-          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
-          <div style="font-size:.65rem;color:#4a7c6f">1人あたり約¥8,267</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:.62rem;letter-spacing:.14em;font-weight:700;color:var(--gold);margin-bottom:3px">PERSONAL — 個人弁護士向け</div>
+            <div style="font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:2px">パーソナルプラン</div>
+            <div style="font-size:.72rem;color:var(--slate)">弁護士<strong style="color:var(--ink)">1名</strong>の個人利用専用（ユーザー追加不可）</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;margin-left:16px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--ink)">¥9,800</div>
+            <div style="font-size:.66rem;color:var(--slate)">/月（税込）</div>
+          </div>
         </div>
       </a>
 
-      <!-- Team -->
+      <!-- スモールプラン -->
       <a href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener"
-         onclick="track('click_plan_select',{plan:'team'});closePlanModal()"
-         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid #c4b8e8;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f8f6ff"
-         onmouseover="this.style.borderColor='#5a4a8a';this.style.boxShadow='0 4px 16px rgba(90,74,138,.15)'"
-         onmouseout="this.style.borderColor='#c4b8e8';this.style.boxShadow='none'">
-        <div>
-          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:#5a4a8a;margin-bottom:2px">TEAM</div>
-          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">チームプラン</div>
-          <div style="font-size:.72rem;color:var(--slate)">4〜5名の事務所向け・最大5名</div>
+         onclick="track('click_plan_select',{plan:'small'});closePlanModal()"
+         style="display:block;padding:18px 20px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
+         onmouseover="this.style.borderColor='#4a7c6f';this.style.boxShadow='0 4px 16px rgba(74,124,111,.15)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:.62rem;letter-spacing:.14em;font-weight:700;color:#4a7c6f;margin-bottom:3px">SMALL — 小規模事務所向け</div>
+            <div style="font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:2px">スモールプラン</div>
+            <div style="font-size:.73rem;color:var(--slate)">弁護士・事務員まとめて <strong style="color:var(--ink)">5名まで</strong> 利用可能</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;margin-left:16px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--ink)">¥39,800</div>
+            <div style="font-size:.66rem;color:var(--slate)">/月（税込）</div>
+            <div style="font-size:.68rem;color:#4a7c6f;margin-top:2px">1名あたり 約¥7,960</div>
+          </div>
         </div>
-        <div style="text-align:right">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#5a4a8a">¥39,800</div>
-          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
-          <div style="font-size:.65rem;color:#5a4a8a">1人あたり約¥7,960</div>
+      </a>
+
+      <!-- ラージプラン（おすすめ） -->
+      <a href="https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03" target="_blank" rel="noopener"
+         onclick="track('click_plan_select',{plan:'large'});closePlanModal()"
+         style="display:block;padding:18px 20px;border:2px solid #5a4a8a;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f8f6ff;position:relative"
+         onmouseover="this.style.boxShadow='0 4px 20px rgba(90,74,138,.2)'"
+         onmouseout="this.style.boxShadow='none'">
+        <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#5a4a8a;color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:3px 14px;border-radius:20px;white-space:nowrap">複数弁護士・事務員向け</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-top:4px">
+          <div>
+            <div style="font-size:.62rem;letter-spacing:.14em;font-weight:700;color:#5a4a8a;margin-bottom:3px">LARGE — 中規模事務所向け</div>
+            <div style="font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:2px">ラージプラン</div>
+            <div style="font-size:.73rem;color:var(--slate)">弁護士・事務員まとめて <strong style="color:var(--ink)">10名まで</strong> 利用可能</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;margin-left:16px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#5a4a8a">¥74,900</div>
+            <div style="font-size:.66rem;color:var(--slate)">/月（税込）</div>
+            <div style="font-size:.68rem;color:#5a4a8a;margin-top:2px">1名あたり 約¥7,490 <span style="font-size:.63rem;opacity:.8">（スモールより割安）</span></div>
+          </div>
         </div>
       </a>
 
@@ -1168,6 +1180,33 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </div>
   </div>
 </div>
+
+<!-- TRIAL EXPIRED MODAL -->
+<div class="upg-overlay" id="trial-expired-modal" style="display:none">
+  <div class="upg-box">
+    <div class="upg-hd">
+      <div class="lock">📅</div>
+      <h3>無料トライアルが終了しました</h3>
+      <p>無料トライアルが終了しました。<br>引き続き利用するには有料プランに登録してください。</p>
+    </div>
+    <div class="upg-body">
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+        <a style="display:block;text-align:center;padding:13px;background:var(--gold);border-radius:4px;text-decoration:none;color:#fff;font-weight:600;font-size:.87rem"
+           href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener"
+           onclick="closeTrialExpiredModal()">パーソナル ¥9,800/月 — 個人で使う →</a>
+        <a style="display:block;text-align:center;padding:12px;border:1px solid #4a7c6f;border-radius:4px;text-decoration:none;color:#4a7c6f;font-weight:600;font-size:.85rem"
+           href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener"
+           onclick="closeTrialExpiredModal()">スモール ¥39,800/月 — 事務所5名で使う →</a>
+        <a style="display:block;text-align:center;padding:12px;border:1px solid #5a4a8a;border-radius:4px;text-decoration:none;color:#5a4a8a;font-weight:600;font-size:.85rem"
+           href="https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03" target="_blank" rel="noopener"
+           onclick="closeTrialExpiredModal()">ラージ ¥74,900/月 — 事務所10名で使う →</a>
+      </div>
+      <p style="font-size:.71rem;color:var(--slate);text-align:center;margin-bottom:8px">🔒 Stripe の安全な決済ページへ</p>
+      <span class="upg-cancel" onclick="closeTrialExpiredModal()">後で登録する</span>
+    </div>
+  </div>
+</div>
+
 <!-- UPGRADE MODAL -->
 <div class="upg-overlay" id="upg-modal">
   <div class="upg-box">
@@ -1178,7 +1217,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </div>
     <div class="upg-body">
       <div class="upg-price">
-        <div class="amount">¥9,800</div>
+        <div class="amount">¥39,800〜</div>
         <div class="period">/ 月（税込）</div>
       </div>
       <ul class="upg-features">
@@ -1186,10 +1225,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <li>履歴の無制限保存・検索</li>
         <li>関連条文の自動引用</li>
         <li>PDF出力（無制限）</li>
-        <li>優先サポート</li>
+        <li>弁護士・事務員まとめて登録可能</li>
+        <li>メンバー管理・チーム招待機能</li>
       </ul>
       <a class="btn-upgrade" href="#" onclick="event.preventDefault();closeUpgrade();openPlanModal()">
-        プロプランに登録する →
+        有料プランへ →
       </a>
       <span class="upg-cancel" onclick="closeUpgrade()">今は無料プランを続ける</span>
       <div class="upg-note">🔒 Stripeの安全な決済ページへ遷移します</div>
@@ -1203,18 +1243,25 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 // ── 定数・プラン管理 ──────────────────────────────────
 const _D = atob('aXdhaGFydS40MjJAb3V0bG9vay5qcA==');
-const DEV_PLAN = 'team';
+const DEV_PLAN = 'large';
 const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/14AbJ0ckfbeZ79V8fR4sE00';
-const STRIPE_UPGRADE = 'https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00';
-const PLAN_LIMITS = { free:1, pro:1, office:3, team:5 };
+const STRIPE_SMALL  = 'https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00'; // 5人プラン（要更新）
+const STRIPE_LARGE  = 'https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03'; // 10人プラン
+const STRIPE_UPGRADE = 'https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03';
+const PLAN_LIMITS = { free:0, personal:1, small:5, large:10 }; // 0=無制限（free=AI整理のみ制限）
 
 function getEffectivePlan(email) {
   if (email === _D) return DEV_PLAN;
   const u = users[email]; if (!u) return 'free';
-  return u.plan || (u.isPro ? 'pro' : 'free');
+  // 旧プラン互換: pro/office→small, team→large
+  const p = u.plan || (u.isPro ? 'small' : 'free');
+  if (p === 'pro') return 'personal';
+  if (p === 'office') return 'small';
+  if (p === 'team') return 'large';
+  return p;
 }
-function isProOrAbove(email) { return ['pro','office','team'].includes(getEffectivePlan(email)); }
-function isTeamPlan(email)   { return ['office','team'].includes(getEffectivePlan(email)); }
+function isProOrAbove(email) { return ['personal','small','large'].includes(getEffectivePlan(email)); }
+function isTeamPlan(email)   { return ['small','large'].includes(getEffectivePlan(email)); }
 
 // ── Analytics ─────────────────────────────────────────
 function track(ev, p) { if (typeof gtag === 'function') gtag('event', ev, p || {}); }
@@ -1235,7 +1282,7 @@ function saveTeam(team) {
 function initTeam(adminEmail) {
   const plan = getEffectivePlan(adminEmail);
   const u = users[adminEmail];
-  const team = { adminEmail, name: u?.officeName||'', plan, maxMembers: PLAN_LIMITS[plan]||3,
+  const team = { adminEmail, name: u?.officeName||'', plan, maxMembers: PLAN_LIMITS[plan]||5,
     members: [{ email:adminEmail, name:u?.name||'', role:'admin', status:'active', joinedAt:new Date().toISOString() }],
     invites: [], createdAt: new Date().toISOString() };
   saveTeam(team); return team;
@@ -1323,6 +1370,7 @@ function enterApp(u) {
   const tt = document.getElementById('atab-team');
   if (tt) tt.style.display = isTeamPlan(u.email) ? '' : 'none';
   appTab('inp'); updateUsageBar();
+  if (isTrialExpired(me.email)) { setTimeout(openTrialExpiredModal, 800); }
 }
 
 function appTab(t) {
@@ -1343,8 +1391,40 @@ function updateUsageBar() {
   const isPro = isProOrAbove(me.email);
   const bar = document.getElementById('usage-bar'); if (!bar) return;
   if (isPro) {
-    const lbl = {pro:'プロプラン',office:'オフィスプラン',team:'チームプラン'}[plan]||'有料プラン';
-    bar.innerHTML = `<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">${lbl}</strong>　AI整理：無制限</div>`;
+    const team = findMyTeam();
+    const max  = PLAN_LIMITS[plan] || 5;
+    const used = team ? (team.members||[]).filter(m2=>m2.status==='active').length : 1;
+    const lbl  = {personal:'パーソナルプラン',small:'スモールプラン',large:'ラージプラン'}[plan]||'有料プラン';
+    if (plan === 'personal') {
+      bar.innerHTML = `<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">${lbl}</strong>　AI整理：無制限　<span style="font-size:.78rem;color:var(--slate);margin-left:8px">個人利用（1名）</span></div>`;
+    } else {
+      bar.innerHTML = `<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">${lbl}</strong>　AI整理：無制限　<span style="font-size:.78rem;color:var(--slate);margin-left:8px">利用メンバー ${used} / ${max} 名</span></div>`;
+    }
+    return;
+  }
+  // トライアル中
+  if (isInTrial(me.email)) {
+    const days  = trialDaysLeft(me.email);
+    const uses  = trialUsesLeft(me.email);
+    const dayColor  = days  <= 2 ? '#e74c3c' : days  <= 4 ? '#f39c12' : '#4a7c6f';
+    const useColor  = uses  <= 3 ? '#e74c3c' : uses  <= 5 ? '#f39c12' : '#4a7c6f';
+    const dayPct = ((TRIAL_DAYS  - days) / TRIAL_DAYS)  * 100;
+    const usePct = ((TRIAL_LIMIT - uses) / TRIAL_LIMIT) * 100;
+    bar.innerHTML = `
+      <div class="usage-left" style="flex-wrap:wrap;gap:12px">
+        <span class="usage-icon">🎁</span>
+        <span style="font-size:.82rem"><strong style="color:${dayColor}">無料トライアル残り ${days} 日</strong></span>
+        <span style="font-size:.78rem;color:var(--slate)">｜</span>
+        <span style="font-size:.82rem">無料利用回数：<strong style="color:${useColor}">あと ${uses} 回</strong></span>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <div class="usage-fill" style="width:${dayPct}%;background:${dayColor};flex:1;height:3px;border-radius:2px"></div>
+      </div>`;
+    return;
+  }
+  // トライアル終了済み
+  if (isTrialExpired(me.email)) {
+    bar.innerHTML = `<div class="usage-left"><span class="usage-icon">⚠️</span><strong style="color:#e74c3c">無料トライアルが終了しました</strong><span style="font-size:.76rem;color:var(--slate);margin-left:8px"><a href="#" onclick="event.preventDefault();openTrialExpiredModal()" style="color:var(--gold);text-decoration:underline">プランを登録する →</a></span></div>`;
     return;
   }
   const count = users[me.email]?.usageCount || 0;
@@ -1353,6 +1433,8 @@ function updateUsageBar() {
 
 function openPlanModal()  { document.getElementById('plan-modal').classList.add('on'); }
 function closePlanModal() { document.getElementById('plan-modal').classList.remove('on'); }
+function openTrialExpiredModal()  { const m=document.getElementById('trial-expired-modal'); if(m){m.style.display='flex';} }
+function closeTrialExpiredModal() { const m=document.getElementById('trial-expired-modal'); if(m){m.style.display='none';} }
 function openUpgrade()  { window.open(STRIPE_UPGRADE,'_blank'); track('click_upgrade'); }
 function closeUpgrade() { document.getElementById('upg-modal').classList.remove('on'); }
 
@@ -1361,11 +1443,30 @@ async function analyze() {
   const memo = document.getElementById('memo').value.trim();
   if (!memo) { toast('相談メモを入力してください'); return; }
   const u = users[me.email];
-  const isPro = u.isPro || false;
-  if (!isPro && (u.usageCount || 0) >= 5) { openUpgrade(); return; }
+  const isPro    = isProOrAbove(me.email);
+  const inTrial  = isInTrial(me.email);
+  const trialExp = isTrialExpired(me.email);
 
-  track('click_analyze', { plan: isPro ? 'pro' : 'free' });
-  track('input_consultation', { char_count: memo.length, plan: isPro ? 'pro' : 'free' });
+  // 有料プランでなく、トライアルも終了 → 有料案内
+  if (!isPro && trialExp) { openTrialExpiredModal(); return; }
+  // 有料プランでなく、トライアル外（登録0日以上かつtrialStartなし）→ 旧フリー5件制限
+  if (!isPro && !inTrial && !trialExp) {
+    if ((u.usageCount || 0) >= 5) { openUpgrade(); return; }
+  }
+
+  // トライアル中で残り3回以下 → 警告トースト（使用は続行）
+  if (inTrial && trialUsesLeft(me.email) <= 3 && trialUsesLeft(me.email) > 0) {
+    toast('無料利用は残り ' + trialUsesLeft(me.email) + ' 回です。継続利用する場合は有料プランをご検討ください。');
+  }
+
+  // トライアル回数をインクリメント
+  if (inTrial) {
+    u.trialCount = (u.trialCount || 0) + 1;
+    save();
+  }
+
+  track('click_analyze', { plan: isPro ? 'paid' : (inTrial ? 'trial' : 'free') });
+  track('input_consultation', { char_count: memo.length, plan: isPro ? 'paid' : (inTrial ? 'trial' : 'free') });
 
   document.getElementById('res-wrap').style.display = 'block';
   document.getElementById('res-loading').style.display = 'block';
@@ -1639,10 +1740,12 @@ function delHist(i) {
 function renderAcct() {
   if (!me) return;
   const u=users[me.email], plan=getEffectivePlan(me.email), isPro=isProOrAbove(me.email), isDev=me.email===_D;
-  const planNames={free:'無料プラン',pro:'プロプラン',office:'オフィスプラン（3名）',team:'チームプラン（5名）'};
-  const planBdg={free:'bdg-free',pro:'bdg-pro',office:'bdg-office',team:'bdg-team'};
+  const planNames={free:'無料プラン',personal:'パーソナルプラン（1名）',small:'スモールプラン（5名）',large:'ラージプラン（10名）'};
+  const planBdg={free:'bdg-free',personal:'bdg-pro',small:'bdg-office',large:'bdg-team'};
   const body=document.getElementById('acct-body'); if(!body)return;
   const nextRenewal=isPro&&!isDev?formatDate(calcNextRenewal(u.joinDate)):'—';
+  const trialLeft=(!isPro&&isInTrial(u.email))?trialDaysLeft(u.email):null;
+  const trialExp=(!isPro&&isTrialExpired(u.email));
   const cs=u.cancelScheduled;
   body.innerHTML=`
     <div class="sec-box">
@@ -1729,7 +1832,7 @@ function renderTeam() {
   const plan=getEffectivePlan(me.email);
   let team=findMyTeam(); if(!team)team=initTeam(me.email);
   const isAdmin=team.adminEmail===me.email;
-  const planLabel={office:'オフィスプラン',team:'チームプラン'}[plan]||plan;
+  const planLabel={small:'スモールプラン',large:'ラージプラン'}[plan]||plan;
   const maxM=PLAN_LIMITS[plan]||3;
   const activeCount=(team.members||[]).filter(m2=>m2.status==='active').length;
   const pendingCount=(team.invites||[]).length;
@@ -1815,6 +1918,36 @@ function cancelInvite(email){
 }
 
 // ── toast / modal / scroll ─────────────────────────
+// ── トライアル機能 ──────────────────────────────────────
+const TRIAL_DAYS  = 7;
+const TRIAL_LIMIT = 10; // 無料利用回数上限
+
+function trialDaysLeft(email) {
+  const u = users[email]; if (!u || !u.trialStart) return 0;
+  const diff = Math.ceil((new Date(u.trialStart).getTime() + TRIAL_DAYS * 86400000 - Date.now()) / 86400000);
+  return Math.max(0, diff);
+}
+function trialUsesLeft(email) {
+  const u = users[email]; if (!u) return 0;
+  return Math.max(0, TRIAL_LIMIT - (u.trialCount || 0));
+}
+// 7日以内 かつ 10回未満 の両方を満たす場合のみトライアル有効
+function isInTrial(email) {
+  const u = users[email]; if (!u || !u.trialStart) return false;
+  if (u.plan && u.plan !== 'free') return false;
+  return trialDaysLeft(email) > 0 && trialUsesLeft(email) > 0;
+}
+function isTrialExpired(email) {
+  const u = users[email]; if (!u || !u.trialStart) return false;
+  if (u.plan && u.plan !== 'free') return false;
+  if (!u.trialStart) return false;
+  // どちらかの条件を超えたら終了
+  return trialDaysLeft(email) === 0 || trialUsesLeft(email) === 0;
+}
+function canUseFeature(email) {
+  return isProOrAbove(email) || isInTrial(email);
+}
+
 function faqOpen(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
