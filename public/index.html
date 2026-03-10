@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IntakeAI – 初回相談メモをすばやく整理</title>
-<!-- Google Analytics 4 / 測定ID: G-8F7LVCTWX0 -->
+<!-- =====================================================
+     Google Analytics 4
+     測定ID: G-8F7LVCTWX0
+           例）G-XXXXXXXXXX
+     ===================================================== -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8F7LVCTWX0"></script>
 <script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-8F7LVCTWX0');
-function track(n,p){if(typeof gtag==='function')gtag('event',n,p||{});}
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8F7LVCTWX0');
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:#1a1a2e;--ink2:#2d2d4e;--gold:#b8975a;--gold2:#d4af72;
@@ -46,7 +46,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 ══════════════════════════════ */
 /* hero */
 .hero{min-height:100vh;display:flex;align-items:center;padding:140px 48px 80px;background:var(--cream);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;right:0;width:55%;height:100%;background:linear-gradient(135deg,#eee8de,#e0d6c8);clip-path:polygon(12% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:0;right:0;width:55%;height:100%;background:linear-gradient(135deg,#eee8de,#e0d6c8);clip-path:polygon(12% 0,100% 0,100% 100%,0 100%)}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;max-width:1200px;margin:0 auto;align-items:center;position:relative;z-index:1}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:500;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:24px}
 .eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
@@ -136,7 +136,8 @@ footer{background:var(--ink);padding:32px 48px;display:flex;align-items:center;j
 footer .logo{color:#fff}
 footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
-.fade-up{opacity:1;transform:none}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.fade-up.on{opacity:1;transform:none}
 
 /* ══════════════════════════════
    AUTH SCREEN
@@ -145,7 +146,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 #screen-auth.on{display:flex}
 .auth-box{background:#fff;border-radius:8px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(26,26,46,.12);overflow:hidden}
 .auth-hd{background:var(--ink);padding:28px 32px}
-.auth-hd .logo{font-size:1.5rem;color:#fff}.auth-hd .logo span{color:var(--gold)}
+.auth-hd .logo{font-size:1.5rem}
 .auth-sub{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
 .auth-tabs{display:flex;border-bottom:2px solid var(--border)}
 .auth-tab{flex:1;padding:14px;text-align:center;font-size:.84rem;font-weight:500;color:var(--slate);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
@@ -180,88 +181,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .app-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:28px}
 .atab{padding:11px 24px;font-size:.82rem;font-weight:500;color:var(--slate);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
 .atab.on{color:var(--gold);border-bottom:2px solid var(--gold)}
-/* ── account settings ────────────────── */
-.acct-section{background:#fff;border:1px solid var(--border);border-radius:6px;padding:28px 32px;margin-bottom:20px}
-.acct-section h3{font-family:'Noto Serif JP',serif;font-size:.9rem;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);color:var(--ink2)}
-.acct-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0ece6;font-size:.85rem}
-.acct-row:last-child{border-bottom:none;padding-bottom:0}
-.acct-label{color:var(--slate);font-size:.78rem;width:140px;flex-shrink:0}
-.acct-val{color:var(--ink);font-weight:500;flex:1}
-.acct-badge-pro{display:inline-block;background:#fdf6e9;color:var(--gold);border:1px solid #e8d5a3;border-radius:3px;padding:2px 10px;font-size:.72rem;font-weight:600;letter-spacing:.04em}
-.acct-badge-free{display:inline-block;background:#f3f4f6;color:var(--slate);border:1px solid var(--border);border-radius:3px;padding:2px 10px;font-size:.72rem;font-weight:600}
-.acct-btn{padding:9px 20px;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;transition:all .2s;font-weight:500}
-.acct-btn-outline{background:#fff;border:1px solid var(--border);color:var(--ink2)}
-.acct-btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.acct-btn-gold{background:var(--gold);border:1px solid var(--gold);color:#fff}
-.acct-btn-gold:hover{background:#a07840}
-.acct-btn-danger{background:#fff;border:1px solid #fca5a5;color:#dc2626}
-.acct-btn-danger:hover{background:#fef2f2}
-.acct-btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-.acct-divider{height:1px;background:var(--border);margin:6px 0}
-.pw-form{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
-.pw-form.on{display:block}
-.pw-field{margin-bottom:12px}
-.pw-field label{display:block;font-size:.76rem;color:var(--slate);margin-bottom:5px}
-.pw-field input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:var(--cream)}
-.pw-field input:focus{outline:none;border-color:var(--gold)}
-.pw-err{font-size:.76rem;color:var(--red);margin-top:6px;display:none}
-.pw-err.on{display:block}
-/* ── team panel ────────────────────────── */
-.team-section{background:#fff;border:1px solid var(--border);border-radius:6px;padding:28px 32px;margin-bottom:20px}
-.team-section h3{font-family:'Noto Serif JP',serif;font-size:.9rem;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);color:var(--ink2)}
-.team-badge{display:inline-flex;align-items:center;gap:6px;background:#f0f4ff;color:#5a4a8a;border:1px solid #c4b8e8;border-radius:3px;padding:3px 10px;font-size:.72rem;font-weight:600;margin-bottom:16px}
-.team-badge.office{background:#f0f8f4;color:#4a7c6f;border-color:#b8d8cc}
-.office-name-row{display:flex;gap:10px;align-items:center;margin-bottom:20px}
-.office-name-row input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:var(--cream)}
-.office-name-row input:focus{outline:none;border-color:var(--gold)}
-.office-name-row button{padding:9px 18px;background:var(--gold);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .2s}
-.office-name-row button:hover{background:#a07840}
-.member-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.member-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--cream);border-radius:4px;border:1px solid var(--border);font-size:.83rem}
-.member-row .m-name{font-weight:500;flex:1}
-.member-row .m-email{color:var(--slate);font-size:.76rem;flex:1}
-.member-row .m-role{font-size:.7rem;color:var(--gold);border:1px solid #e8d5a3;background:#fdf6e9;border-radius:3px;padding:2px 8px;white-space:nowrap}
-.member-row .m-role.admin{color:#5a4a8a;border-color:#c4b8e8;background:#f0f4ff}
-.member-row .m-del{background:none;border:1px solid #fca5a5;color:#dc2626;border-radius:3px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
-.member-row .m-del:hover{background:#fef2f2}
-.add-member-row{display:flex;gap:8px;flex-wrap:wrap}
-.add-member-row input{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.83rem;font-family:inherit;background:var(--cream)}
-.add-member-row input:focus{outline:none;border-color:var(--gold)}
-.add-member-row button{padding:9px 18px;background:var(--ink);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;transition:background .2s;white-space:nowrap}
-.add-member-row button:hover{background:var(--gold)}
-.team-err{font-size:.76rem;color:var(--red);margin-top:6px;display:none}
-.team-err.on{display:block}
-/* usage table */
-.usage-table{width:100%;border-collapse:collapse;font-size:.82rem}
-.usage-table th{background:var(--cream);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border);font-weight:600;color:var(--ink2)}
-.usage-table td{padding:10px 12px;border-bottom:1px solid #f0ece6;color:var(--ink)}
-.usage-table tr:last-child td{border-bottom:none}
-.usage-bar-mini{background:#e8e2d8;border-radius:10px;height:6px;flex:1}
-.usage-bar-mini-fill{height:6px;border-radius:10px;background:var(--gold)}
-/* shared PDF list */
-.shared-list{display:flex;flex-direction:column;gap:8px}
-.shared-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--cream);border:1px solid var(--border);border-radius:4px;font-size:.82rem;cursor:pointer;transition:border-color .2s}
-.shared-item:hover{border-color:var(--gold)}
-.shared-item .sh-meta{color:var(--slate);font-size:.74rem}
-.shared-item .sh-name{font-weight:500;flex:1}
-.team-locked{text-align:center;padding:40px 20px;color:var(--slate)}
-.team-locked p{margin-bottom:16px;font-size:.88rem}
-@media(max-width:600px){.member-row{flex-wrap:wrap}.add-member-row{flex-direction:column}.office-name-row{flex-direction:column}}
-/* cancel confirm modal */
-.cancel-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.55);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-.cancel-overlay.on{display:flex}
-.cancel-box{background:#fff;border-radius:8px;padding:36px 32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.18)}
-.cancel-box-icon{font-size:2rem;margin-bottom:12px;text-align:center}
-.cancel-box h3{font-family:'Noto Serif JP',serif;font-size:1.05rem;font-weight:600;text-align:center;margin-bottom:10px;color:var(--ink)}
-.cancel-box-body{font-size:.83rem;color:var(--slate);line-height:1.9;margin-bottom:6px}
-.cancel-box-note{background:#fef2f2;border-left:3px solid #fca5a5;border-radius:0 4px 4px 0;padding:10px 14px;font-size:.78rem;color:#dc2626;margin:14px 0 22px;line-height:1.8}
-.cancel-box-btns{display:flex;gap:10px;flex-direction:column}
-.cancel-box-btns button{width:100%;padding:11px;border-radius:4px;font-size:.84rem;font-family:inherit;cursor:pointer;font-weight:500;transition:all .2s}
-.cancel-confirm-btn{background:#dc2626;border:1px solid #dc2626;color:#fff}
-.cancel-confirm-btn:hover{background:#b91c1c}
-.cancel-back-btn{background:#fff;border:1px solid var(--border);color:var(--ink2)}
-.cancel-back-btn:hover{border-color:var(--gold);color:var(--gold)}
-@media(max-width:600px){.acct-row{flex-direction:column;align-items:flex-start;gap:6px}.acct-label{width:auto}.acct-btn-group{width:100%}.acct-btn{flex:1;text-align:center}}
 
 .apanel{display:none}
 .apanel.on{display:block}
@@ -363,18 +282,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .plan-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
 .plan-badge.free{color:var(--slate)}
 .plan-badge.pro{color:var(--gold)}
-.plan-badge.office{color:#4a7c6f}
-.plan-badge.team{color:#5a4a8a}
-.pricing-card.office{border:2px solid #4a7c6f;box-shadow:0 8px 32px rgba(74,124,111,.12)}
-.pricing-card.team{border:2px solid #5a4a8a;box-shadow:0 8px 32px rgba(90,74,138,.12)}
-.plan-rec-office{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
-.plan-rec-team{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#5a4a8a;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
-.btn-plan-office{display:block;width:100%;padding:14px;background:#4a7c6f;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
-.btn-plan-office:hover{background:#3a6460}
-.btn-plan-team{display:block;width:100%;padding:14px;background:#5a4a8a;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
-.btn-plan-team:hover{background:#4a3a7a}
-.plan-users{font-size:.72rem;color:var(--slate);background:var(--cream);border-radius:3px;padding:3px 10px;display:inline-block;margin-bottom:14px;border:1px solid var(--border)}
-.plan-price{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:16px}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:24px}
 .plan-price span{font-size:1rem;font-weight:400;color:var(--slate);font-family:'Noto Sans JP',sans-serif}
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
 .plan-features li{font-size:.82rem;color:var(--ink);display:flex;align-items:center;gap:8px}
@@ -402,24 +310,9 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;letter-spacing:.04em}
 .footer-link:hover{color:rgba(255,255,255,.8)}
 
-
-/* ── FAQ ── */
-.faq-sec{background:var(--bg);padding:100px 48px;border-top:1px solid var(--border)}
-.faq-wrap{max-width:1000px;margin:0 auto}
-.faq-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 64px;margin-top:0}
-.faq-cat-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.faq-cat-label::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-btn{width:100%;text-align:left;background:none;border:none;padding:15px 0;font-size:.86rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:inherit;line-height:1.6}
-.faq-chevron{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--gold);transition:transform .3s,background .2s}
-.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--gold);color:#fff;border-color:var(--gold)}
-.faq-ans{font-size:.8rem;color:var(--slate);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .35s ease,padding-bottom .3s}
-.faq-item.open .faq-ans{max-height:260px;padding-bottom:14px}
-.faq-ans a{color:var(--gold);text-decoration:underline}
 /* responsive */
 @media(max-width:900px){
-  nav{padding:16px 20px  .pricing-grid{grid-template-columns:1fr 1fr}
-}
+  nav{padding:16px 20px}
   .nav-links{display:none}
   .hero{padding:120px 24px 60px}
   .hero-grid{grid-template-columns:1fr;gap:32px}
@@ -432,20 +325,28 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   .cta{padding:64px 24px}
   .notice{padding:32px 20px}
   footer{padding:24px;flex-direction:column;text-align:center}
+  .pricing-grid{grid-template-columns:1fr}
   .pricing-sec{padding:64px 24px}
-  .faq-sec{padding:64px 20px}
-  .faq-cats{grid-template-columns:1fr;gap:36px}
-  
 }
 
+/* オフィス・チームプラン */
+.plan-users{font-size:.72rem;color:var(--slate);background:var(--cream);border-radius:3px;padding:3px 10px;display:inline-block;margin-bottom:14px;border:1px solid var(--border)}
+.pricing-card.office{border:2px solid #4a7c6f;box-shadow:0 8px 32px rgba(74,124,111,.12)}
+.pricing-card.team{border:2px solid #5a4a8a;box-shadow:0 8px 32px rgba(90,74,138,.12)}
+.plan-badge.office{color:#4a7c6f}
+.plan-badge.team{color:#5a4a8a}
+.plan-rec-office{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-rec-team{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#5a4a8a;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.btn-plan-office{display:block;width:100%;padding:14px;background:#4a7c6f;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
+.btn-plan-office:hover{background:#3a6460}
+.btn-plan-team{display:block;width:100%;padding:14px;background:#5a4a8a;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
+.btn-plan-team:hover{background:#4a3a7a}
+/* レスポンシブ */
+@media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
-
-
 </style>
 </head>
 <body>
-
-
 
 <!-- NAV -->
 <nav>
@@ -468,7 +369,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <div>
         <div class="eyebrow">AI Legal Assistant</div>
         <h1>初回相談メモを<br><em>すばやく整理</em></h1>
-        <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、<strong>平均15秒</strong>で完了。</p>
+        <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、数分で完了。</p>
         <button class="btn-gold" onclick="track('click_try_free',{location:'hero'});go('auth','register')">無料で試す</button>
         <div class="trust-badges">
           <span class="trust-badge"><span class="ti">✏️</span>架空の相談内容で試せます</span>
@@ -505,7 +406,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   </section>
 
   <div class="stats">
-    <div class="stat"><span class="stat-n">15<small style="font-size:1.5rem">秒</small></span><div class="stat-l">平均整理時間</div></div>
+    <div class="stat"><span class="stat-n">3<small style="font-size:1.5rem">分</small></span><div class="stat-l">平均整理時間</div></div>
     <div class="stat"><span class="stat-n">4</span><div class="stat-l">自動生成される整理項目</div></div>
     <div class="stat"><span class="stat-n">PDF</span><div class="stat-l">ワンクリックで出力</div></div>
     <div class="stat"><span class="stat-n">∞</span><div class="stat-l">保存できる相談履歴</div></div>
@@ -632,130 +533,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     </div>
   </section>
 
-
-  <!-- ── FAQ ───────────────────────────── -->
-  <section class="faq-sec" id="faq">
-    <div class="faq-wrap">
-      <div class="sec-ey">FAQ</div>
-      <h2 class="sec-ttl">よくあるお問い合わせ</h2>
-      <div class="faq-cats">
-        <!-- サービスについて -->
-        <div>
-          <div class="faq-cat-label">🗂 サービスについて</div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">IntakeAIとはどのようなサービスですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">弁護士・法律事務所向けに、初回相談メモをAIが自動で4項目（事実関係・依頼者の主張・想定される論点・確認事項）に整理するWebツールです。PDF出力・履歴保存にも対応しています。インストール不要、ブラウザだけで動作します。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">無料プランと有料プランの違いは？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">無料プランはAI整理を月5件まで利用できます。有料プラン（月額¥9,800）では利用回数が無制限となり、関連条文の自動引用・より高精度なAIモデルが使用できます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">法的助言として利用できますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">いいえ。本サービスはあくまでも情報整理の補助ツールです。AI出力は参考情報であり、法的助言・法律意見書の代替にはなりません。最終的な法的判断は弁護士ご自身が行ってください。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">架空の相談内容でも試せますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">はい。架空の相談内容でも機能をフルにお試しいただけます。実際の依頼者情報や機密情報を入力せず、まずはダミーの事案でご体験されることを推奨しています。</div>
-          </div>
-        </div>
-
-        <!-- データ・セキュリティ -->
-        <div>
-          <div class="faq-cat-label">🔒 データ・セキュリティ</div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">入力した相談内容はどこに保存されますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">履歴として保存する場合も、お使いのブラウザ（ローカルストレージ）にのみ記録されます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">弁護士秘密との関係はどうなりますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">本サービスはサーバーに相談内容を保存しないため、情報漏洩リスクを最小化しています。ただし、依頼者の機密情報の入力に際しては各事務所の情報管理規程・弁護士倫理に従いご判断ください。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">通信は暗号化されていますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">はい。本サービスはHTTPS通信を使用しており、ブラウザ間の通信は暗号化されています。入力された相談内容がGoogle Analyticsに送信されることはありません。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">他の事務所の情報が見られる心配はありますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">ありません。各アカウントのデータはブラウザのローカルストレージに個別に保存されており、他のユーザーからアクセスすることは一切できません。</div>
-          </div>
-        </div>
-
-        <!-- 支払いと請求 -->
-        <div>
-          <div class="faq-cat-label">💳 支払いと請求</div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">利用できる支払い方法は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">クレジットカード（Visa・Mastercard・American Express・JCB）がご利用いただけます。決済はStripeが処理し、カード情報は本サービスのサーバーに保存されません。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">請求はいつ行われますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">有料プラン登録日を起算日として、毎月同日に自動で請求されます。請求書はStripeから登録メールアドレスへ自動送付されます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">いつでも解約できますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">はい、いつでも解約いただけます。アカウント設定画面の「プランを解約する」からお手続きください。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">領収書・適格請求書は発行されますか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、<a href="/contact.html">お問い合わせ</a>ください。</div>
-          </div>
-        </div>
-
-        <!-- 技術・動作環境 -->
-        <div>
-          <div class="faq-cat-label">⚙️ 技術・動作環境</div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">対応しているブラウザは？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">Chrome・Safari・Edge・Firefoxの最新バージョンに対応しています。スマートフォン・タブレットからもご利用いただけます。Internet Explorerは非対応です。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">アプリのインストールは必要ですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">不要です。ブラウザからURLにアクセスするだけでご利用いただけます。インストールや初期設定等の作業は一切ありません。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">AI整理にかかる時間はどのくらいですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">無料プランは平均15秒程度で整理結果が表示されます。有料プランは関連条文・判例の参照を含む高精度な分析を行うため、30〜60秒程度かかる場合があります。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans"><a href="/contact.html">お問い合わせページ</a>またはメール（）までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
-          </div>
-        </div>
-
-        <!-- よくあるお問い合わせ -->
-        <div>
-          <div class="faq-cat-label">📬 よくあるお問い合わせ</div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">プランのアップグレード・解約をしたい<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">ログイン後、アカウント設定画面から操作できます。アップグレードはStripeの安全な決済ページに遷移します。解約は「プランを解約する」ボタンから即時お手続きいただけます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">請求・支払いについて確認したい<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">アカウント設定画面の「請求情報を確認する」からStripeのカスタマーポータルに遷移し、請求履歴・カード情報の確認・変更ができます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">パスワードを忘れた・ログインできない<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">ログイン画面の「<a href="#" onclick="go('auth');setTimeout(()=>authTab('reset'),50);return false;" style="color:var(--gold);font-weight:500">パスワードをお忘れですか？</a>」リンクから再設定できます。登録済みのメールアドレスを入力すると、新しいパスワードを設定できます。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">AI出力内容について質問したい<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">AI出力は情報整理の補助であり、正確性を保証するものではありません。出力内容へのご意見・ご質問は<a href="/contact.html">お問い合わせ</a>よりお送りください。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">個人情報の開示・訂正・削除を依頼したい<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">ご本人確認のうえ対応いたします。<a href="/contact.html">お問い合わせ</a>より「個人情報に関するご依頼」としてご連絡ください。通常5営業日以内に対応いたします。</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-btn" onclick="faqOpen(this)">その他のご意見・ご要望<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">機能改善のご提案・ご意見は大歓迎です。<a href="/contact.html">お問い合わせ</a>よりお気軽にご連絡ください。</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <section class="cta">
     <h2>まずは試してみる</h2>
     <p>アカウント登録は1分。クレジットカード不要。</p>
@@ -773,7 +550,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <li>相談内容（個人情報・機密情報）の入力には十分ご注意ください。入力されたデータの取り扱いはプライバシーポリシーに準じます。</li>
         <li>AIの出力精度は入力内容の質・量に依存します。重要な情報は詳細に入力することを推奨します。</li>
         <li>本サービスはデモ版のため、機能・精度・データ保持期間に制限がある場合があります。</li>
-        <li>履歴として保存する場合も、お使いのブラウザ（ローカルストレージ）にのみ記録されます。</li>
+        <li>入力した相談内容はサーバーに保存されません。履歴への保存はお使いのブラウザ内にのみ記録されます。</li>
       </ul>
     </div>
   </section>
@@ -781,12 +558,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   <footer>
     <div class="logo">Intake<span>AI</span></div>
     <div class="footer-links">
-      <a class="footer-link" href="/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="footer-link" href="/terms.html" target="_blank" rel="noopener">利用規約</a>
-      <a class="footer-link" href="/tokusho.html" target="_blank" rel="noopener">特定商取引法に基づく表記</a>
-      <a class="footer-link" href="/refund.html" target="_blank" rel="noopener">返金ポリシー</a>
-      <a class="footer-link" href="/antisocial.html" target="_blank" rel="noopener">反社会的勢力への基本方針</a>
-      <a class="footer-link" href="/contact.html" target="_blank" rel="noopener">お問い合わせ</a>
+      <a class="footer-link" href="./privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="footer-link" href="./terms.html" target="_blank" rel="noopener">利用規約</a>
     </div>
     <p>© 2025 IntakeAI. All rights reserved.</p>
   </footer>
@@ -800,7 +573,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <div class="auth-hd">
       <div class="logo">Intake<span>AI</span></div>
       <div class="auth-sub">弁護士向け AI 相談整理ツール</div>
-      <button class="back-link" onclick="go('lp')">← トップに戻る</button>
+      <button class="back-link" onclick="go('lp')">← LPに戻る</button>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab on" id="atab-reg" onclick="authTab('reg')">新規登録</button>
@@ -847,30 +620,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           <div class="ferr" id="e-login-cred">メールアドレスまたはパスワードが違います</div>
         </div>
         <button class="btn-submit" onclick="doLogin()">ログイン</button>
-        <div class="form-sw" style="margin-top:2px"><a onclick="authTab('reset')" style="color:var(--slate);font-size:.72rem">パスワードをお忘れですか？</a></div>
         <div class="form-sw">アカウントをお持ちでない方は <a onclick="authTab('reg')">新規登録</a></div>
-      </div>
-
-      <!-- パスワード再設定フォーム -->
-      <div class="auth-form" id="form-reset">
-        <p style="font-size:.82rem;color:var(--slate);line-height:1.8;margin-bottom:4px">登録済みのメールアドレスを入力してください。新しいパスワードを設定できます。</p>
-        <div class="fg">
-          <label>登録メールアドレス</label>
-          <input type="email" id="reset-email" placeholder="example@lawfirm.jp">
-          <div class="ferr" id="e-reset-email">メールアドレスを入力してください</div>
-        </div>
-        <div class="fg" id="reset-newpw-wrap" style="display:none">
-          <label>新しいパスワード（8文字以上）</label>
-          <input type="password" id="reset-newpw" placeholder="新しいパスワード">
-          <div class="ferr" id="e-reset-newpw">8文字以上で入力してください</div>
-        </div>
-        <div class="fg" id="reset-newpw2-wrap" style="display:none">
-          <label>新しいパスワード（確認）</label>
-          <input type="password" id="reset-newpw2" placeholder="もう一度入力">
-          <div class="ferr" id="e-reset-newpw2">パスワードが一致しません</div>
-        </div>
-        <button class="btn-submit" id="reset-btn" onclick="doReset()">次へ</button>
-        <div class="form-sw"><a onclick="authTab('login')">← ログインに戻る</a></div>
       </div>
 
     </div>
@@ -892,8 +642,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <div class="app-tabs">
       <button class="atab on" id="atab-inp" onclick="appTab('inp')">✍️ 新規整理</button>
       <button class="atab" id="atab-hist" onclick="appTab('hist')">📂 履歴</button>
-      <button class="atab" id="atab-acct" onclick="appTab('acct')">⚙️ アカウント</button>
-      <button class="atab" id="atab-team" onclick="appTab('team')" style="display:none">👥 チーム管理</button>
     </div>
 
     <!-- 入力パネル -->
@@ -922,7 +670,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         </div>
         <div class="privacy-note">
           <span>架空の相談内容でお試しいただけます</span>
-          <span>履歴として保存する場合も、お使いのブラウザ（ローカルストレージ）にのみ記録されます</span>
+          <span>入力内容はサーバーに保存されません</span>
+          <span>AI処理後、データは保持されません</span>
         </div>
       </div>
 
@@ -935,7 +684,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
             <div class="res-ttl">AI整理結果</div>
             <div class="res-acts">
               <button class="btn-pdf" onclick="track('click_pdf_download');exportPDF()">📄 PDFで保存</button>
-              <button class="btn-pdf" id="btn-share-team" style="display:none;background:var(--ink2)" onclick="shareToTeam()">👥 チームに共有</button>
               <span style="font-size:.72rem;color:var(--slate);display:flex;align-items:center;gap:4px">✅ 自動保存済み</span>
             </div>
           </div>
@@ -952,140 +700,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <!-- 履歴パネル -->
     <div class="apanel" id="panel-hist">
       <div id="hist-body"></div>
-    </div>
-    <!-- アカウント設定パネル -->
-    <div class="apanel" id="panel-acct">
-      <!-- プラン情報 -->
-      <div class="acct-section">
-        <h3>ご利用プラン</h3>
-        <div class="acct-row">
-          <span class="acct-label">メールアドレス</span>
-          <span class="acct-val" id="acct-email">—</span>
-        </div>
-        <div class="acct-row">
-          <span class="acct-label">現在のプラン</span>
-          <span class="acct-val" id="acct-plan-badge">—</span>
-        </div>
-        <div class="acct-row" id="acct-renewal-row">
-          <span class="acct-label">次回更新日</span>
-          <span class="acct-val" id="acct-renewal">—</span>
-        </div>
-        <div class="acct-row" id="acct-cancel-sched-row" style="display:none">
-          <span class="acct-label">解約予定日</span>
-          <span class="acct-val" id="acct-cancel-date" style="color:#dc2626">—</span>
-        </div>
-      </div>
-
-      <!-- 請求・プラン操作 -->
-      <div class="acct-section">
-        <h3>請求・プラン操作</h3>
-        <div class="acct-btn-group">
-          <button class="acct-btn acct-btn-outline" onclick="openBilling()">💳 請求情報を確認する</button>
-          <button class="acct-btn acct-btn-gold" id="acct-upgrade-btn" onclick="openUpgrade()" style="display:none">✨ プロプランに登録</button>
-          <button class="acct-btn acct-btn-outline" id="acct-cancel-btn" onclick="cancelPlan()">プランを解約する</button>
-        </div>
-        <p style="font-size:.74rem;color:var(--slate);margin-top:12px">※ 解約後は次回更新日まで引き続き有料機能をご利用いただけます。</p>
-      </div>
-
-      <!-- パスワード変更 -->
-      <div class="acct-section">
-        <h3>パスワードを変更する</h3>
-        <button class="acct-btn acct-btn-outline" onclick="togglePwForm()">🔑 パスワード変更フォームを開く</button>
-        <div class="pw-form" id="pw-form">
-          <div class="pw-field">
-            <label>現在のパスワード</label>
-            <input type="password" id="pw-current" placeholder="現在のパスワード">
-          </div>
-          <div class="pw-field">
-            <label>新しいパスワード（8文字以上）</label>
-            <input type="password" id="pw-new" placeholder="新しいパスワード">
-          </div>
-          <div class="pw-field">
-            <label>新しいパスワード（確認）</label>
-            <input type="password" id="pw-confirm" placeholder="確認用パスワード">
-          </div>
-          <div class="pw-err" id="pw-err"></div>
-          <div class="acct-btn-group" style="margin-top:4px">
-            <button class="acct-btn acct-btn-gold" onclick="changePassword()">変更を保存</button>
-            <button class="acct-btn acct-btn-outline" onclick="togglePwForm()">キャンセル</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- アカウント削除 -->
-      <div class="acct-section">
-        <h3 style="color:#dc2626">アカウント削除</h3>
-        <p style="font-size:.83rem;color:var(--slate);margin-bottom:16px">アカウントを削除すると、すべての相談履歴・設定が完全に消去されます。この操作は取り消せません。</p>
-        <button class="acct-btn acct-btn-danger" onclick="deleteAccount()">🗑 アカウントを削除する</button>
-      </div>
-    </div>
-    <!-- チーム管理パネル -->
-    <div class="apanel" id="panel-team">
-      <!-- 非チームプランユーザー向けロック表示 -->
-      <div id="team-locked-msg" class="team-section team-locked" style="display:none">
-        <p>👥 チーム管理機能は<strong>オフィスプラン</strong>または<strong>チームプラン</strong>でご利用いただけます。</p>
-        <button class="acct-btn acct-btn-gold" onclick="openUpgrade()">✨ プランをアップグレード</button>
-      </div>
-
-      <!-- チーム設定 -->
-      <div class="team-section" id="team-settings-sec">
-        <h3>🏢 事務所設定</h3>
-        <div id="team-badge-wrap"></div>
-        <div class="office-name-row">
-          <input type="text" id="office-name-input" placeholder="事務所名を入力（例：山田法律事務所）">
-          <button onclick="saveOfficeName()">保存</button>
-        </div>
-        <p style="font-size:.76rem;color:var(--slate)">※ 設定した事務所名はPDFに表示されます。</p>
-      </div>
-
-      <!-- メンバー管理 -->
-      <div class="team-section" id="team-members-sec">
-        <h3>👤 メンバー管理</h3>
-        <div id="member-capacity" style="font-size:.78rem;color:var(--slate);margin-bottom:14px"></div>
-        <div id="member-list-wrap" class="member-list"></div>
-        <div class="add-member-row">
-          <input type="text" id="add-member-name" placeholder="メンバーの名前">
-          <input type="email" id="add-member-email" placeholder="メールアドレス（登録済み）">
-          <button onclick="addMember()">＋ 追加</button>
-        </div>
-        <div class="team-err" id="team-add-err"></div>
-      </div>
-
-      <!-- チーム利用状況 -->
-      <div class="team-section" id="team-usage-sec">
-        <h3>📊 チーム利用状況（今月）</h3>
-        <table class="usage-table" id="team-usage-table">
-          <thead><tr><th>メンバー</th><th>利用件数</th><th>プラン</th></tr></thead>
-          <tbody id="team-usage-body"></tbody>
-        </table>
-      </div>
-
-      <!-- 共有PDF -->
-      <div class="team-section" id="team-shared-sec">
-        <h3>📄 チーム共有PDF</h3>
-        <p style="font-size:.8rem;color:var(--slate);margin-bottom:14px">チームメンバーが共有した整理結果を閲覧できます。</p>
-        <div class="shared-list" id="shared-list-wrap">
-          <p style="color:var(--slate);font-size:.82rem">共有されたPDFはありません。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CANCEL CONFIRM MODAL -->
-<div class="cancel-overlay" id="cancel-modal">
-  <div class="cancel-box">
-    <div class="cancel-box-icon">⚠️</div>
-    <h3>プランを解約しますか？</h3>
-    <p class="cancel-box-body">解約手続きを行うと、次回更新日をもってプロプランが終了します。</p>
-    <div class="cancel-box-note">
-      ・解約後も<strong id="cancel-modal-date">次回更新日</strong>までは引き続きプロプランをご利用いただけます<br>
-      ・更新日以降は無料プラン（月5件）に自動的に切り替わります<br>
-      ・この操作はいつでもキャンセルできます
-    </div>
-    <div class="cancel-box-btns">
-      <button class="cancel-confirm-btn" onclick="confirmCancelPlan()">解約を確定する</button>
-      <button class="cancel-back-btn" onclick="closeCancelModal()">キャンセル（プランを続ける）</button>
     </div>
   </div>
 </div>
@@ -1120,20 +734,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 </div>
 
 <div class="toast" id="toast"></div>
+
 <script>
-const _D=atob('aXdhaGFydS40MjJAb3V0bG9vay5qcA=='),DEV_OVERRIDE_PLAN='team';
-function getEffectivePlan(e){if(e===_D)return DEV_OVERRIDE_PLAN;const u=users[e];if(!u)return'free';if(u.plan)return u.plan;if(u.isPro)return'pro';return'free';}
-function isProOrAbove(e){const p=getEffectivePlan(e);return p==='pro'||p==='office'||p==='team';}
-function isTeamPlan(e){const p=getEffectivePlan(e);return p==='office'||p==='team';}
-
-// ── FAQ accordion ──────────────────────
-function faqOpen(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  item.closest('.faq-cats').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
-
 // ── analytics ─────────────────────────
 function track(eventName, params) {
   if (typeof gtag === 'function') {
@@ -1163,7 +765,13 @@ function goSec(id) {
 }
 
 // ── auth tabs ──────────────────────────
-function authTab(t){['reg','login','reset'].forEach(x=>{const t2=document.getElementById('atab-'+x),f2=document.getElementById('form-'+x);if(t2)t2.classList.toggle('on',x===t);if(f2)f2.classList.toggle('on',x===t);});clearErrs();}
+function authTab(t) {
+  ['reg','login'].forEach(x => {
+    document.getElementById('atab-' + x).classList.toggle('on', x === t);
+    document.getElementById('form-' + x).classList.toggle('on', x === t);
+  });
+  clearErrs();
+}
 function clearErrs() { document.querySelectorAll('.ferr').forEach(e => e.classList.remove('on')); }
 function err(id, msg) { const e = document.getElementById(id); if (msg) e.textContent = msg; e.classList.add('on'); }
 
@@ -1201,13 +809,26 @@ function doLogin() {
 
 function logout() { me = null; result = null; go('lp'); toast('ログアウトしました'); }
 
-function enterApp(u){me=u;document.getElementById('uname').textContent=u.name+' さん';go('app');renderHist();updateUsageBar();const _it=isTeamPlan(u.email);const _tt=document.getElementById('atab-team');if(_tt)_tt.style.display=_it?'':'none';}
+function enterApp(u) {
+  me = u;
+  document.getElementById('uname').textContent = u.name + ' さん';
+  go('app');
+  renderHist();
+  updateUsageBar();
+}
 
 function updateUsageBar() {
   if (!me) return;
   const u = users[me.email];
   const count = u.usageCount || 0;
-  const _pl=getEffectivePlan(me.email),isPro=isProOrAbove(me.email);const bar=document.getElementById('usage-bar'),countEl=document.getElementById('usage-count'),fill=document.getElementById('usage-fill');if(isPro){const lbl=_pl==='team'?'チームプラン':_pl==='office'?'オフィスプラン':'プロプラン';bar.innerHTML='<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">'+lbl+'</strong>　AI整理：無制限</div>';return;}
+  const isPro = u.isPro || false;
+  const bar = document.getElementById('usage-bar');
+  const countEl = document.getElementById('usage-count');
+  const fill = document.getElementById('usage-fill');
+  if (isPro) {
+    bar.innerHTML = '<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">プロプラン</strong>　AI整理：無制限</div>';
+    return;
+  }
   countEl.textContent = count;
   const pct = Math.min(count / 5 * 100, 100);
   fill.style.width = pct + '%';
@@ -1237,14 +858,21 @@ function closeUpgrade() {
 }
 
 // ── app tabs ───────────────────────────
-function appTab(t){['inp','hist','acct','team'].forEach(x=>{const _t=document.getElementById('atab-'+x),_p=document.getElementById('panel-'+x);if(_t)_t.classList.toggle('on',x===t);if(_p)_p.classList.toggle('on',x===t);});if(t==='hist')renderHist();if(t==='acct')renderAcct();if(t==='team')renderTeam();}
+function appTab(t) {
+  ['inp','hist'].forEach(x => {
+    document.getElementById('atab-' + x).classList.toggle('on', x === t);
+    document.getElementById('panel-' + x).classList.toggle('on', x === t);
+  });
+  if (t === 'hist') renderHist();
+}
 
 // ── analyze ────────────────────────────
 async function analyze() {
   const memo = document.getElementById('memo').value.trim();
   if (!memo) { toast('相談メモを入力してください'); return; }
   const u = users[me.email];
-  const isPro=isProOrAbove(me.email);if(!isPro&&(u.usageCount||0)>=5){openUpgrade();return;}
+  const isPro = u.isPro || false;
+  if (!isPro && (u.usageCount || 0) >= 5) { openUpgrade(); return; }
 
   track('click_analyze', { plan: isPro ? 'pro' : 'free' });
   track('input_consultation', { char_count: memo.length, plan: isPro ? 'pro' : 'free' });
@@ -1433,7 +1061,11 @@ function exportPDF() {
   ctx.font = `${11 * scale}px 'Noto Sans JP', sans-serif`;
   ctx.fillStyle = '#b8975a';
   ctx.fillText('初回相談整理レポート', marginX, 52 * scale);
-  ctx.fillStyle='#888888';ctx.textAlign='right';ctx.fillText(date,W-marginX,52*scale);ctx.textAlign='left';const _on=me?(users[me.email]?.officeName||''):'';if(_on){ctx.font=`${10*scale}px 'Noto Sans JP',sans-serif`;ctx.fillStyle='#6b7280';ctx.fillText('📌 '+_on,marginX,68*scale);y=88*scale+28*scale;}else{y=72*scale+28*scale;}
+  ctx.fillStyle = '#888888';
+  ctx.textAlign = 'right';
+  ctx.fillText(date, W - marginX, 52 * scale);
+  ctx.textAlign = 'left';
+  y = 72 * scale + 28 * scale;
 
   // sections
   sections.forEach(([lbl, val]) => {
@@ -1572,34 +1204,12 @@ function toast(msg) {
 
 // ── upgrade modal bg click ─────────────
 document.getElementById('upg-modal').addEventListener('click', function(e) {
-  if (e.target == this) closeUpgrade();
+  if (e.target === this) closeUpgrade();
 });
 
-function doReset(){const eEl=document.getElementById('reset-email'),eErr=document.getElementById('e-reset-email'),nW=document.getElementById('reset-newpw-wrap'),n2W=document.getElementById('reset-newpw2-wrap'),btn=document.getElementById('reset-btn');eErr.classList.remove('on');const em=eEl.value.trim();if(!em){eErr.textContent='メールアドレスを入力してください';eErr.classList.add('on');return;}if(!users[em]){eErr.textContent='このメールアドレスで登録されたアカウントが見つかりません';eErr.classList.add('on');return;}nW.style.display='';n2W.style.display='';eEl.disabled=true;btn.textContent='パスワードを変更する';btn.onclick=doResetConfirm;}
-function doResetConfirm(){const em=document.getElementById('reset-email').value.trim(),np=document.getElementById('reset-newpw').value,np2=document.getElementById('reset-newpw2').value,e1=document.getElementById('e-reset-newpw'),e2=document.getElementById('e-reset-newpw2');[e1,e2].forEach(e=>e.classList.remove('on'));if(np.length<8){e1.textContent='8文字以上で入力してください';e1.classList.add('on');return;}if(np!==np2){e2.textContent='パスワードが一致しません';e2.classList.add('on');return;}users[em].pass=np;save();toast('パスワードを再設定しました');authTab('login');document.getElementById('login-email').value=em;}
-function renderAcct(){if(!me)return;const u=users[me.email],plan=getEffectivePlan(me.email),isPro=isProOrAbove(me.email),cs=u.cancelScheduled||false;document.getElementById('acct-email').textContent=me.email;const badge=document.getElementById('acct-plan-badge'),lmap={free:'<span class="acct-badge-free">無料プラン（月5件）</span>',pro:'<span class="acct-badge-pro">✨ プロプラン</span>',office:'<span class="acct-badge-pro" style="background:#f0f8f4;color:#4a7c6f;border-color:#b8d8cc">🏢 オフィスプラン（3名）</span>',team:'<span class="acct-badge-pro" style="background:#f0f4ff;color:#5a4a8a;border-color:#c4b8e8">👥 チームプラン（5名）</span>'};badge.innerHTML=(lmap[plan]||lmap['free'])+(me.email===_D?' <span style="font-size:.65rem;color:#888;border:1px solid #ddd;border-radius:3px;padding:1px 5px">DEV</span>':'');const rr=document.getElementById('acct-renewal-row'),re2=document.getElementById('acct-renewal'),cr=document.getElementById('acct-cancel-sched-row'),cd=document.getElementById('acct-cancel-date');if(isPro&&me.email!==_D){const rd=u.renewDate?new Date(u.renewDate):calcNextRenewal(u.joinDate);re2.textContent=formatDate(rd);rr.style.display='';cr.style.display=cs?'':'none';if(cs)cd.textContent=formatDate(rd)+'（解約予定）';}else{rr.style.display='none';cr.style.display='none';}document.getElementById('acct-upgrade-btn').style.display=(isPro||me.email===_D)?'none':'';const cb=document.getElementById('acct-cancel-btn');if(!isPro||me.email===_D){cb.style.display='none';}else if(cs){cb.textContent='解約申請済み';cb.disabled=true;cb.style.display='';}else{cb.textContent='プランを解約する';cb.disabled=false;cb.style.display='';}}
-function calcNextRenewal(j){const b=j?new Date(j):new Date(),n=new Date(),x=new Date(b);while(x<=n)x.setMonth(x.getMonth()+1);return x;}
-function formatDate(d){if(!d)return'—';const dt=new Date(d);return dt.getFullYear()+'年'+(dt.getMonth()+1)+'月'+dt.getDate()+'日';}
-function openBilling(){window.open('https://billing.stripe.com/p/login/14AbJ0ckfbeZ79V8fR4sE00','_blank');}
-function openUpgrade(){window.open('https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00','_blank');}
-function cancelPlan(){if(!me)return;if(!isProOrAbove(me.email))return;const u=users[me.email],rd=u.renewDate?new Date(u.renewDate):calcNextRenewal(u.joinDate);document.getElementById('cancel-modal-date').textContent=formatDate(rd);document.getElementById('cancel-modal').classList.add('on');}
-function closeCancelModal(){document.getElementById('cancel-modal').classList.remove('on');}
-function confirmCancelPlan(){if(!me)return;users[me.email].cancelScheduled=true;save();closeCancelModal();renderAcct();toast('解約を受け付けました。次回更新日に自動停止します。');}
-function togglePwForm(){const f=document.getElementById('pw-form');f.classList.toggle('on');if(!f.classList.contains('on')){['pw-current','pw-new','pw-confirm'].forEach(id=>document.getElementById(id).value='');document.getElementById('pw-err').classList.remove('on');}}
-function changePassword(){if(!me)return;const c2=document.getElementById('pw-current').value,nw=document.getElementById('pw-new').value,cf=document.getElementById('pw-confirm').value,er=document.getElementById('pw-err'),u=users[me.email];er.classList.remove('on');if(!c2||!nw||!cf){er.textContent='すべての項目を入力してください';er.classList.add('on');return;}if(u.pass!==c2){er.textContent='現在のパスワードが正しくありません';er.classList.add('on');return;}if(nw.length<8){er.textContent='8文字以上にしてください';er.classList.add('on');return;}if(nw!==cf){er.textContent='パスワードが一致しません';er.classList.add('on');return;}u.pass=nw;save();togglePwForm();toast('パスワードを変更しました');}
-function deleteAccount(){if(!me)return;if(!confirm('アカウントを削除してもよいですか？\nすべての相談履歴・設定が完全に消去されます。\nこの操作は取り消せません。'))return;if(!confirm('本当に削除しますか？この操作は元に戻せません。'))return;delete users[me.email];save();me=null;result=null;go('lp');toast('アカウントを削除しました');}
-function getTeam(){if(!me)return null;const plan=getEffectivePlan(me.email);if(plan!=='office'&&plan!=='team')return null;const tk='team_'+me.email;if(!localStorage.getItem(tk)){const u=users[me.email],mm=plan==='office'?3:5;localStorage.setItem(tk,JSON.stringify({adminEmail:me.email,officeName:u.officeName||'',members:[{email:me.email,name:u.name,role:'admin'}],maxMembers:mm,sharedPdfs:[]}));}return JSON.parse(localStorage.getItem(tk));}
-function saveTeam(t){if(!t)return;localStorage.setItem('team_'+t.adminEmail,JSON.stringify(t));}
-function findMyTeam(){if(!me)return null;const mt=getTeam();if(mt)return mt;for(const em in users){const r=localStorage.getItem('team_'+em);if(!r)continue;const t=JSON.parse(r);if(t.members.some(m=>m.email===me.email))return t;}return null;}
-function renderTeam(){if(!me)return;const plan=getEffectivePlan(me.email),itf=isTeamPlan(me.email);document.getElementById('team-locked-msg').style.display=itf?'none':'';['team-settings-sec','team-members-sec','team-usage-sec','team-shared-sec'].forEach(id=>{document.getElementById(id).style.display=itf?'':'none';});if(!itf)return;const team=getTeam();if(!team)return;const pl=plan==='office'?'オフィスプラン（3名まで）':'チームプラン（5名まで）';document.getElementById('team-badge-wrap').innerHTML='<div class="team-badge '+plan+'">'+pl+'</div>';document.getElementById('office-name-input').value=team.officeName||'';document.getElementById('member-capacity').textContent='メンバー：'+team.members.length+' / '+team.maxMembers+'名';document.getElementById('member-list-wrap').innerHTML=team.members.map(m=>'<div class="member-row"><span class="m-name">'+m.name+'</span><span class="m-email">'+m.email+'</span><span class="m-role '+(m.role==='admin'?'admin':'')+'">'+(m.role==='admin'?'管理者':'メンバー')+'</span>'+(m.role!=='admin'?'<button class="m-del" onclick="removeMember(\'+m.email+\')">削除</button>':'')+'</div>').join('');const tbody=document.getElementById('team-usage-body');tbody.innerHTML=team.members.map(m=>{const mu=users[m.email],cnt=mu?(mu.usageCount||0):0,ip2=mu?isProOrAbove(m.email):false,pct=Math.min(100,(cnt/5)*100);return'<tr><td>'+m.name+(m.role==='admin'?'<span style="font-size:.68rem;color:var(--gold);margin-left:6px">管理者</span>':'')+'</td><td style="display:flex;align-items:center;gap:8px">'+cnt+'件'+(!ip2?'<div class="usage-bar-mini"><div class="usage-bar-mini-fill" style="width:'+pct+'%"></div></div>':'')+'</td><td>'+(ip2?'<span style="color:var(--gold);font-size:.75rem">有料</span>':'<span style="color:var(--slate);font-size:.75rem">無料</span>')+'</td></tr>';}).join('');renderSharedPdfs(team);}
-function renderSharedPdfs(team){const wrap=document.getElementById('shared-list-wrap'),pdfs=team.sharedPdfs||[];if(!pdfs.length){wrap.innerHTML='<p style="color:var(--slate);font-size:.82rem">共有されたPDFはありません。</p>';return;}wrap.innerHTML=pdfs.slice().reverse().map((p,i)=>'<div class="shared-item" onclick="loadSharedResult('+(pdfs.length-1-i)+')"><span>📄</span><div style="flex:1"><div class="sh-name">'+(p.memo?p.memo.slice(0,30)+'...':'相談メモ')+'</div><div class="sh-meta">共有者：'+p.sharedBy+' ／ '+new Date(p.date).toLocaleDateString('ja-JP')+'</div></div><span style="font-size:.72rem;color:var(--gold)">閲覧する →</span></div>').join('');}
-function loadSharedResult(idx){const team=findMyTeam();if(!team)return;const item=team.sharedPdfs[idx];if(!item)return;result=item.result;appTab('inp');renderResult(result);toast(item.sharedBy+' さんが共有した整理結果を表示しています');}
-function saveOfficeName(){if(!me)return;const name=document.getElementById('office-name-input').value.trim(),team=getTeam();if(!team)return;team.officeName=name;saveTeam(team);users[me.email].officeName=name;save();renderTeam();toast('事務所名を保存しました：'+(name||'（未設定）'));}
-function addMember(){if(!me)return;const team=getTeam();if(!team)return;const name=document.getElementById('add-member-name').value.trim(),email=document.getElementById('add-member-email').value.trim(),errEl=document.getElementById('team-add-err');errEl.classList.remove('on');if(!name||!email){errEl.textContent='名前とメールアドレスを入力してください';errEl.classList.add('on');return;}if(!users[email]){errEl.textContent='このメールアドレスで登録されたアカウントが見つかりません';errEl.classList.add('on');return;}if(team.members.some(m=>m.email===email)){errEl.textContent='すでに追加されています';errEl.classList.add('on');return;}if(team.members.length>=team.maxMembers){errEl.textContent='このプランのメンバー上限（'+team.maxMembers+'名）に達しています';errEl.classList.add('on');return;}team.members.push({email,name,role:'member'});saveTeam(team);document.getElementById('add-member-name').value='';document.getElementById('add-member-email').value='';renderTeam();toast(name+' さんをチームに追加しました');}
-function removeMember(email){if(!me)return;const team=getTeam();if(!team)return;const member=team.members.find(m=>m.email===email);if(!member)return;if(!confirm(member.name+' さんをチームから削除しますか？'))return;team.members=team.members.filter(m=>m.email!==email);saveTeam(team);renderTeam();toast(member.name+' さんをチームから削除しました');}
-function shareToTeam(){if(!result){toast('整理結果がありません');return;}const team=findMyTeam();if(!team){toast('チームプランでのみ共有できます');return;}const item={result,memo:result.memo||'',date:new Date().toISOString(),sharedBy:me.name};team.sharedPdfs=team.sharedPdfs||[];team.sharedPdfs.push(item);if(team.sharedPdfs.length>20)team.sharedPdfs.shift();saveTeam(team);toast('チームに共有しました');}
-function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),2800);}
-document.getElementById('upg-modal').addEventListener('click',function(e){if(e.target==this)closeUpgrade();});
+// ── scroll animations ──────────────────
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }), {threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
