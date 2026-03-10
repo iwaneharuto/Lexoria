@@ -1700,39 +1700,26 @@ async function analyze() {
     console.log('fetch done', res.status);
 
     const raw = await res.text();
-    console.log('text done', raw.slice(0, 200));
-
-    let data = {};
+    let data;
     try { data = JSON.parse(raw); }
     catch (e) { throw new Error('JSON parse error: ' + raw.slice(0, 300)); }
-    console.log('parse done', data);
+    console.log('API response data =', data);
 
     if (!res.ok) {
-      throw new Error(data.error || data.detail || raw || '整理に失敗しました');
+      throw new Error(data.error || '整理に失敗しました');
     }
 
-    if (!data.result) throw new Error('サーバーから結果が返りませんでした');
-
-    // result-raw はデバッグ用のため通常は非表示
-    const resultRaw = document.getElementById('result-raw');
-    if (resultRaw) {
-      resultRaw.textContent = data.result;
-      resultRaw.style.display = 'none';
-    }
-
-    // サーバー側でJSONパース済み → data.parsed を直接使う
     if (!data.parsed || typeof data.parsed !== 'object') {
-      // parse_failed: data.raw を result-raw に表示
+      // data.raw があれば result-raw に表示
       const rawEl = document.getElementById('result-raw');
       if (rawEl && data.raw) { rawEl.textContent = data.raw; rawEl.style.display = 'block'; }
-      throw new Error(data.error || 'AIの応答を解析できませんでした。再試行してください。');
+      throw new Error('API response keys: ' + Object.keys(data).join(','));
     }
 
     // result-raw は非表示
     const rawEl = document.getElementById('result-raw');
     if (rawEl) rawEl.style.display = 'none';
 
-    console.log('parse done', Object.keys(data.parsed));
     result = { memo, ...data.parsed, date: new Date().toISOString(), isPro };
     showResult(data.parsed);
     autoSave(result);
