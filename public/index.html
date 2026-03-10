@@ -1148,6 +1148,31 @@ let users = JSON.parse(localStorage.getItem('iai_users') || '{}');
 let me = null;
 let result = null;
 
+// ── DEV OVERRIDE ────────────────────────
+// 開発者テスト用：このメールのみ全機能を有効化（本番影響なし）
+const DEV_OVERRIDE_EMAILS = ['iwaharu.422@outlook.jp'];
+const DEV_OVERRIDE_PLAN   = 'team'; // 'pro' | 'office' | 'team'
+
+function getEffectivePlan(email) {
+  if (DEV_OVERRIDE_EMAILS.includes(email)) return DEV_OVERRIDE_PLAN;
+  const u = users[email];
+  if (!u) return 'free';
+  if (u.plan) return u.plan;
+  if (u.isPro) return 'pro';
+  return 'free';
+}
+
+function isProOrAbove(email) {
+  const p = getEffectivePlan(email);
+  return p === 'pro' || p === 'office' || p === 'team';
+}
+
+function isTeamPlan(email) {
+  const p = getEffectivePlan(email);
+  return p === 'office' || p === 'team';
+}
+// ────────────────────────────────────────
+
 // ── routing ────────────────────────────
 function go(screen, sub) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
@@ -1227,7 +1252,7 @@ function enterApp(u) {
   renderHist();
   updateUsageBar();
   // チームタブ表示制御
-  const isTeam = u.plan === 'office' || u.plan === 'team';
+  const isTeam = isTeamPlan(u.email);
   const teamTab = document.getElementById('atab-team');
   if (teamTab) teamTab.style.display = isTeam ? '' : 'none';
   // 共有ボタン
@@ -1239,12 +1264,14 @@ function updateUsageBar() {
   if (!me) return;
   const u = users[me.email];
   const count = u.usageCount || 0;
-  const isPro = u.isPro || false;
+  const plan = getEffectivePlan(me.email);
+  const isPro = isProOrAbove(me.email);
   const bar = document.getElementById('usage-bar');
   const countEl = document.getElementById('usage-count');
   const fill = document.getElementById('usage-fill');
   if (isPro) {
-    bar.innerHTML = '<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">プロプラン</strong>　AI整理：無制限</div>';
+    const planLabel = plan === 'team' ? 'チームプラン' : plan === 'office' ? 'オフィスプラン' : 'プロプラン';
+    bar.innerHTML = '<div class="usage-left"><span class="usage-icon">✨</span><strong style="color:var(--gold)">' + planLabel + '</strong>　AI整理：無制限</div>';
     return;
   }
   countEl.textContent = count;
@@ -1293,7 +1320,7 @@ async function analyze() {
   const memo = document.getElementById('memo').value.trim();
   if (!memo) { toast('相談メモを入力してください'); return; }
   const u = users[me.email];
-  const isPro = u.isPro || false;
+  const isPro = isProOrAbove(me.email);
   if (!isPro && (u.usageCount || 0) >= 5) { openUpgrade(); return; }
 
   track('click_analyze', { plan: isPro ? 'pro' : 'free' });
@@ -1675,13 +1702,13 @@ function doResetConfirm() {
 function renderAcct() {
   if (!me) return;
   const u = users[me.email];
-  const isPro = u.isPro || false;
+  const plan = getEffectivePlan(me.email);
+  const isPro = isProOrAbove(me.email);
   const cancelScheduled = u.cancelScheduled || false;
   document.getElementById('acct-email').textContent = me.email;
   const badge = document.getElementById('acct-plan-badge');
-  badge.innerHTML = isPro
-    ? '<span class="acct-badge-pro">✨ プロプラン</span>'
-    : '<span class="acct-badge-free">無料プラン（月5件）</span>';
+  const planLabels = { free:'<span class="acct-badge-free">無料プラン（月5件）</span>', pro:'<span class="acct-badge-pro">✨ プロプラン</span>', office:'<span class="acct-badge-pro" style="background:#f0f8f4;color:#4a7c6f;border-color:#b8d8cc">🏢 オフィスプラン（3名）</span>', team:'<span class="acct-badge-pro" style="background:#f0f4ff;color:#5a4a8a;border-color:#c4b8e8">👥 チームプラン（5名）</span>' };
+  badge.innerHTML = planLabels[plan] || planLabels['free'];
   const renewRow = document.getElementById('acct-renewal-row');
   const renewEl  = document.getElementById('acct-renewal');
   const cancelRow = document.getElementById('acct-cancel-sched-row');
@@ -1700,7 +1727,7 @@ function renderAcct() {
   }
   document.getElementById('acct-upgrade-btn').style.display = isPro ? 'none' : '';
   const cancelBtn = document.getElementById('acct-cancel-btn');
-  if (!isPro) { cancelBtn.style.display = 'none'; }
+  if (!isPro || DEV_OVERRIDE_EMAILS.includes(me.email)) { cancelBtn.style.display = 'none'; }
   else if (cancelScheduled) { cancelBtn.textContent = '解約申請済み'; cancelBtn.disabled = true; cancelBtn.style.display = ''; }
   else { cancelBtn.textContent = 'プランを解約する'; cancelBtn.disabled = false; cancelBtn.style.display = ''; }
 }
@@ -1775,7 +1802,7 @@ function deleteAccount() {
 function getTeam() {
   if (!me) return null;
   const u = users[me.email];
-  const plan = u.plan || (u.isPro ? 'pro' : 'free');
+  const plan = getEffectivePlan(me.email);
   if (plan !== 'office' && plan !== 'team') return null;
   const teamKey = 'team_' + me.email;
   if (!localStorage.getItem(teamKey)) {
@@ -1812,21 +1839,22 @@ function findMyTeam() {
 function renderTeam() {
   if (!me) return;
   const u = users[me.email];
-  const plan = u.plan || (u.isPro ? 'pro' : 'free');
-  const isTeamPlan = plan === 'office' || plan === 'team';
+  const plan = getEffectivePlan(me.email);
+  const isTeamPlanFlag = isTeamPlan(me.email);
 
-  document.getElementById('team-locked-msg').style.display = isTeamPlan ? 'none' : '';
+  document.getElementById('team-locked-msg').style.display = isTeamPlanFlag ? 'none' : '';
   ['team-settings-sec','team-members-sec','team-usage-sec','team-shared-sec'].forEach(id => {
-    document.getElementById(id).style.display = isTeamPlan ? '' : 'none';
+    document.getElementById(id).style.display = isTeamPlanFlag ? '' : 'none';
   });
-  if (!isTeamPlan) return;
+  if (!isTeamPlanFlag) return;
 
   const team = getTeam();
   if (!team) return;
 
   const badgeWrap = document.getElementById('team-badge-wrap');
   const planLabel = plan === 'office' ? 'オフィスプラン（3名まで）' : 'チームプラン（5名まで）';
-  badgeWrap.innerHTML = '<div class="team-badge ' + plan + '">' + planLabel + '</div>';
+  const devMark = DEV_OVERRIDE_EMAILS.includes(me.email) ? ' <span style="font-size:.65rem;color:#888;border:1px solid #ddd;border-radius:3px;padding:1px 5px">DEV</span>' : '';
+  badgeWrap.innerHTML = '<div class="team-badge ' + plan + '">' + planLabel + devMark + '</div>';
 
   document.getElementById('office-name-input').value = team.officeName || '';
 
