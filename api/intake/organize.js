@@ -107,9 +107,11 @@ export default async function handler(req, res) {
     }
 
     if (parsed) {
+      console.log('RETURN_SHAPE', { hasParsed: true, keys: Object.keys(parsed), ok: true });
       return res.status(200).json({ ok: true, parsed, raw: rawAIText });
     } else {
-      return res.status(502).json({ error: 'parse_failed', raw: rawAIText.slice(0, 2000) });
+      console.log('RETURN_SHAPE', { hasParsed: false, keys: [], ok: false });
+      return res.status(502).json({ ok: false, error: 'parse_failed', raw: rawAIText.slice(0, 2000) });
     }
 
   } catch (err) {
