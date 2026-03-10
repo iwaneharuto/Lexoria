@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -147,7 +146,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 #screen-auth.on{display:flex}
 .auth-box{background:#fff;border-radius:8px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(26,26,46,.12);overflow:hidden}
 .auth-hd{background:var(--ink);padding:28px 32px}
-.auth-hd .logo{font-size:1.5rem}
+.auth-hd .logo{font-size:1.5rem;color:#fff}.auth-hd .logo span{color:var(--gold)}
 .auth-sub{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
 .auth-tabs{display:flex;border-bottom:2px solid var(--border)}
 .auth-tab{flex:1;padding:14px;text-align:center;font-size:.84rem;font-weight:500;color:var(--slate);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
@@ -275,26 +274,105 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 /* ── PRICING ── */
 .pricing-sec{background:var(--cream);padding:100px 48px;border-top:1px solid var(--border)}
-.pricing-inner{max-width:1160px;margin:0 auto}
-.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:100%}
-.pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:22px 18px;position:relative;transition:box-shadow .3s}
-.pricing-card.featured{border:2px solid var(--gold);box-shadow:0 12px 40px rgba(184,151,90,.15)}
-.plan-rec{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
-.plan-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
-.plan-badge.free{color:var(--slate)}
-.plan-badge.pro{color:var(--gold)}
-.plan-price{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:24px}
-.plan-price span{font-size:1rem;font-weight:400;color:var(--slate);font-family:'Noto Sans JP',sans-serif}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.plan-features li{font-size:.82rem;color:var(--ink);display:flex;align-items:center;gap:8px}
-.plan-features li.dim{color:var(--border);text-decoration:line-through}
-.btn-plan-free{width:100%;padding:12px;background:none;border:1px solid var(--border);border-radius:3px;font-size:.84rem;color:var(--slate);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center}
-.btn-plan-free:hover{border-color:var(--ink);color:var(--ink)}
-.btn-plan-pro{display:block;width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:3px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
-.btn-plan-pro:hover{background:var(--ink)}
-.plan-note{font-size:.7rem;color:var(--slate);text-align:center;margin-top:8px}
-.btn-cta-stripe{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:18px 40px;font-size:.9rem;font-weight:500;letter-spacing:.06em;border:2px solid rgba(255,255,255,.4);border-radius:2px;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none;position:relative;z-index:2}
-.btn-cta-stripe:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.pricing-inner{max-width:1100px;margin:0 auto}
+
+/* 導入タイプ分岐バナー */
+.pricing-type-nav{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:48px;max-width:640px;margin-left:auto;margin-right:auto}
+.ptn-item{padding:18px 24px;background:#fff;cursor:default}
+.ptn-item.ptn-team{background:var(--ink);color:#fff}
+.ptn-label{font-size:.62rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;margin-bottom:4px;opacity:.6}
+.ptn-item.ptn-team .ptn-label{opacity:.7;color:var(--gold)}
+.ptn-title{font-family:'Noto Serif JP',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ptn-item.ptn-team .ptn-title{color:#fff}
+.ptn-desc{font-size:.74rem;color:var(--slate)}
+.ptn-item.ptn-team .ptn-desc{color:rgba(255,255,255,.55)}
+
+/* Free お試しバー */
+.pricing-free-bar{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--border);border-radius:6px;padding:16px 24px;margin-bottom:32px;gap:16px;flex-wrap:wrap}
+.pfb-left{display:flex;align-items:center;gap:14px}
+.pfb-icon{font-size:1.4rem;opacity:.5}
+.pfb-title{font-family:'Noto Serif JP',serif;font-size:.88rem;font-weight:600;color:var(--ink)}
+.pfb-sub{font-size:.74rem;color:var(--slate);margin-top:2px}
+.pfb-features{display:flex;gap:12px;flex-wrap:wrap}
+.pfb-feat{font-size:.72rem;color:var(--slate);display:flex;align-items:center;gap:4px}
+.pfb-feat::before{content:'✓';color:#9ca3af}
+.btn-pfb{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;background:none;border:1px solid var(--border);border-radius:3px;font-size:.78rem;color:var(--slate);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;text-decoration:none}
+.btn-pfb:hover{border-color:var(--ink);color:var(--ink)}
+
+/* 有料プラン見出し */
+.pricing-paid-hd{margin-bottom:20px}
+.pricing-paid-hd h3{font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.pricing-paid-hd p{font-size:.78rem;color:var(--slate)}
+
+/* 有料3プラングリッド */
+.pricing-paid-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:16px;align-items:start}
+
+/* カード共通 */
+.pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:24px 20px;position:relative;transition:box-shadow .3s,transform .3s}
+.pricing-card:hover{box-shadow:0 8px 32px rgba(26,26,46,.1);transform:translateY(-2px)}
+
+/* Office 強調 */
+.pricing-card.featured{border:2px solid #4a7c6f;box-shadow:0 12px 40px rgba(74,124,111,.15);background:#fff}
+.pricing-card.team-card{border:2px solid #5a4a8a}
+
+/* おすすめバッジ */
+.plan-rec{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-rec.rec-team{background:#5a4a8a}
+
+/* プランヘッド */
+.plan-head{margin-bottom:14px}
+.plan-tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:5px}
+.plan-tag.pro{color:var(--gold)}
+.plan-tag.office{color:#4a7c6f}
+.plan-tag.team{color:#5a4a8a}
+.plan-name{font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.plan-target{font-size:.72rem;color:var(--slate);line-height:1.5}
+
+/* 価格 */
+.plan-price-wrap{margin:14px 0}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--ink);line-height:1}
+.plan-price sub{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;font-weight:400;color:var(--slate);vertical-align:baseline}
+.plan-users-badge{display:inline-flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--border);border-radius:3px;padding:3px 10px;font-size:.69rem;color:var(--ink2);margin-top:6px;flex-wrap:wrap}
+.plan-users-badge.u-office{background:#f0f8f4;border-color:#b8d8cc;color:#4a7c6f}
+.plan-users-badge.u-team{background:#f0f4ff;border-color:#c4b8e8;color:#5a4a8a}
+
+/* Office 強調ポイント */
+.office-points{display:flex;flex-direction:column;gap:5px;margin:12px 0;padding:12px 14px;background:#f0f8f4;border-radius:5px;border-left:3px solid #4a7c6f}
+.office-point{font-size:.74rem;color:#3a6460;display:flex;align-items:center;gap:6px}
+.office-point::before{content:'◎';font-size:.65rem;color:#4a7c6f}
+
+/* 機能リスト */
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin:14px 0 18px;border-top:1px solid var(--border);padding-top:12px}
+.plan-features li{font-size:.78rem;color:var(--ink);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.plan-features li .fi{width:14px;flex-shrink:0;margin-top:1px}
+.plan-features li.dim{color:#ccc}
+.plan-features li .fi.ok{color:#4a7c6f}
+.plan-features li .fi.ng{color:#ddd}
+.feat-highlight{font-weight:600;color:var(--ink)}
+.feat-new{font-size:.63rem;background:#f0f4ff;color:#5a4a8a;border:1px solid #c4b8e8;border-radius:3px;padding:1px 5px;margin-left:3px}
+
+/* ボタン */
+.btn-plan{display:block;width:100%;padding:12px;border-radius:3px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;text-align:center;text-decoration:none;transition:all .2s;letter-spacing:.04em;border:none}
+.btn-pro{background:var(--gold);color:#fff}.btn-pro:hover{background:#a07840}
+.btn-office{background:#4a7c6f;color:#fff;padding:14px}.btn-office:hover{background:#3a6460}
+.btn-team{background:#5a4a8a;color:#fff}.btn-team:hover{background:#4a3a7a}
+.plan-note{font-size:.67rem;color:var(--slate);text-align:center;margin-top:7px}
+
+/* ヒント */
+.pricing-hint{text-align:center;margin-top:24px;font-size:.78rem;color:var(--slate)}
+.pricing-hint strong{color:var(--gold)}
+
+/* レスポンシブ */
+@media(max-width:960px){
+  .pricing-paid-grid{grid-template-columns:1fr 1fr}
+  .pricing-sec{padding:64px 24px}
+  .pricing-type-nav{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .pricing-paid-grid{grid-template-columns:1fr}
+  .pricing-free-bar{flex-direction:column;align-items:flex-start}
+  .pfb-features{display:none}
+}
 
 /* ── TRUST BADGES ── */
 .trust-badges{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
@@ -330,8 +408,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 }
 
 /* ── チームプラン追加CSS ── */
-@media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
 /* アプリ追加パネル */
 .apanel{display:none}.apanel.on{display:block}
 .sec-box{background:#fff;border:1px solid var(--border);border-radius:6px;padding:22px 26px;margin-bottom:14px}
@@ -385,6 +461,27 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .cmodal-btns button{width:100%;padding:9px;border-radius:4px;font-size:.81rem;font-family:inherit;cursor:pointer;font-weight:500}
 .btn-ccancel{background:#dc2626;border:1px solid #dc2626;color:#fff}.btn-ccancel:hover{background:#b91c1c}
 .btn-cback{background:#fff;border:1px solid var(--border);color:var(--ink2)}.btn-cback:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── btn-cta-stripe (有料登録ボタン) ── */
+.btn-cta-stripe{display:inline-flex;align-items:center;gap:10px;background:none;color:#fff;padding:18px 48px;font-size:.9rem;font-weight:500;letter-spacing:.08em;border:2px solid rgba(255,255,255,.55);border-radius:2px;cursor:pointer;font-family:inherit;transition:background .25s,border-color .25s,transform .2s;text-decoration:none;position:relative;z-index:2}
+.btn-cta-stripe::after{content:'→';transition:transform .2s}
+.btn-cta-stripe:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-2px)}
+.btn-cta-stripe:hover::after{transform:translateX(4px)}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--bg);padding:100px 48px;border-top:1px solid var(--border)}
+.faq-wrap{max-width:1000px;margin:0 auto}
+.faq-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 64px;margin-top:0}
+.faq-cat-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.faq-cat-label::before{content:'';display:block;width:18px;height:1px;background:var(--gold)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-btn{width:100%;text-align:left;background:none;border:none;padding:15px 0;font-size:.86rem;font-weight:500;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:inherit;line-height:1.6}
+.faq-chevron{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--gold);transition:transform .3s,background .2s}
+.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--gold);color:#fff;border-color:var(--gold)}
+.faq-ans{font-size:.8rem;color:var(--slate);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .35s ease,padding-bottom .3s}
+.faq-item.open .faq-ans{max-height:260px;padding-bottom:14px}
+.faq-ans a{color:var(--gold);text-decoration:underline}
+@media(max-width:900px){.faq-sec{padding:64px 20px}.faq-cats{grid-template-columns:1fr;gap:36px}}
 </style>
 </head>
 <body>
@@ -411,7 +508,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <div class="eyebrow">AI Legal Assistant</div>
         <h1>初回相談メモを<br><em>すばやく整理</em></h1>
         <p class="hero-sub">相談メモを入力すると、AIが<strong>事実関係・依頼者の主張・想定される論点・追加で確認すべき事項</strong>に自動で整理します。弁護士の初回面談後の情報整理を、数分で完了。</p>
-        <button class="btn-gold" onclick="track('click_try_free',{location:'hero'});go('auth','register')">無料で試す</button>
+        <button class="btn-gold" onclick="track('click_try_free',{location:'hero'});go('auth','reg')">無料で試す</button>
         <div class="trust-badges">
           <span class="trust-badge"><span class="ti">✏️</span>架空の相談内容で試せます</span>
           <span class="trust-badge"><span class="ti">🔒</span>入力内容は保存されません</span>
@@ -499,71 +596,294 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   </div>
 
   <!-- PRICING -->
-  <section class="pricing-sec">
+  <section class="pricing-sec" id="pricing">
     <div class="pricing-inner">
       <div class="sec-ey" style="justify-content:center">Pricing</div>
-      <h2 class="sec-ttl" style="text-align:center;margin-bottom:12px">シンプルな料金体系</h2>
-      <p style="text-align:center;font-size:.88rem;color:var(--slate);margin-bottom:48px">まずは無料で試して、必要なら有料プランへ</p>
-      <div class="pricing-grid">
-        <!-- 無料プラン -->
-        <div class="pricing-card">
-          <div class="plan-badge free">無料プラン</div>
-          <div class="plan-price">¥0<span>/月</span></div>
-          <ul class="plan-features">
-            <li>✓ AI整理：月5件まで</li>
-            <li>✓ PDF出力</li>
-            <li>✓ 履歴保存：直近5件</li>
-            <li>✓ 平均整理時間：約15秒</li>
-            <li class="dim">✗ 無制限利用</li>
-            <li class="dim">✗ 優先サポート</li>
-          </ul>
-          <button class="btn-plan-free" onclick="track('click_try_free',{location:'pricing'});go('auth','register')">無料で始める →</button>
+      <h2 class="sec-ttl" style="text-align:center;margin-bottom:10px">ご利用スタイルに合わせたプラン</h2>
+      <p style="text-align:center;font-size:.86rem;color:var(--slate);margin-bottom:40px">まずは無料で試し、必要に応じて個人利用または事務所導入プランをお選びください</p>
+
+      <!-- 導入タイプ分岐 -->
+      <div class="pricing-type-nav">
+        <div class="ptn-item">
+          <div class="ptn-label">Individual</div>
+          <div class="ptn-title">個人で使う方向け</div>
+          <div class="ptn-desc">弁護士1名での業務効率化に</div>
         </div>
-        <!-- プロプラン -->
-        <div class="pricing-card featured">
-          <div class="plan-rec">おすすめ</div>
-          <div class="plan-badge pro">プロプラン</div>
-          <div class="plan-price">¥9,800<span>/月</span></div>
+        <div class="ptn-item ptn-team">
+          <div class="ptn-label">Office / Team</div>
+          <div class="ptn-title">事務所で複数人利用する方向け</div>
+          <div class="ptn-desc">チーム管理・メンバー招待に対応</div>
+        </div>
+      </div>
+
+      <!-- Free：お試しバー -->
+      <div class="pricing-free-bar">
+        <div class="pfb-left">
+          <div class="pfb-icon">🆓</div>
+          <div>
+            <div class="pfb-title">無料プラン　¥0 / 月</div>
+            <div class="pfb-sub">クレジットカード不要・1分で登録完了</div>
+          </div>
+        </div>
+        <div class="pfb-features">
+          <span class="pfb-feat">AI整理：月5件まで</span>
+          <span class="pfb-feat">PDF出力</span>
+          <span class="pfb-feat">履歴保存：5件</span>
+        </div>
+        <button class="btn-pfb" onclick="track('click_try_free',{location:'pricing'});go('auth','reg')">無料で試す →</button>
+      </div>
+
+      <!-- 有料プラン -->
+      <div class="pricing-paid-hd">
+        <h3>有料プラン</h3>
+        <p>AI整理・PDF出力・履歴保存がすべて無制限。事務所規模に合わせてお選びください。</p>
+      </div>
+
+      <div class="pricing-paid-grid">
+
+        <!-- Pro -->
+        <div class="pricing-card">
+          <div class="plan-head">
+            <div class="plan-tag pro">Pro — 個人向け</div>
+            <div class="plan-name">プロプラン</div>
+            <div class="plan-target">個人利用の弁護士向け</div>
+          </div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">¥9,800<sub>/月（税込）</sub></div>
+            <div class="plan-users-badge">👤 1名</div>
+          </div>
           <ul class="plan-features">
-            <li>✓ AI整理：<strong>無制限</strong></li>
-            <li>✓ PDF出力</li>
-            <li>✓ 履歴保存：<strong>無制限</strong></li>
-            <li>✓ 関連条文の自動引用・判例参照</li>
-            <li>✓ 優先サポート</li>
+            <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力</li>
+            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
+            <li class="dim"><span class="fi ng">✗</span> チーム利用・メンバー管理</li>
           </ul>
-          <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録する（月額 ¥9,800）→</a>
+          <a class="btn-plan btn-pro" href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener">個人で登録する →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
-        <!-- オフィスプラン -->
-        <div class="pricing-card">
-          <div class="plan-badge" style="color:#4a7c6f">オフィスプラン</div>
-          <div class="plan-price" style="font-size:2.2rem">¥19,800<span>/月</span></div>
+
+        <!-- Office（主役・おすすめ） -->
+        <div class="pricing-card featured" style="margin-top:-16px">
+          <div class="plan-rec">事務所向けおすすめ</div>
+          <div class="plan-head" style="padding-top:10px">
+            <div class="plan-tag office">Office — 小規模事務所向け</div>
+            <div class="plan-name">オフィスプラン</div>
+            <div class="plan-target">2〜3名の法律事務所向け</div>
+          </div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">¥24,800<sub>/月（税込）</sub></div>
+            <div class="plan-users-badge u-office">👥 最大3名　<span style="font-size:.85em;opacity:.85">1人あたり 約¥8,267</span></div>
+          </div>
+          <!-- Office 強調ポイント -->
+          <div class="office-points">
+            <div class="office-point">2〜3名の事務所に最適なサイズ</div>
+            <div class="office-point">Pro 3名分（¥29,400）より約16%お得</div>
+            <div class="office-point">チーム管理・メンバー招待に対応</div>
+          </div>
           <ul class="plan-features">
-            <li>✓ AI整理：<strong>無制限</strong></li>
-            <li>✓ PDF出力</li>
-            <li>✓ 履歴保存：<strong>無制限</strong></li>
-            <li>✓ 関連条文の自動引用・判例参照</li>
-            <li>✓ 優先サポート</li>
-            <li>✓ <strong>3名まで</strong>利用可能</li>
+            <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力</li>
+            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">優先サポート</span></li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">チーム利用</span>・メンバー管理</li>
           </ul>
-          <a class="btn-plan-pro" style="background:#4a7c6f" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">登録する（¥19,800/月）→</a>
+          <a class="btn-plan btn-office" href="https://buy.stripe.com/3cI5kC6ZV96Rcuf8fR4sE01" target="_blank" rel="noopener">事務所で導入する →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
-        <!-- チームプラン -->
-        <div class="pricing-card">
-          <div class="plan-badge" style="color:#5a4a8a">チームプラン</div>
-          <div class="plan-price" style="font-size:2.2rem">¥39,800<span>/月</span></div>
+
+        <!-- Team -->
+        <div class="pricing-card team-card">
+          <div class="plan-rec rec-team">事務所全体向け</div>
+          <div class="plan-head" style="padding-top:10px">
+            <div class="plan-tag team">Team — 中規模事務所向け</div>
+            <div class="plan-name">チームプラン</div>
+            <div class="plan-target">4〜5名で共有したい事務所向け</div>
+          </div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">¥39,800<sub>/月（税込）</sub></div>
+            <div class="plan-users-badge u-team">👥 最大5名　<span style="font-size:.85em;opacity:.85">1人あたり 約¥7,960</span></div>
+          </div>
           <ul class="plan-features">
-            <li>✓ AI整理：<strong>無制限</strong></li>
-            <li>✓ PDF出力</li>
-            <li>✓ 履歴保存：<strong>無制限</strong></li>
-            <li>✓ 関連条文の自動引用・判例参照</li>
-            <li>✓ 優先サポート</li>
-            <li>✓ <strong>5名まで</strong>利用可能</li>
+            <li><span class="fi ok">✓</span> AI整理：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> PDF出力</li>
+            <li><span class="fi ok">✓</span> 履歴保存：<span class="feat-highlight">無制限</span></li>
+            <li><span class="fi ok">✓</span> 関連条文の自動引用・判例参照</li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">優先サポート</span></li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">チーム利用</span>・メンバー管理</li>
+            <li><span class="fi ok">✓</span> <span class="feat-highlight">メンバー招待機能</span></li>
           </ul>
-          <a class="btn-plan-pro" style="background:#5a4a8a" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">登録する（¥39,800/月）→</a>
+          <a class="btn-plan btn-team" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">複数人で導入する →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
+
+      </div><!-- /pricing-paid-grid -->
+
+      <div class="pricing-hint">
+        人数が増えるほど1人あたりの費用が下がります。5名以上なら<strong>Teamプランが最もお得</strong>（1人あたり約¥7,960/月）。
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="faq-sec" id="faq">
+    <div class="faq-wrap">
+      <div class="sec-ey">FAQ</div>
+      <h2 class="sec-ttl">よくあるお問い合わせ</h2>
+      <div class="faq-cats">
+
+        <!-- サービスについて -->
+        <div>
+          <div class="faq-cat-label">🗂 サービスについて</div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">IntakeAIとはどのようなサービスですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">弁護士・法律事務所向けに、初回相談メモをAIが自動で4項目（事実関係・依頼者の主張・想定される論点・確認事項）に整理するWebツールです。PDF出力・履歴保存にも対応しています。インストール不要、ブラウザだけで動作します。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">無料プランと有料プランの違いは？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">無料プランはAI整理を月5件まで利用できます。有料プランでは利用回数が無制限となり、関連条文の自動引用・より高精度なAIモデルが使用できます。Officeプラン（¥24,800/月）・Teamプラン（¥39,800/月）ではチーム利用・メンバー管理にも対応します。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">法的助言として利用できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">いいえ。本サービスはあくまでも情報整理の補助ツールです。AI出力は参考情報であり、法的助言・法律意見書の代替にはなりません。最終的な法的判断は弁護士ご自身が行ってください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">架空の相談内容でも試せますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。架空の相談内容でも機能をフルにお試しいただけます。実際の依頼者情報や機密情報を入力せず、まずはダミーの事案でご体験されることを推奨しています。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">複数の事務所で共有して使えますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">いいえ。各アカウントは1事務所・1組織でのご利用を想定しています。他の事務所との共有アカウントでの利用はご遠慮ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">司法書士・行政書士でも使えますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。弁護士以外の法律・法務関係者の方にもご利用いただけます。ただし、本サービスは弁護士の初回相談業務を主な想定シーンとして設計されています。</div>
+          </div>
+        </div>
+
+        <!-- データ・セキュリティ -->
+        <div>
+          <div class="faq-cat-label">🔒 データ・セキュリティ</div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">入力した相談内容はどこに保存されますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">入力内容はサーバーに保存されません。AI処理後はデータが保持されません。履歴として保存する場合も、お使いのブラウザ内（ローカルストレージ）にのみ記録されます。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">弁護士秘密との関係はどうなりますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">本サービスはサーバーに相談内容を保存しないため、情報漏洩リスクを最小化しています。ただし、依頼者の機密情報の入力に際しては各事務所の情報管理規程・弁護士倫理に従いご判断ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">通信は暗号化されていますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。本サービスはHTTPS通信を使用しており、ブラウザ間の通信は暗号化されています。入力された相談内容がGoogle Analyticsに送信されることはありません。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">他の事務所の情報が見られる心配はありますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">ありません。各アカウントのデータはブラウザのローカルストレージに個別に保存されており、他のユーザーからアクセスすることは一切できません。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">AIに入力した内容はAIの学習に使われますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">本サービスはAnthropic社のAPIを利用しています。APIで送信したデータはAnthropic社のモデル学習には使用されません。詳細はAnthropic社のプライバシーポリシーをご参照ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">ブラウザを変えたり端末が変わると履歴は消えますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。履歴はブラウザのローカルストレージに保存されるため、別のブラウザや端末では引き継がれません。重要な整理結果はPDFとして保存しておくことをお勧めします。</div>
+          </div>
+        </div>
+
+        <!-- 支払いと請求 -->
+        <div>
+          <div class="faq-cat-label">💳 支払いと請求</div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">利用できる支払い方法は？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">クレジットカード（Visa・Mastercard・American Express・JCB）がご利用いただけます。決済はStripeが処理し、カード情報は本サービスのサーバーに保存されません。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">請求はいつ行われますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">有料プラン登録日を起算日として、毎月同日に自動で請求されます。請求書はStripeから登録メールアドレスへ自動送付されます。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">いつでも解約できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい、いつでも解約いただけます。解約後は次回更新日まで有料プランをご利用いただけます。日割り返金は対応しておりません。アカウント設定の「プランを解約する」からお手続きください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">領収書・適格請求書は発行されますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">Stripeが発行する決済明細をご利用いただけます。インボイス対応の適格請求書が必要な場合は、お問い合わせページよりご連絡ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">プランをあとから変更できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。現時点ではプランの変更はお問い合わせにてご対応しています。より大きいプランへのアップグレードの場合は、差額を日割り計算でご請求します。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">無料トライアル期間はありますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">無料プランでAI整理を月5件まで永続的にご利用いただけます。期間限定のトライアルではなく、無料プランとして継続してお使いいただけます。有料プランへの移行はいつでも任意です。</div>
+          </div>
+        </div>
+
+        <!-- 技術・動作環境 -->
+        <div>
+          <div class="faq-cat-label">⚙️ 技術・動作環境</div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">対応しているブラウザは？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">Chrome・Safari・Edge・Firefoxの最新バージョンに対応しています。スマートフォン・タブレットからもご利用いただけます。Internet Explorerは非対応です。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">アプリのインストールは必要ですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">不要です。ブラウザからURLにアクセスするだけでご利用いただけます。インストールや初期設定等の作業は一切ありません。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">AI整理にかかる時間はどのくらいですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">通常10〜30秒程度で整理結果が表示されます。有料プランは高精度モデルを使用するため、やや長くなる場合があります。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">iwaharu.422&#64;outlook.jp までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">オフラインでも使えますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">いいえ。AI整理機能にはインターネット接続が必要です。保存済みの履歴の閲覧はオフラインでも可能ですが、新規のAI整理はオンライン環境でご利用ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">入力できる文字数に制限はありますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">制限はありませんが、相談メモは1,000〜3,000文字程度が最も精度よく整理されます。極端に長い文章は要点が絞られる場合があります。</div>
+          </div>
+        </div>
+
+
+        <!-- よくあるお問い合わせ -->
+        <div>
+          <div class="faq-cat-label">📮 よくあるお問い合わせ</div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">パスワードを忘れました。どうすればいいですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">ログイン画面の「パスワードをお忘れですか？」から再設定できます。登録済みのメールアドレスを入力すると、新しいパスワードを設定できます。
+              <div style="margin-top:10px">
+                <button onclick="go('auth','login')" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:var(--gold);color:#fff;border:none;border-radius:3px;font-size:.78rem;font-family:inherit;cursor:pointer;font-weight:600">ログイン画面へ →</button>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">導入前に操作方法を確認できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">はい。無料プランでAI整理を月5件まで実際にお試しいただけます。クレジットカード不要・登録1分で始められますので、まずは無料でご体験ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">事務所の複数名でまとめて導入したい場合は？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">オフィスプラン（3名まで・¥24,800/月）またはチームプラン（5名まで・¥39,800/月）をご利用ください。チーム管理・メンバー招待機能が使えます。ご不明な点はお問い合わせページよりご連絡ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">機能追加・改善の要望はどこに送ればいいですか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">お問い合わせページ、またはiwaharu.422&#64;outlook.jpへご連絡ください。いただいたご意見は今後のアップデートに反映させていただきます。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">返金・キャンセルポリシーを教えてください<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">解約はアカウント設定からいつでも行えます。解約後も次回更新日まで有料機能をご利用いただけます。日割り返金には対応しておりません。詳細は返金ポリシーページをご確認ください。</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" onclick="faqOpen(this)">サービスに関する規約・ポリシーはどこで確認できますか？<span class="faq-chevron">▼</span></button>
+            <div class="faq-ans">ページ下部のフッターより、利用規約・プライバシーポリシー・特定商取引法に基づく表記・返金ポリシー・反社会的勢力への基本方針をご確認いただけます。</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -572,8 +892,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <h2>まずは試してみる</h2>
     <p>アカウント登録は1分。クレジットカード不要。</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2">
-      <button class="btn-cta" onclick="track('click_try_free',{location:'cta'});go('auth','register')">無料で試す</button>
-      <a class="btn-cta-stripe" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録 ¥9,800/月</a>
+      <button class="btn-cta" onclick="track('click_try_free',{location:'cta'});go('auth','reg')">無料で試す</button>
+      <button class="btn-cta-stripe" onclick="openPlanModal()">有料登録</button>
     </div>
   </section>
 
@@ -595,6 +915,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <div class="footer-links">
       <a class="footer-link" href="./privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
       <a class="footer-link" href="./terms.html" target="_blank" rel="noopener">利用規約</a>
+      <a class="footer-link" href="./tokusho.html" target="_blank" rel="noopener">特定商取引法の表記</a>
+      <a class="footer-link" href="./refund.html" target="_blank" rel="noopener">返金ポリシー</a>
+      <a class="footer-link" href="./antisocial.html" target="_blank" rel="noopener">反社会的勢力への基本方針</a>
+      <a class="footer-link" href="./contact.html" target="_blank" rel="noopener">お問い合わせ</a>
     </div>
     <p>© 2025 IntakeAI. All rights reserved.</p>
   </footer>
@@ -608,7 +932,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
     <div class="auth-hd">
       <div class="logo">Intake<span>AI</span></div>
       <div class="auth-sub">弁護士向け AI 相談整理ツール</div>
-      <button class="back-link" onclick="go('lp')">← LPに戻る</button>
+      <button class="back-link" onclick="go('lp')">← トップへ戻る</button>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab on" id="atab-reg" onclick="authTab('reg')">新規登録</button>
@@ -655,7 +979,25 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           <div class="ferr" id="e-login-cred">メールアドレスまたはパスワードが違います</div>
         </div>
         <button class="btn-submit" onclick="doLogin()">ログイン</button>
+        <div style="text-align:center;margin-top:-4px">
+          <a onclick="showForgotPw()" style="font-size:.74rem;color:var(--slate);cursor:pointer;text-decoration:underline">パスワードをお忘れですか？</a>
+        </div>
         <div class="form-sw">アカウントをお持ちでない方は <a onclick="authTab('reg')">新規登録</a></div>
+        <!-- パスワード再設定（ローカル版） -->
+        <div id="forgot-pw-box" style="display:none;background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:16px;margin-top:4px">
+          <p style="font-size:.78rem;color:var(--ink);margin-bottom:10px;font-weight:500">パスワードをリセットする</p>
+          <div class="fg">
+            <label>登録済みのメールアドレス</label>
+            <input type="email" id="forgot-email" placeholder="example@lawfirm.jp">
+          </div>
+          <div class="ferr" id="e-forgot-email"></div>
+          <button class="btn-submit" style="margin-top:10px;font-size:.8rem;padding:10px" onclick="doForgotPw()">新しいパスワードを設定する</button>
+          <div id="forgot-new-pw-wrap" style="display:none;margin-top:10px">
+            <div class="fg"><label>新しいパスワード（8文字以上）</label><input type="password" id="forgot-new-pw" placeholder="新しいパスワード"></div>
+            <div class="ferr" id="e-forgot-new-pw"></div>
+            <button class="btn-submit" style="margin-top:8px;font-size:.8rem;padding:10px" onclick="doResetPw()">パスワードを変更する</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -696,7 +1038,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           <div class="teb-title">無料トライアルが終了しました</div>
           <div class="teb-msg">無料利用（5件）をすべて使い切りました。引き続き利用する場合は有料プランをご利用ください。</div>
         </div>
-        <a class="teb-btn" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料プランへ →</a>
+        <a class="teb-btn" href="#" onclick="event.preventDefault();closeUpgrade();openPlanModal()">有料プランへ →</a>
       </div>
       <div class="card">
         <label class="card-label">相談メモ</label>
@@ -745,6 +1087,75 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   </div>
 </div>
 
+<!-- PLAN SELECT MODAL -->
+<div class="cmodal" id="plan-modal">
+  <div class="cmodal-box" style="max-width:440px">
+    <h3 style="margin-bottom:6px">プランを選択してください</h3>
+    <p style="font-size:.78rem;color:var(--slate);text-align:center;margin-bottom:20px">すべて税込・Stripeの安全な決済ページへ遷移します</p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+
+      <!-- Pro -->
+      <a href="https://buy.stripe.com/6oU7sKfwr5UF8dZ1Rt4sE02" target="_blank" rel="noopener"
+         onclick="track('click_plan_select',{plan:'pro'});closePlanModal()"
+         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
+         onmouseover="this.style.borderColor='var(--gold)';this.style.boxShadow='0 4px 16px rgba(184,151,90,.15)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <div>
+          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:var(--gold);margin-bottom:2px">PRO</div>
+          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">プロプラン</div>
+          <div style="font-size:.72rem;color:var(--slate)">個人利用の弁護士向け・1名</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--ink)">¥9,800</div>
+          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
+        </div>
+      </a>
+
+      <!-- Office（おすすめ） -->
+      <a href="https://buy.stripe.com/3cI5kC6ZV96Rcuf8fR4sE01" target="_blank" rel="noopener"
+         onclick="track('click_plan_select',{plan:'office'});closePlanModal()"
+         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:2px solid #4a7c6f;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f0f8f4;position:relative"
+         onmouseover="this.style.boxShadow='0 4px 16px rgba(74,124,111,.2)'"
+         onmouseout="this.style.boxShadow='none'">
+        <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:3px 12px;border-radius:20px;white-space:nowrap">事務所向けおすすめ</div>
+        <div>
+          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:#4a7c6f;margin-bottom:2px">OFFICE</div>
+          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">オフィスプラン</div>
+          <div style="font-size:.72rem;color:var(--slate)">2〜3名の法律事務所向け・最大3名</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#4a7c6f">¥24,800</div>
+          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
+          <div style="font-size:.65rem;color:#4a7c6f">1人あたり約¥8,267</div>
+        </div>
+      </a>
+
+      <!-- Team -->
+      <a href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener"
+         onclick="track('click_plan_select',{plan:'team'});closePlanModal()"
+         style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid #c4b8e8;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f8f6ff"
+         onmouseover="this.style.borderColor='#5a4a8a';this.style.boxShadow='0 4px 16px rgba(90,74,138,.15)'"
+         onmouseout="this.style.borderColor='#c4b8e8';this.style.boxShadow='none'">
+        <div>
+          <div style="font-size:.68rem;letter-spacing:.14em;font-weight:700;color:#5a4a8a;margin-bottom:2px">TEAM</div>
+          <div style="font-size:.88rem;font-weight:600;color:var(--ink)">チームプラン</div>
+          <div style="font-size:.72rem;color:var(--slate)">4〜5名の事務所向け・最大5名</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#5a4a8a">¥39,800</div>
+          <div style="font-size:.68rem;color:var(--slate)">/月（税込）</div>
+          <div style="font-size:.65rem;color:#5a4a8a">1人あたり約¥7,960</div>
+        </div>
+      </a>
+
+    </div>
+
+    <button class="btn-cback" onclick="closePlanModal()" style="width:100%;padding:9px;border-radius:4px;font-size:.81rem;font-family:inherit;cursor:pointer;background:#fff;border:1px solid var(--border);color:var(--slate)">閉じる</button>
+    <p style="text-align:center;font-size:.68rem;color:var(--slate);margin-top:10px">🔒 Stripe の安全な決済ページへ遷移します</p>
+  </div>
+</div>
+
 <!-- CANCEL PLAN MODAL -->
 <div class="cmodal" id="cancel-modal">
   <div class="cmodal-box">
@@ -777,7 +1188,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <li>PDF出力（無制限）</li>
         <li>優先サポート</li>
       </ul>
-      <a class="btn-upgrade" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">
+      <a class="btn-upgrade" href="#" onclick="event.preventDefault();closeUpgrade();openPlanModal()">
         プロプランに登録する →
       </a>
       <span class="upg-cancel" onclick="closeUpgrade()">今は無料プランを続ける</span>
@@ -844,9 +1255,11 @@ function findMyTeam() {
 
 // ── 画面遷移 ──────────────────────────────────────────
 function go(screen, sub) {
+  const displayMap = { lp:'block', auth:'flex', app:'block' };
   ['lp','auth','app'].forEach(s => {
     const el = document.getElementById('screen-' + s);
-    if (el) el.style.display = s === screen ? '' : 'none';
+    if (!el) return;
+    el.style.display = s === screen ? (displayMap[s] || 'block') : 'none';
   });
   if (screen === 'auth') authTab(sub || 'login');
   if (screen === 'lp') window.scrollTo(0, 0);
@@ -937,6 +1350,9 @@ function updateUsageBar() {
   const count = users[me.email]?.usageCount || 0;
   bar.innerHTML = `<div class="usage-left"><span class="usage-icon">📊</span>今月の利用<span id="usage-count">${count}/5件</span></div><div id="usage-fill" class="usage-fill" style="width:${Math.min(100,(count/5)*100)}%"></div>`;
 }
+
+function openPlanModal()  { document.getElementById('plan-modal').classList.add('on'); }
+function closePlanModal() { document.getElementById('plan-modal').classList.remove('on'); }
 function openUpgrade()  { window.open(STRIPE_UPGRADE,'_blank'); track('click_upgrade'); }
 function closeUpgrade() { document.getElementById('upg-modal').classList.remove('on'); }
 
@@ -1399,6 +1815,13 @@ function cancelInvite(email){
 }
 
 // ── toast / modal / scroll ─────────────────────────
+function faqOpen(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
 function toast(msg){
   const el=document.getElementById('toast'); if(!el)return;
   el.textContent=msg; el.classList.add('on');
@@ -1406,6 +1829,7 @@ function toast(msg){
 }
 document.getElementById('upg-modal').addEventListener('click',function(e){if(e.target===this)closeUpgrade();});
 document.getElementById('cancel-modal').addEventListener('click',function(e){if(e.target===this)closeCancelModal();});
+document.getElementById('plan-modal').addEventListener('click',function(e){if(e.target===this)closePlanModal();});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
