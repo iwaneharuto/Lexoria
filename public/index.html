@@ -215,6 +215,47 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .pw-field input:focus{outline:none;border-color:var(--gold)}
 .pw-err{font-size:.76rem;color:var(--red);margin-top:6px;display:none}
 .pw-err.on{display:block}
+/* ── team panel ────────────────────────── */
+.team-section{background:#fff;border:1px solid var(--border);border-radius:6px;padding:28px 32px;margin-bottom:20px}
+.team-section h3{font-family:'Noto Serif JP',serif;font-size:.9rem;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);color:var(--ink2)}
+.team-badge{display:inline-flex;align-items:center;gap:6px;background:#f0f4ff;color:#5a4a8a;border:1px solid #c4b8e8;border-radius:3px;padding:3px 10px;font-size:.72rem;font-weight:600;margin-bottom:16px}
+.team-badge.office{background:#f0f8f4;color:#4a7c6f;border-color:#b8d8cc}
+.office-name-row{display:flex;gap:10px;align-items:center;margin-bottom:20px}
+.office-name-row input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:var(--cream)}
+.office-name-row input:focus{outline:none;border-color:var(--gold)}
+.office-name-row button{padding:9px 18px;background:var(--gold);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .2s}
+.office-name-row button:hover{background:#a07840}
+.member-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.member-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--cream);border-radius:4px;border:1px solid var(--border);font-size:.83rem}
+.member-row .m-name{font-weight:500;flex:1}
+.member-row .m-email{color:var(--slate);font-size:.76rem;flex:1}
+.member-row .m-role{font-size:.7rem;color:var(--gold);border:1px solid #e8d5a3;background:#fdf6e9;border-radius:3px;padding:2px 8px;white-space:nowrap}
+.member-row .m-role.admin{color:#5a4a8a;border-color:#c4b8e8;background:#f0f4ff}
+.member-row .m-del{background:none;border:1px solid #fca5a5;color:#dc2626;border-radius:3px;padding:4px 10px;font-size:.72rem;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+.member-row .m-del:hover{background:#fef2f2}
+.add-member-row{display:flex;gap:8px;flex-wrap:wrap}
+.add-member-row input{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.83rem;font-family:inherit;background:var(--cream)}
+.add-member-row input:focus{outline:none;border-color:var(--gold)}
+.add-member-row button{padding:9px 18px;background:var(--ink);color:#fff;border:none;border-radius:4px;font-size:.8rem;font-family:inherit;cursor:pointer;transition:background .2s;white-space:nowrap}
+.add-member-row button:hover{background:var(--gold)}
+.team-err{font-size:.76rem;color:var(--red);margin-top:6px;display:none}
+.team-err.on{display:block}
+/* usage table */
+.usage-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.usage-table th{background:var(--cream);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border);font-weight:600;color:var(--ink2)}
+.usage-table td{padding:10px 12px;border-bottom:1px solid #f0ece6;color:var(--ink)}
+.usage-table tr:last-child td{border-bottom:none}
+.usage-bar-mini{background:#e8e2d8;border-radius:10px;height:6px;flex:1}
+.usage-bar-mini-fill{height:6px;border-radius:10px;background:var(--gold)}
+/* shared PDF list */
+.shared-list{display:flex;flex-direction:column;gap:8px}
+.shared-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--cream);border:1px solid var(--border);border-radius:4px;font-size:.82rem;cursor:pointer;transition:border-color .2s}
+.shared-item:hover{border-color:var(--gold)}
+.shared-item .sh-meta{color:var(--slate);font-size:.74rem}
+.shared-item .sh-name{font-weight:500;flex:1}
+.team-locked{text-align:center;padding:40px 20px;color:var(--slate)}
+.team-locked p{margin-bottom:16px;font-size:.88rem}
+@media(max-width:600px){.member-row{flex-wrap:wrap}.add-member-row{flex-direction:column}.office-name-row{flex-direction:column}}
 /* cancel confirm modal */
 .cancel-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.55);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
 .cancel-overlay.on{display:flex}
@@ -324,14 +365,27 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 /* ── PRICING ── */
 .pricing-sec{background:var(--cream);padding:100px 48px;border-top:1px solid var(--border)}
 .pricing-inner{max-width:900px;margin:0 auto}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:800px;margin:0 auto}
-.pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:36px 32px;position:relative;transition:box-shadow .3s}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
+@media(max-width:900px){.pricing-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
+.pricing-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px 24px;position:relative;transition:box-shadow .3s}
 .pricing-card.featured{border:2px solid var(--gold);box-shadow:0 12px 40px rgba(184,151,90,.15)}
 .plan-rec{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
 .plan-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
 .plan-badge.free{color:var(--slate)}
 .plan-badge.pro{color:var(--gold)}
-.plan-price{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:24px}
+.plan-badge.office{color:#4a7c6f}
+.plan-badge.team{color:#5a4a8a}
+.pricing-card.office{border:2px solid #4a7c6f;box-shadow:0 8px 32px rgba(74,124,111,.12)}
+.pricing-card.team{border:2px solid #5a4a8a;box-shadow:0 8px 32px rgba(90,74,138,.12)}
+.plan-rec-office{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#4a7c6f;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-rec-team{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#5a4a8a;color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.btn-plan-office{display:block;width:100%;padding:14px;background:#4a7c6f;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
+.btn-plan-office:hover{background:#3a6460}
+.btn-plan-team{display:block;width:100%;padding:14px;background:#5a4a8a;color:#fff;border:none;border-radius:3px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;text-align:center;text-decoration:none;letter-spacing:.04em}
+.btn-plan-team:hover{background:#4a3a7a}
+.plan-users{font-size:.72rem;color:var(--slate);background:var(--cream);border-radius:3px;padding:3px 10px;display:inline-block;margin-bottom:14px;border:1px solid var(--border)}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:16px}
 .plan-price span{font-size:1rem;font-weight:400;color:var(--slate);font-family:'Noto Sans JP',sans-serif}
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
 .plan-features li{font-size:.82rem;color:var(--ink);display:flex;align-items:center;gap:8px}
@@ -513,8 +567,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <h2 class="sec-ttl" style="text-align:center;margin-bottom:12px">シンプルな料金体系</h2>
       <p style="text-align:center;font-size:.88rem;color:var(--slate);margin-bottom:48px">まずは無料で試して、必要なら有料プランへ</p>
       <div class="pricing-grid">
+        <!-- 無料プラン -->
         <div class="pricing-card">
           <div class="plan-badge free">無料プラン</div>
+          <div class="plan-users">1名</div>
           <div class="plan-price">¥0<span>/月</span></div>
           <ul class="plan-features">
             <li>✓ AI整理：月5件まで</li>
@@ -526,9 +582,11 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           </ul>
           <button class="btn-plan-free" onclick="track('click_try_free',{location:'pricing'});go('auth','register')">無料で始める →</button>
         </div>
+        <!-- プロプラン -->
         <div class="pricing-card featured">
           <div class="plan-rec">おすすめ</div>
           <div class="plan-badge pro">プロプラン</div>
+          <div class="plan-users">1名</div>
           <div class="plan-price">¥9,800<span>/月</span></div>
           <ul class="plan-features">
             <li>✓ AI整理：<strong>無制限</strong></li>
@@ -537,7 +595,41 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
             <li>✓ 関連条文の自動引用・判例参照</li>
             <li>✓ 優先サポート</li>
           </ul>
-          <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">有料登録する（月額 ¥9,800）→</a>
+          <a class="btn-plan-pro" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">登録する →</a>
+          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+        </div>
+        <!-- オフィスプラン -->
+        <div class="pricing-card office">
+          <div class="plan-rec-office">複数名向け</div>
+          <div class="plan-badge office">オフィスプラン</div>
+          <div class="plan-users">3名まで</div>
+          <div class="plan-price">¥19,800<span>/月</span></div>
+          <ul class="plan-features">
+            <li>✓ AI整理：<strong>無制限</strong></li>
+            <li>✓ PDF出力</li>
+            <li>✓ 履歴保存：<strong>無制限</strong></li>
+            <li>✓ 関連条文の自動引用・判例参照</li>
+            <li>✓ 優先サポート</li>
+            <li>✓ <strong>3名</strong>まで利用可能</li>
+          </ul>
+          <a class="btn-plan-office" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">登録する →</a>
+          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+        </div>
+        <!-- チームプラン -->
+        <div class="pricing-card team">
+          <div class="plan-rec-team">事務所全体向け</div>
+          <div class="plan-badge team">チームプラン</div>
+          <div class="plan-users">5名まで</div>
+          <div class="plan-price">¥39,800<span>/月</span></div>
+          <ul class="plan-features">
+            <li>✓ AI整理：<strong>無制限</strong></li>
+            <li>✓ PDF出力</li>
+            <li>✓ 履歴保存：<strong>無制限</strong></li>
+            <li>✓ 関連条文の自動引用・判例参照</li>
+            <li>✓ 優先サポート</li>
+            <li>✓ <strong>5名</strong>まで利用可能</li>
+          </ul>
+          <a class="btn-plan-team" href="https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00" target="_blank" rel="noopener">登録する →</a>
           <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
         </div>
       </div>
@@ -805,6 +897,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <button class="atab on" id="atab-inp" onclick="appTab('inp')">✍️ 新規整理</button>
       <button class="atab" id="atab-hist" onclick="appTab('hist')">📂 履歴</button>
       <button class="atab" id="atab-acct" onclick="appTab('acct')">⚙️ アカウント</button>
+      <button class="atab" id="atab-team" onclick="appTab('team')" style="display:none">👥 チーム管理</button>
     </div>
 
     <!-- 入力パネル -->
@@ -846,6 +939,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
             <div class="res-ttl">AI整理結果</div>
             <div class="res-acts">
               <button class="btn-pdf" onclick="track('click_pdf_download');exportPDF()">📄 PDFで保存</button>
+              <button class="btn-pdf" id="btn-share-team" style="display:none;background:var(--ink2)" onclick="shareToTeam()">👥 チームに共有</button>
               <span style="font-size:.72rem;color:var(--slate);display:flex;align-items:center;gap:4px">✅ 自動保存済み</span>
             </div>
           </div>
@@ -927,6 +1021,56 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
         <h3 style="color:#dc2626">アカウント削除</h3>
         <p style="font-size:.83rem;color:var(--slate);margin-bottom:16px">アカウントを削除すると、すべての相談履歴・設定が完全に消去されます。この操作は取り消せません。</p>
         <button class="acct-btn acct-btn-danger" onclick="deleteAccount()">🗑 アカウントを削除する</button>
+      </div>
+    </div>
+    <!-- チーム管理パネル -->
+    <div class="apanel" id="panel-team">
+      <!-- 非チームプランユーザー向けロック表示 -->
+      <div id="team-locked-msg" class="team-section team-locked" style="display:none">
+        <p>👥 チーム管理機能は<strong>オフィスプラン</strong>または<strong>チームプラン</strong>でご利用いただけます。</p>
+        <button class="acct-btn acct-btn-gold" onclick="openUpgrade()">✨ プランをアップグレード</button>
+      </div>
+
+      <!-- チーム設定 -->
+      <div class="team-section" id="team-settings-sec">
+        <h3>🏢 事務所設定</h3>
+        <div id="team-badge-wrap"></div>
+        <div class="office-name-row">
+          <input type="text" id="office-name-input" placeholder="事務所名を入力（例：山田法律事務所）">
+          <button onclick="saveOfficeName()">保存</button>
+        </div>
+        <p style="font-size:.76rem;color:var(--slate)">※ 設定した事務所名はPDFに表示されます。</p>
+      </div>
+
+      <!-- メンバー管理 -->
+      <div class="team-section" id="team-members-sec">
+        <h3>👤 メンバー管理</h3>
+        <div id="member-capacity" style="font-size:.78rem;color:var(--slate);margin-bottom:14px"></div>
+        <div id="member-list-wrap" class="member-list"></div>
+        <div class="add-member-row">
+          <input type="text" id="add-member-name" placeholder="メンバーの名前">
+          <input type="email" id="add-member-email" placeholder="メールアドレス（登録済み）">
+          <button onclick="addMember()">＋ 追加</button>
+        </div>
+        <div class="team-err" id="team-add-err"></div>
+      </div>
+
+      <!-- チーム利用状況 -->
+      <div class="team-section" id="team-usage-sec">
+        <h3>📊 チーム利用状況（今月）</h3>
+        <table class="usage-table" id="team-usage-table">
+          <thead><tr><th>メンバー</th><th>利用件数</th><th>プラン</th></tr></thead>
+          <tbody id="team-usage-body"></tbody>
+        </table>
+      </div>
+
+      <!-- 共有PDF -->
+      <div class="team-section" id="team-shared-sec">
+        <h3>📄 チーム共有PDF</h3>
+        <p style="font-size:.8rem;color:var(--slate);margin-bottom:14px">チームメンバーが共有した整理結果を閲覧できます。</p>
+        <div class="shared-list" id="shared-list-wrap">
+          <p style="color:var(--slate);font-size:.82rem">共有されたPDFはありません。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1082,6 +1226,13 @@ function enterApp(u) {
   go('app');
   renderHist();
   updateUsageBar();
+  // チームタブ表示制御
+  const isTeam = u.plan === 'office' || u.plan === 'team';
+  const teamTab = document.getElementById('atab-team');
+  if (teamTab) teamTab.style.display = isTeam ? '' : 'none';
+  // 共有ボタン
+  const shareBtn = document.getElementById('btn-share-team');
+  if (shareBtn) shareBtn.style.display = isTeam ? '' : 'none';
 }
 
 function updateUsageBar() {
@@ -1126,12 +1277,15 @@ function closeUpgrade() {
 
 // ── app tabs ───────────────────────────
 function appTab(t) {
-  ['inp','hist','acct'].forEach(x => {
-    document.getElementById('atab-' + x).classList.toggle('on', x === t);
-    document.getElementById('panel-' + x).classList.toggle('on', x === t);
+  ['inp','hist','acct','team'].forEach(x => {
+    const tab = document.getElementById('atab-' + x);
+    const panel = document.getElementById('panel-' + x);
+    if (tab) tab.classList.toggle('on', x === t);
+    if (panel) panel.classList.toggle('on', x === t);
   });
   if (t === 'hist') renderHist();
   if (t === 'acct') renderAcct();
+  if (t === 'team') renderTeam();
 }
 
 // ── analyze ────────────────────────────
@@ -1251,6 +1405,7 @@ function exportPDF() {
   if (!result) return;
 
   const date = new Date(result.date).toLocaleDateString('ja-JP');
+  const officeName = me ? (users[me.email]?.officeName || getTeamOfficeName()) : '';
   const sections = [
     ['事実関係', result.facts],
     ['依頼者の主張', result.claims],
@@ -1333,7 +1488,15 @@ function exportPDF() {
   ctx.textAlign = 'right';
   ctx.fillText(date, W - marginX, 52 * scale);
   ctx.textAlign = 'left';
-  y = 72 * scale + 28 * scale;
+  // 事務所名
+  if (officeName) {
+    ctx.font = `${10 * scale}px 'Noto Sans JP', sans-serif`;
+    ctx.fillStyle = '#6b7280';
+    ctx.fillText('📌 ' + officeName, marginX, 68 * scale);
+    y = 88 * scale + 28 * scale;
+  } else {
+    y = 72 * scale + 28 * scale;
+  }
 
   // sections
   sections.forEach(([lbl, val]) => {
@@ -1604,6 +1767,178 @@ function deleteAccount() {
   delete users[me.email]; save();
   me=null; result=null; go('lp'); toast('アカウントを削除しました');
 }
+
+// ══════════════════════════════════════════
+// TEAM FUNCTIONS
+// ══════════════════════════════════════════
+
+function getTeam() {
+  if (!me) return null;
+  const u = users[me.email];
+  const plan = u.plan || (u.isPro ? 'pro' : 'free');
+  if (plan !== 'office' && plan !== 'team') return null;
+  const teamKey = 'team_' + me.email;
+  if (!localStorage.getItem(teamKey)) {
+    const maxMembers = plan === 'office' ? 3 : 5;
+    const teamData = { adminEmail: me.email, officeName: u.officeName || '', members: [{ email: me.email, name: u.name, role: 'admin' }], maxMembers, sharedPdfs: [] };
+    localStorage.setItem(teamKey, JSON.stringify(teamData));
+  }
+  return JSON.parse(localStorage.getItem(teamKey));
+}
+
+function saveTeam(team) {
+  if (!team) return;
+  localStorage.setItem('team_' + team.adminEmail, JSON.stringify(team));
+}
+
+function getTeamOfficeName() {
+  const team = getTeam();
+  return team ? (team.officeName || '') : '';
+}
+
+function findMyTeam() {
+  if (!me) return null;
+  const myTeam = getTeam();
+  if (myTeam) return myTeam;
+  for (const email in users) {
+    const raw = localStorage.getItem('team_' + email);
+    if (!raw) continue;
+    const team = JSON.parse(raw);
+    if (team.members.some(m => m.email === me.email)) return team;
+  }
+  return null;
+}
+
+function renderTeam() {
+  if (!me) return;
+  const u = users[me.email];
+  const plan = u.plan || (u.isPro ? 'pro' : 'free');
+  const isTeamPlan = plan === 'office' || plan === 'team';
+
+  document.getElementById('team-locked-msg').style.display = isTeamPlan ? 'none' : '';
+  ['team-settings-sec','team-members-sec','team-usage-sec','team-shared-sec'].forEach(id => {
+    document.getElementById(id).style.display = isTeamPlan ? '' : 'none';
+  });
+  if (!isTeamPlan) return;
+
+  const team = getTeam();
+  if (!team) return;
+
+  const badgeWrap = document.getElementById('team-badge-wrap');
+  const planLabel = plan === 'office' ? 'オフィスプラン（3名まで）' : 'チームプラン（5名まで）';
+  badgeWrap.innerHTML = '<div class="team-badge ' + plan + '">' + planLabel + '</div>';
+
+  document.getElementById('office-name-input').value = team.officeName || '';
+
+  const maxM = team.maxMembers;
+  document.getElementById('member-capacity').textContent = 'メンバー：' + team.members.length + ' / ' + maxM + '名';
+  const listWrap = document.getElementById('member-list-wrap');
+  listWrap.innerHTML = team.members.map(m =>
+    '<div class="member-row">' +
+    '<span class="m-name">' + m.name + '</span>' +
+    '<span class="m-email">' + m.email + '</span>' +
+    '<span class="m-role ' + (m.role === 'admin' ? 'admin' : '') + '">' + (m.role === 'admin' ? '管理者' : 'メンバー') + '</span>' +
+    (m.role !== 'admin' ? '<button class="m-del" onclick="removeMember(\'' + m.email + '\')">削除</button>' : '') +
+    '</div>'
+  ).join('');
+
+  const tbody = document.getElementById('team-usage-body');
+  tbody.innerHTML = team.members.map(m => {
+    const mu = users[m.email];
+    const count = mu ? (mu.usageCount || 0) : 0;
+    const isPro2 = mu ? (mu.isPro || mu.plan === 'office' || mu.plan === 'team') : false;
+    const pct = Math.min(100, (count / 5) * 100);
+    return '<tr><td>' + m.name + (m.role === 'admin' ? '<span style="font-size:.68rem;color:var(--gold);margin-left:6px">管理者</span>' : '') + '</td>' +
+      '<td style="display:flex;align-items:center;gap:8px">' + count + '件' +
+      (!isPro2 ? '<div class="usage-bar-mini"><div class="usage-bar-mini-fill" style="width:' + pct + '%"></div></div>' : '') + '</td>' +
+      '<td>' + (isPro2 ? '<span style="color:var(--gold);font-size:.75rem">有料</span>' : '<span style="color:var(--slate);font-size:.75rem">無料</span>') + '</td></tr>';
+  }).join('');
+
+  renderSharedPdfs(team);
+}
+
+function renderSharedPdfs(team) {
+  const wrap = document.getElementById('shared-list-wrap');
+  const pdfs = team.sharedPdfs || [];
+  if (!pdfs.length) { wrap.innerHTML = '<p style="color:var(--slate);font-size:.82rem">共有されたPDFはありません。</p>'; return; }
+  wrap.innerHTML = pdfs.slice().reverse().map((p, i) =>
+    '<div class="shared-item" onclick="loadSharedResult(' + (pdfs.length - 1 - i) + ')">' +
+    '<span style="font-size:1.2rem">📄</span>' +
+    '<div style="flex:1"><div class="sh-name">' + (p.memo ? p.memo.slice(0, 30) + '...' : '相談メモ') + '</div>' +
+    '<div class="sh-meta">共有者：' + p.sharedBy + ' ／ ' + new Date(p.date).toLocaleDateString('ja-JP') + '</div></div>' +
+    '<span style="font-size:.72rem;color:var(--gold)">閲覧する →</span></div>'
+  ).join('');
+}
+
+function loadSharedResult(idx) {
+  const team = findMyTeam();
+  if (!team) return;
+  const item = team.sharedPdfs[idx];
+  if (!item) return;
+  result = item.result;
+  appTab('inp');
+  renderResult(result);
+  toast(item.sharedBy + ' さんが共有した整理結果を表示しています');
+}
+
+function saveOfficeName() {
+  if (!me) return;
+  const name = document.getElementById('office-name-input').value.trim();
+  const team = getTeam();
+  if (!team) return;
+  team.officeName = name;
+  saveTeam(team);
+  users[me.email].officeName = name;
+  save();
+  renderTeam();
+  toast('事務所名を保存しました：' + (name || '（未設定）'));
+}
+
+function addMember() {
+  if (!me) return;
+  const team = getTeam();
+  if (!team) return;
+  const name  = document.getElementById('add-member-name').value.trim();
+  const email = document.getElementById('add-member-email').value.trim();
+  const errEl = document.getElementById('team-add-err');
+  errEl.classList.remove('on');
+  if (!name || !email) { errEl.textContent = '名前とメールアドレスを入力してください'; errEl.classList.add('on'); return; }
+  if (!users[email]) { errEl.textContent = 'このメールアドレスで登録されたアカウントが見つかりません'; errEl.classList.add('on'); return; }
+  if (team.members.some(m => m.email === email)) { errEl.textContent = 'すでに追加されています'; errEl.classList.add('on'); return; }
+  if (team.members.length >= team.maxMembers) { errEl.textContent = 'このプランのメンバー上限（' + team.maxMembers + '名）に達しています'; errEl.classList.add('on'); return; }
+  team.members.push({ email, name, role: 'member' });
+  saveTeam(team);
+  document.getElementById('add-member-name').value = '';
+  document.getElementById('add-member-email').value = '';
+  renderTeam();
+  toast(name + ' さんをチームに追加しました');
+}
+
+function removeMember(email) {
+  if (!me) return;
+  const team = getTeam();
+  if (!team) return;
+  const member = team.members.find(m => m.email === email);
+  if (!member) return;
+  if (!confirm(member.name + ' さんをチームから削除しますか？')) return;
+  team.members = team.members.filter(m => m.email !== email);
+  saveTeam(team);
+  renderTeam();
+  toast(member.name + ' さんをチームから削除しました');
+}
+
+function shareToTeam() {
+  if (!result) { toast('整理結果がありません'); return; }
+  const team = findMyTeam();
+  if (!team) { toast('チームプランでのみ共有できます'); return; }
+  const item = { result, memo: result.memo || '', date: new Date().toISOString(), sharedBy: me.name };
+  team.sharedPdfs = team.sharedPdfs || [];
+  team.sharedPdfs.push(item);
+  if (team.sharedPdfs.length > 20) team.sharedPdfs.shift();
+  saveTeam(team);
+  toast('チームに共有しました');
+}
+
 
 </script>
 </body>
