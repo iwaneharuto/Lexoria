@@ -22,35 +22,28 @@ export default async function handler(req, res) {
     return res.status(503).json({ error: 'AI service unavailable' });
   }
 
-  const freeSystem = `以下の相談メモを分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
-出力形式：{"caseType":"案件類型","keyIssues":"主要論点","priority":"初動確認事項","facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点","todo":"追加で確認すべき事項","nextActions":"初動で確認したい事項"}
+  // 入力を先頭2500文字に制限（速度改善・超過分は切り捨て）
+  const text = consultationText.trim().slice(0, 2500);
+
+  // システムプロンプト（簡潔版）
+  const systemPrompt = `相談メモを以下のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
+出力形式：{"caseType":"案件類型","keyIssues":"主要論点","priority":"初動確認事項","facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点","todo":"確認対象事項","nextActions":"初動で確認したい事項"}
 
 記載ルール：
-- caseType: 相談内容から判断される案件の類型を短く1行で記載する（入力内容に基づき決定する）
-- keyIssues: 関連する法的論点を1〜2点、条文番号を付記して列挙する
-- priority: 初動で確認対象となる事項を1点、「〜の確認」「〜の有無を確認」の形式で記載する
-- facts: 箇条書き（・）で、相談メモに記載された日時・当事者・出来事・状況を3〜4点抽出する
-- claims: 箇条書き（・）で、依頼者が求める結果・要求事項を2〜3点抽出する
-- issues: 箇条書き（・）で、相談内容に関連する法的論点を3〜4点列挙する。各論点に対応する日本法の条文番号（法律名・条番号）を「（○○法○条）」の形式で付記する
-- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を3〜4点列挙する
-- nextActions: 箇条書き（・）で、初動において確認対象となる事項を3〜4点列挙する。「〜の確認」「〜の有無を確認」「〜資料の取得状況を確認」「〜事情の整理」「〜経過の確認」の形式を使用する。「〜すべき」「〜してください」「〜した方がよい」「〜すること」等の命令・助言表現は使用しない`;
-  const proSystem  = `以下の相談メモを分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
-出力形式：{"caseType":"案件類型","keyIssues":"主要論点","priority":"初動確認事項","facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項","nextActions":"初動で確認したい事項"}
+- caseType: 案件類型を1行で
+- keyIssues: 法的論点を1〜2点、条文番号付きで
+- priority: 初動確認事項を1点、「〜の確認」形式で
+- facts: 箇条書き（・）で事実関係を3〜4点
+- claims: 箇条書き（・）で依頼者の要求を2〜3点
+- issues: 箇条書き（・）で法的論点を3〜4点、条文番号付きで
+- todo: 箇条書き（・）で確認・収集が必要な事項を3〜4点
+- nextActions: 箇条書き（・）で初動確認事項を3〜4点、「〜の確認」「〜の有無を確認」形式で`;
 
-記載ルール：
-- caseType: 相談内容から判断される案件の類型を短く1行で記載する（入力内容に基づき決定する）
-- keyIssues: 関連する法的論点を1〜2点、条文番号を付記して列挙する
-- priority: 初動で確認対象となる事項を1点、「〜の確認」「〜の有無を確認」の形式で記載する
-- facts: 箇条書き（・）で、相談メモに記載された日時・当事者・出来事・状況・背景を時系列順に4〜6点抽出する
-- claims: 箇条書き（・）で、依頼者が求める結果・法的請求の内容・要求事項を3〜5点抽出する
-- issues: 箇条書き（・）で、相談内容に関連する法的論点を4〜6点列挙する。各論点の末尾に対応する日本法の条文番号（法律名・条番号）を「（関連条文：○○法○条、○条）」の形式で付記する。判例が確立している論点については判例番号（最判年月日等）を付記する
-- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を4〜6点列挙する
-- nextActions: 箇条書き（・）で、初動において確認対象となる事項を4〜6点列挙する。「〜の確認」「〜の有無を確認」「〜資料の取得状況を確認」「〜事情の整理」「〜経過の確認」「〜可能性の検討材料を整理」の形式を使用する。「〜すべき」「〜してください」「〜した方がよい」「〜すること」「〜を行う」「〜を検討する」等の命令・助言・断定表現は使用しない`;
+  // free/pro ともに haiku に統一（速度優先）
+  const model  = 'claude-haiku-4-5-20251001';
+  const maxTok = isPro ? 800 : 500;
 
-  const model  = isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';
-  const maxTok = isPro ? 1800 : 1000;
-  const system = isPro ? proSystem : freeSystem;
-
+  console.time('[IntakeAI] anthropic_call');
   try {
     const anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -62,28 +55,38 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model,
         max_tokens: maxTok,
-        system,
-        messages: [{ role: 'user', content: '以下の相談内容を整理してください。\n\n' + consultationText.trim() }],
+        system: systemPrompt,
+        messages: [{ role: 'user', content: '以下の相談内容を整理してください。\n\n' + text }],
       }),
     });
+    console.timeEnd('[IntakeAI] anthropic_call');
 
     if (!anthropicRes.ok) {
       const errText = await anthropicRes.text().catch(() => '');
       console.error('[IntakeAI] FULL_ANTHROPIC_ERROR=' + errText);
-      return res.status(502).json({ error: 'upstream_error_' + anthropicRes.status, detail: errText });
+      return res.status(502).json({ error: 'AI処理でエラーが発生しました。再試行してください。' });
     }
 
-    const data = await anthropicRes.json();
+    // response.text()で受けてJSON.parseする（json()待ちで止まる問題を回避）
+    const rawText = await anthropicRes.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (e) {
+      console.error('[IntakeAI] レスポンスのJSONパース失敗:', rawText.slice(0, 200));
+      return res.status(502).json({ error: 'AIの応答形式が不正でした。再試行してください。' });
+    }
+
     if (!data.content || !data.content.length) {
-      return res.status(502).json({ error: 'empty_response' });
+      return res.status(502).json({ error: 'AIから応答が返りませんでした。再試行してください。' });
     }
 
-    const text = data.content.map(b => b.text || '').join('');
-    // 整理結果テキストのみをフロントに返す（APIキー・内部情報は一切含まない）
-    return res.status(200).json({ result: text });
+    const result = data.content.map(b => b.text || '').join('');
+    return res.status(200).json({ result });
 
   } catch (err) {
+    console.timeEnd('[IntakeAI] anthropic_call');
     console.error('[IntakeAI] サーバーエラー:', err.message);
-    return res.status(500).json({ error: 'server_error' });
+    return res.status(500).json({ error: 'サーバーエラーが発生しました。再試行してください。' });
   }
 }
