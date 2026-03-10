@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     try {
       data = JSON.parse(rawText);
     } catch (e) {
-      console.error('[IntakeAI] レスポンスのJSONパース失敗:', rawText.slice(0, 200));
+      console.error('[IntakeAI] Anthropicレスポンスのパース失敗:', rawText.slice(0, 200));
       return res.status(502).json({ error: 'AIの応答形式が不正でした。再試行してください。' });
     }
 
@@ -81,8 +81,36 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'AIから応答が返りませんでした。再試行してください。' });
     }
 
-    const result = data.content.map(b => b.text || '').join('');
-    return res.status(200).json({ result });
+    // Anthropic content ブロックのテキストを結合
+    const rawAIText = data.content.map(b => b.text || '').join('');
+
+    // ```json ``` を除去
+    let cleaned = rawAIText
+      .replace(/^```json[\r\n]*/i, '')
+      .replace(/^```[\r\n]*/,      '')
+      .replace(/[\r\n]*```\s*$/,   '')
+      .trim();
+
+    // それでもパース失敗する場合は { ... } を抜き出して再試行
+    let parsed = null;
+    try {
+      parsed = JSON.parse(cleaned);
+    } catch (e1) {
+      const m = cleaned.match(/\{[\s\S]*\}/);
+      if (m) {
+        try {
+          parsed = JSON.parse(m[0]);
+        } catch (e2) {
+          console.error('[IntakeAI] JSONパース失敗（両試行）:', cleaned.slice(0, 400));
+        }
+      }
+    }
+
+    if (parsed) {
+      return res.status(200).json({ ok: true, parsed, raw: rawAIText });
+    } else {
+      return res.status(502).json({ error: 'parse_failed', raw: rawAIText.slice(0, 2000) });
+    }
 
   } catch (err) {
     console.timeEnd('[IntakeAI] anthropic_call');
