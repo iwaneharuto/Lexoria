@@ -241,6 +241,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 
 /* ── 次にやること ── */
 .res-next{margin-top:16px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.api-key-banner{background:#fff8e6;border:1px solid #f0c060;border-radius:4px;padding:10px 14px;font-size:.78rem;color:#7a5800;margin-bottom:12px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .res-next-disclaimer{font-size:.72rem;color:#9ca3af;padding:10px 22px 0;line-height:1.7}
 .res-next-hd{background:var(--cream);padding:10px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .res-next-title{font-size:.68rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
@@ -1446,6 +1447,8 @@ footer{padding:24px;flex-direction:column;text-align:center}
 // ── 定数・プラン管理 ──────────────────────────────────
 const _D = atob('aXdhaGFydS40MjJAb3V0bG9vay5qcA==');
 const DEV_PLAN = 'large';
+// ↓ ここに自分のAnthropicのAPIキーを貼り付けてください（例: 'sk-ant-api03-...'）
+const DEV_API_KEY = '';
 const STRIPE_PORTAL = 'https://billing.stripe.com/p/login/14AbJ0ckfbeZ79V8fR4sE00';
 const STRIPE_SMALL  = 'https://buy.stripe.com/14AbJ0ckfbeZ79V8fR4sE00'; // 5人プラン（要更新）
 const STRIPE_LARGE  = 'https://buy.stripe.com/fZueVc6ZV4QB9i3dAb4sE03'; // 10人プラン
@@ -1571,7 +1574,7 @@ function enterApp(u) {
   go('app');
   const tt = document.getElementById('atab-team');
   if (tt) tt.style.display = isTeamPlan(u.email) ? '' : 'none';
-  appTab('inp'); updateUsageBar();
+  appTab('inp'); updateUsageBar(); updateApiKeyBanner();
   if (isTrialExpired(me.email)) { setTimeout(openTrialExpiredModal, 800); }
 }
 
@@ -1587,6 +1590,10 @@ function appTab(t) {
 }
 
 // ── 使用量バー ────────────────────────────────────────
+function updateApiKeyBanner() {
+  const banner = document.getElementById('api-key-banner');
+  if (banner) banner.style.display = getApiKey() ? 'none' : 'flex';
+}
 function updateUsageBar() {
   if (!me) return;
   const plan = getEffectivePlan(me.email);
@@ -1644,7 +1651,7 @@ function closeUpgrade() { document.getElementById('upg-modal').classList.remove(
 async function analyze() {
   const memo = document.getElementById('memo').value.trim();
   if (!memo || memo.length < 10) { toast('相談内容を入力してください（10文字以上）'); return; }
-  if (!getApiKey() && me.email !== _D) {
+  if (!getApiKey()) {
     toast('APIキーが設定されていません。アカウント設定から入力してください。');
     appTab('acct');
     return;
@@ -1715,11 +1722,13 @@ const proSystem = `以下の相談メモを分類し、指定のJSON形式のみ
   const system   = isPro ? proSystem : freeSystem;
 
   try {
+    const apiKey = getApiKey();
+    if (!apiKey) throw new Error('no_key');
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': getApiKey(),
+        'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-direct-browser-access': 'true'
       },
@@ -1750,7 +1759,8 @@ const proSystem = `以下の相談メモを分類し、指定のJSON形式のみ
   } catch (err) {
     console.error('[IntakeAI] AI整理エラー:', err);
     const msg = err.message || '';
-    if (msg.includes('401'))      toast('APIキーが無効です。アカウント設定で正しいキーを入力してください。');
+    if (msg === 'no_key')          { toast('APIキーが設定されていません。アカウント設定で入力してください。'); appTab('acct'); return; }
+    else if (msg.includes('401'))  toast('APIキーが無効または期限切れです。アカウント設定で正しいキーを確認してください。');
     else if (msg.includes('429')) toast('APIの利用上限に達しました。しばらくお待ちください。');
     else if (msg.includes('529') || msg.includes('overloaded')) toast('APIが混雑しています。少し待ってから再試行してください。');
     else if (msg.includes('JSON parse')) toast('AIの応答形式が不正でした。再試行してください。');
@@ -2226,6 +2236,7 @@ function cancelInvite(email){
 
 // ── APIキー管理 ────────────────────────────────────────
 function getApiKey() {
+  if (DEV_API_KEY) return DEV_API_KEY;
   return localStorage.getItem('iai_api_key') || '';
 }
 function saveApiKey(key) {
@@ -2271,6 +2282,7 @@ function doSaveApiKey() {
   if (!key.startsWith('sk-ant-')) { toast('正しいAnthropicのAPIキーを入力してください（sk-ant-で始まります）'); return; }
   saveApiKey(key);
   toast('APIキーを保存しました ✅');
+  updateApiKeyBanner();
   renderAcct();
 }
 function clearApiKey() {
