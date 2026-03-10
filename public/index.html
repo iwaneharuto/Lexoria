@@ -1718,19 +1718,33 @@ const proSystem = `以下の相談メモを分類し、指定のJSON形式のみ
   const maxTok   = isPro ? 1800 : 1000;
   const system   = isPro ? proSystem : freeSystem;
 
+  // AbortController で20秒タイムアウト
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 20000);
+
   try {
     const res = await fetch('/api/intake/organize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ consultationText: memo, isPro })
+      body: JSON.stringify({ consultationText: memo, isPro }),
+      signal: controller.signal
     });
-    if (!res.ok) {
-      const errData = await res.json().catch(()=>({error: String(res.status)}));
-      console.error('[IntakeAI] APIエラー:', res.status, errData.error);
-      throw new Error(String(res.status));
+    clearTimeout(timeoutId);
+
+    // response.text()で受けてJSON.parse（json()待ちで止まる問題を回避）
+    const rawText = await res.text();
+    let data;
+    try { data = JSON.parse(rawText); }
+    catch(e) {
+      console.error('[IntakeAI] レスポンスパース失敗:', rawText.slice(0,100));
+      throw new Error('JSON parse failed');
     }
-    const data = await res.json();
-    console.log('[IntakeAI] レスポンス受信 / isPro:', isPro);
+
+    if (!res.ok) {
+      console.error('[IntakeAI] APIエラー:', res.status, data.error || '');
+      throw new Error(data.error || String(res.status));
+    }
+
     if (!data.result) throw new Error('empty response');
     const cleaned = data.result.replace(/^```json\s*/,'').replace(/```\s*$/,'').trim();
     let parsed;
@@ -1742,17 +1756,19 @@ const proSystem = `以下の相談メモを分類し、指定のJSON形式のみ
     result = { memo, ...parsed, date: new Date().toISOString(), isPro };
     track('analyze_success', { plan: isPro ? 'pro' : 'free' });
   } catch (err) {
+    clearTimeout(timeoutId);
     console.error('[IntakeAI] AI整理エラー:', err);
     const msg = err.message || '';
-    if (msg.includes('503') || msg.includes('401')) toast('現在AI機能を利用できません。管理者にお問い合わせください。');
+    if (err.name === 'AbortError') toast('混み合っています。短くして再試行してください。');
+    else if (msg.includes('503') || msg.includes('401')) toast('現在AI機能を利用できません。管理者にお問い合わせください。');
     else if (msg.includes('429')) toast('APIの利用上限に達しました。しばらくお待ちください。');
-    else if (msg.includes('529') || msg.includes('overloaded')) toast('APIが混雑しています。少し待ってから再試行してください。');
     else if (msg.includes('JSON parse')) toast('AIの応答形式が不正でした。再試行してください。');
-    else toast('整理結果の生成に失敗しました（' + (msg || '不明なエラー') + '）');
+    else toast(msg || '整理結果の生成に失敗しました。再試行してください。');
     document.getElementById('res-wrap').style.display = 'none';
     result = null;
   } finally {
     if (result) { showResult(result); autoSave(result); }
+    document.getElementById('res-loading').style.display = 'none';
     document.getElementById('btn-go').disabled = false;
     updateUsageBar();
   }
