@@ -47,7 +47,7 @@ export default async function handler(req, res) {
 - todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を4〜6点列挙する
 - nextActions: 箇条書き（・）で、初動において確認対象となる事項を4〜6点列挙する。「〜の確認」「〜の有無を確認」「〜資料の取得状況を確認」「〜事情の整理」「〜経過の確認」「〜可能性の検討材料を整理」の形式を使用する。「〜すべき」「〜してください」「〜した方がよい」「〜すること」「〜を行う」「〜を検討する」等の命令・助言・断定表現は使用しない`;
 
-  const model  = isPro ? 'claude-sonnet-4-5-20251001' : 'claude-haiku-4-5-20251001';
+  const model  = isPro ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001';
   const maxTok = isPro ? 1800 : 1000;
   const system = isPro ? proSystem : freeSystem;
 
@@ -69,9 +69,18 @@ export default async function handler(req, res) {
 
     if (!anthropicRes.ok) {
       const errText = await anthropicRes.text().catch(() => '');
-      console.error('[IntakeAI] Anthropic API error:', anthropicRes.status, errText.slice(0, 200));
-      // ステータスコードだけ返す（内部エラー詳細はブラウザに出さない）
-      return res.status(502).json({ error: 'upstream_error_' + anthropicRes.status });
+      console.error(
+        `[IntakeAI] Anthropic API エラー\n` +
+        `  status : ${anthropicRes.status} ${anthropicRes.statusText}\n` +
+        `  model  : ${model}\n` +
+        `  isPro  : ${isPro}\n` +
+        `  body   : ${errText.slice(0, 400)}`
+      );
+      const isDev = process.env.NODE_ENV !== 'production';
+      return res.status(502).json({
+        error: 'upstream_error',
+        ...(isDev && { status: anthropicRes.status, detail: errText.slice(0, 200) }),
+      });
     }
 
     const data = await anthropicRes.json();
