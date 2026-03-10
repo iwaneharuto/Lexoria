@@ -132,6 +132,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .notice-list{list-style:none;display:flex;flex-direction:column;gap:8px}
 .notice-list li{font-size:.76rem;color:var(--slate);display:flex;gap:10px;line-height:1.7}
 .notice-list li::before{content:'—';color:var(--gold);flex-shrink:0}
+.footer-disclaimer{font-size:.68rem;color:rgba(255,255,255,.3);text-align:center;padding:12px 24px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:16px;line-height:1.8}
 footer{background:var(--ink);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer .logo{color:#fff}
 footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
@@ -206,7 +207,56 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .btn-pdf:hover{background:var(--gold)}
 .btn-save{background:none;border:1px solid var(--border);border-radius:3px;padding:9px 16px;font-size:.78rem;color:var(--slate);cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-save:hover{border-color:var(--gold);color:var(--gold)}
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+
+/* ── 案件サマリー ── */
+.res-summary{background:var(--ink);color:#fff;border-radius:8px;padding:20px 26px;margin-bottom:18px;display:grid;grid-template-columns:auto 1fr;gap:0 22px;align-items:start}
+.res-summary-type{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--gold);letter-spacing:.04em;white-space:nowrap;padding-top:3px;border-right:1px solid rgba(255,255,255,.15);padding-right:22px;margin-right:0}
+.res-summary-body{display:flex;flex-direction:column;gap:7px}
+.res-summary-row{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.res-summary-label{font-size:.6rem;letter-spacing:.14em;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap;flex-shrink:0;width:56px}
+.res-summary-val{font-size:.8rem;color:rgba(255,255,255,.85);line-height:1.6}
+
+/* ── 4分割グリッド ── */
+.res-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:26px 28px}
+.res-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.res-ttl{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;letter-spacing:.06em;color:var(--ink2)}
+.res-acts{display:flex;align-items:center;gap:12px}
+.res-item{background:#fafaf8;border:1px solid var(--border);border-radius:6px;padding:18px 20px}
+.res-item.priority{background:#fff8f8;border:2px solid #e8b4b4}
+.res-lbl{font-size:.61rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.res-lbl-facts  {color:var(--ink2)}
+.res-lbl-claims {color:var(--slate)}
+.res-lbl-issues {color:#5a4a8a}
+.res-lbl-todo   {color:#b03030}
+.res-val{font-size:.81rem;color:var(--ink);line-height:2;white-space:pre-wrap}
+
+/* ── todo ラベルバッジ ── */
+.todo-line{display:flex;align-items:baseline;gap:7px;padding:4px 0;border-bottom:1px solid var(--border);font-size:.81rem;color:var(--ink);line-height:1.7}
+.todo-line:last-child{border-bottom:none}
+.todo-tag{font-size:.59rem;font-weight:700;letter-spacing:.07em;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:3px}
+.todo-tag-doc{background:#fdeaea;color:#b03030;border:1px solid #f0c0c0}
+.todo-tag-chk{background:#fef8e8;color:#9a6800;border:1px solid #e8d890}
+.todo-tag-ev {background:#f0eeff;color:#5a4a8a;border:1px solid #c8baf0}
+
+/* ── 次にやること ── */
+.res-next{margin-top:16px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.res-next-disclaimer{font-size:.72rem;color:#9ca3af;padding:10px 22px 0;line-height:1.7}
+.res-next-hd{background:var(--cream);padding:10px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.res-next-title{font-size:.68rem;letter-spacing:.16em;font-weight:700;text-transform:uppercase;color:var(--ink2);white-space:nowrap}
+.res-next-note{font-size:.65rem;color:var(--slate);line-height:1.6;max-width:520px}
+.res-next-body{padding:16px 22px;display:flex;flex-direction:column;gap:4px}
+.res-next-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f0ede8;cursor:pointer}
+.res-next-item:last-child{border-bottom:none}
+.res-next-chk{width:16px;height:16px;border:1.5px solid #c8c0b0;border-radius:3px;flex-shrink:0;margin-top:2px;accent-color:var(--gold);cursor:pointer}
+.res-next-item span{font-size:.82rem;color:var(--ink);line-height:1.7}
+
+@media(max-width:700px){
+  .res-grid{grid-template-columns:1fr}
+  .res-summary{grid-template-columns:1fr;gap:10px}
+  .res-summary-type{border-right:none;padding-right:0;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:10px}
+  .res-next-hd{flex-direction:column}
+}
 .res-item{border-left:4px solid var(--gold);background:var(--cream);padding:16px 18px;border-radius:0 4px 4px 0}
 .res-lbl{font-size:.65rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:8px}
 .res-val{font-size:.82rem;color:var(--ink);line-height:1.8;white-space:pre-wrap}
@@ -403,7 +453,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   .feat-bg{padding:64px 24px}
   .cta{padding:64px 24px}
   .notice{padding:32px 20px}
-  footer{padding:24px;flex-direction:column;text-align:center}
+  .footer-disclaimer{font-size:.68rem;color:rgba(255,255,255,.3);text-align:center;padding:12px 24px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:16px;line-height:1.8}
+footer{padding:24px;flex-direction:column;text-align:center}
   .pricing-sec{padding:64px 24px}
 }
 
@@ -1039,7 +1090,8 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
       <a class="footer-link" href="./contact.html" target="_blank" rel="noopener">お問い合わせ</a>
     </div>
     <p>© 2025 IntakeAI. All rights reserved.</p>
-  </footer>
+    <div class="footer-disclaimer">本サービスは弁護士・法律事務所向けの情報整理支援ツールです。法律相談、法的判断、代理判断その他の法律事務を提供するものではありません。</div>
+</footer>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1180,15 +1232,53 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
           <div class="res-hd">
             <div class="res-ttl">AI整理結果</div>
             <div class="res-acts">
-              <button class="btn-pdf" onclick="track('click_pdf_download');exportPDF()">📄 PDFで保存</button>
-              <span style="font-size:.72rem;color:var(--slate);display:flex;align-items:center;gap:4px">✅ 自動保存済み</span>
+              <button class="btn-pdf" onclick="track('click_pdf_download');exportPDF()" style="font-size:.76rem;padding:6px 14px">📄 PDFで保存</button>
+              <span style="font-size:.69rem;color:var(--slate);display:flex;align-items:center;gap:4px">✅ 自動保存済み</span>
             </div>
           </div>
+
+          <!-- 案件サマリー -->
+          <div class="res-summary" id="r-summary" style="display:none">
+            <div class="res-summary-type" id="r-case-type">—</div>
+            <div class="res-summary-body">
+              <div class="res-summary-row">
+                <span class="res-summary-label">主要論点</span>
+                <span class="res-summary-val" id="r-key-issues">—</span>
+              </div>
+              <div class="res-summary-row">
+                <span class="res-summary-label">初動確認事項</span>
+                <span class="res-summary-val" id="r-priority">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4分割グリッド：左上=事実、右上=確認事項、左下=論点、右下=主張 -->
           <div class="res-grid">
-            <div class="res-item"><div class="res-lbl">事実関係</div><div class="res-val" id="r-facts"></div></div>
-            <div class="res-item"><div class="res-lbl">依頼者の主張</div><div class="res-val" id="r-claims"></div></div>
-            <div class="res-item"><div class="res-lbl">想定される論点</div><div class="res-val" id="r-issues"></div></div>
-            <div class="res-item"><div class="res-lbl">追加で確認すべき事項</div><div class="res-val" id="r-todo"></div></div>
+            <div class="res-item">
+              <div class="res-lbl res-lbl-facts">📋 事実関係</div>
+              <div class="res-val" id="r-facts"></div>
+            </div>
+            <div class="res-item priority">
+              <div class="res-lbl res-lbl-todo">📋 確認対象事項</div>
+              <div id="r-todo-list"></div>
+            </div>
+            <div class="res-item">
+              <div class="res-lbl res-lbl-issues">⚖ 想定される論点</div>
+              <div class="res-val" id="r-issues"></div>
+            </div>
+            <div class="res-item">
+              <div class="res-lbl res-lbl-claims">💬 依頼者の主張</div>
+              <div class="res-val" id="r-claims"></div>
+            </div>
+          </div>
+
+          <!-- 次にやること -->
+          <div class="res-next" id="r-next-wrap" style="display:none">
+            <div class="res-next-hd">
+              <span class="res-next-title">次にやること</span>
+              <span class="res-next-note">※以下は一般的に考えられる確認事項・対応例の整理です。法的判断や具体的な助言を行うものではありません。最終的な対応方針は弁護士ご自身の判断でご検討ください。</span>
+            </div>
+            <div class="res-next-body" id="r-next-body"></div>
           </div>
         </div>
       </div>
@@ -1586,26 +1676,35 @@ async function analyze() {
   document.getElementById('btn-go').disabled = true;
 
   // ── プラン別プロンプト設定 ──────────────────
-  const freeSystem = `以下の相談メモを4項目に分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
-出力形式：{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点","todo":"追加で確認すべき事項"}
+  const freeSystem = `以下の相談メモを分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
+出力形式：{"caseType":"案件類型","keyIssues":"主要論点","priority":"初動確認事項","facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点","todo":"追加で確認すべき事項","nextActions":"初動で確認したい事項"}
 
-各項目の記載ルール：
+記載ルール：
+- caseType: 案件の類型（例：離婚・親権、交通事故・人身 等）を短く1行で
+- keyIssues: 関連する法的論点を1〜2点、条文番号を付記して列挙する
+- priority: 初動で確認対象となる事項を1点、「〜の確認」「〜の有無を確認」の形式で記載する
 - facts: 箇条書き（・）で、相談メモに記載された日時・当事者・出来事・状況を3〜4点抽出する
 - claims: 箇条書き（・）で、依頼者が求める結果・要求事項を2〜3点抽出する
 - issues: 箇条書き（・）で、相談内容に関連する法的論点を3〜4点列挙する。各論点に対応する日本法の条文番号（法律名・条番号）を「（○○法○条）」の形式で付記する
-- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を3〜4点列挙する`;
+- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を3〜4点列挙する
+- nextActions: 箇条書き（・）で、初動において確認対象となる事項を3〜4点列挙する。「〜の確認」「〜の有無を確認」「〜資料の取得状況を確認」「〜事情の整理」「〜経過の確認」の形式を使用する。「〜すべき」「〜してください」「〜した方がよい」「〜すること」等の命令・助言表現は使用しない`;
 
-  const proSystem = `以下の相談メモを4項目に分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
-出力形式：{"facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項"}
+const proSystem = `以下の相談メモを分類し、指定のJSON形式のみで出力してください（前置き・後文・マークダウン不要）。
+出力形式：{"caseType":"案件類型","keyIssues":"主要論点","priority":"初動確認事項","facts":"事実関係","claims":"依頼者の主張","issues":"想定される論点と関連条文","todo":"追加で確認すべき事項","nextActions":"初動で確認したい事項"}
 
-各項目の記載ルール：
+記載ルール：
+- caseType: 案件の類型（例：離婚・親権、交通事故・人身 等）を短く1行で
+- keyIssues: 関連する法的論点を1〜2点、条文番号を付記して列挙する
+- priority: 初動で確認対象となる事項を1点、「〜の確認」「〜の有無を確認」の形式で記載する
 - facts: 箇条書き（・）で、相談メモに記載された日時・当事者・出来事・状況・背景を時系列順に4〜6点抽出する
 - claims: 箇条書き（・）で、依頼者が求める結果・法的請求の内容・要求事項を3〜5点抽出する
 - issues: 箇条書き（・）で、相談内容に関連する法的論点を4〜6点列挙する。各論点の末尾に対応する日本法の条文番号（法律名・条番号）を「（関連条文：○○法○条、○条）」の形式で付記する。判例が確立している論点については判例番号（最判年月日等）を付記する
-- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を4〜6点列挙する`;
+- todo: 箇条書き（・）で、事実確認・証拠収集・書類取得に必要な項目を4〜6点列挙する
+- nextActions: 箇条書き（・）で、初動において確認対象となる事項を4〜6点列挙する。「〜の確認」「〜の有無を確認」「〜資料の取得状況を確認」「〜事情の整理」「〜経過の確認」「〜可能性の検討材料を整理」の形式を使用する。「〜すべき」「〜してください」「〜した方がよい」「〜すること」「〜を行う」「〜を検討する」等の命令・助言・断定表現は使用しない`;
+
 
   const model    = isPro ? 'claude-sonnet-4-20250514' : 'claude-haiku-4-5-20251001';
-  const maxTok   = isPro ? 1200 : 600;
+  const maxTok   = isPro ? 1800 : 1000;
   const system   = isPro ? proSystem : freeSystem;
 
   try {
@@ -1652,11 +1751,56 @@ async function analyze() {
 
 function showResult(parsed) {
   result = parsed;
-  const fields = { 'r-facts':parsed.facts,'r-claims':parsed.claims,'r-issues':parsed.legalIssues||parsed.issues,'r-statutes':parsed.relatedStatutes||parsed.statutes,'r-cases':parsed.relatedCases||parsed.cases,'r-todo':parsed.actionItems||parsed.todo };
-  Object.entries(fields).forEach(([id,val]) => { const el=document.getElementById(id); if(el) el.textContent=val||'—'; });
-  document.getElementById('res-loading').style.display='none';
-  document.getElementById('res-card').style.display='block';
+
+  // ── テキストそのまま埋め込み ─────────────────────
+  const setText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val || '—';
+  };
+  setText('r-facts',  parsed.facts);
+  setText('r-claims', parsed.claims);
+  setText('r-issues', parsed.legalIssues || parsed.issues);
+
+  // ── todo：ラベルバッジ化 ─────────────────────────
+  const todoEl = document.getElementById('r-todo-list');
+  if (todoEl) {
+    const raw   = parsed.actionItems || parsed.todo || '';
+    const lines = raw.split('\n').filter(function(l){ return l.trim(); });
+    todoEl.innerHTML = lines.map(function(line) {
+      const clean = line.replace(/^[・\-\*]\s*/, '');
+      let tag = '', tagClass = '', rest = clean;
+      if (/^要資料[：:]/.test(clean))      { tag = '要資料'; tagClass = 'todo-tag-doc'; rest = clean.replace(/^要資料[：:]\s*/, ''); }
+      else if (/^要確認[：:]/.test(clean)) { tag = '要確認'; tagClass = 'todo-tag-chk'; rest = clean.replace(/^要確認[：:]\s*/, ''); }
+      else if (/^要証拠[：:]/.test(clean)) { tag = '要証拠'; tagClass = 'todo-tag-ev';  rest = clean.replace(/^要証拠[：:]\s*/, ''); }
+      return '<div class="todo-line">' + (tag ? '<span class="todo-tag ' + tagClass + '">' + tag + '</span>' : '') + '<span>' + rest + '</span></div>';
+    }).join('');
+  }
+
+  // ── 案件サマリー ─────────────────────────────────
+  const sumEl = document.getElementById('r-summary');
+  if (sumEl && (parsed.caseType || parsed.keyIssues)) {
+    document.getElementById('r-case-type').textContent  = parsed.caseType  || '—';
+    document.getElementById('r-key-issues').textContent = parsed.keyIssues || '—';
+    document.getElementById('r-priority').textContent   = parsed.priority  || '—'; // 初動確認事項
+    sumEl.style.display = 'grid';
+  }
+
+  // ── 次にやること ─────────────────────────────────
+  const nextWrap = document.getElementById('r-next-wrap');
+  const nextBody = document.getElementById('r-next-body');
+  if (nextBody && parsed.nextActions) {
+    const lines = parsed.nextActions.split('\n').filter(function(l){ return l.trim(); });
+    nextBody.innerHTML = lines.map(function(line) {
+      const clean = line.replace(/^[・\-\*\d\.]\s*/, '');
+      return '<label class="res-next-item"><input type="checkbox" class="res-next-chk"><span>' + clean + '</span></label>';
+    }).join('');
+    if (nextWrap) nextWrap.style.display = 'block';
+  }
+
+  document.getElementById('res-loading').style.display = 'none';
+  document.getElementById('res-card').style.display    = 'block';
 }
+
 function clearAll() { document.getElementById('memo').value=''; document.getElementById('res-wrap').style.display='none'; result=null; }
 
 // ── PDF出力 ───────────────────────────────────────────
@@ -1664,12 +1808,17 @@ function exportPDF() {
   if (!result) return;
 
   const date = new Date(result.date).toLocaleDateString('ja-JP');
+  const DISCLAIMER = '※本表示は相談内容の整理補助を目的とするものであり、法的意見、受任判断、具体的な対応方針を示すものではありません。';
+  const SERVICE_NOTE = '本サービスは弁護士・法律事務所向けの情報整理支援ツールです。法律相談、法的判断、代理判断その他の法律事務を提供するものではありません。';
   const sections = [
     ['事実関係', result.facts],
     ['依頼者の主張', result.claims],
-    ['想定される論点と関連条文', result.issues],
-    ['追加で確認すべき事項', result.todo],
+    ['想定される論点（関連条文）', result.issues],
+    ['確認対象事項', result.todo],
   ];
+  if (result.nextActions) {
+    sections.push(['初動で確認したい事項', '※本項目は参考表示です。法的判断・助言を行うものではありません。\n' + result.nextActions]);
+  }
 
   // A4 at 96dpi = 794×1123px; we use 2× for sharpness
   const scale = 2;
@@ -1790,6 +1939,18 @@ function exportPDF() {
     ctx.fillText(line, marginX, y);
     y += lineH * 0.95;
   });
+
+  // 免責表示
+  y += 16 * scale;
+  ctx.strokeStyle = '#e8e2d8';
+  ctx.lineWidth = scale * 0.5;
+  ctx.beginPath();
+  ctx.moveTo(marginX, y); ctx.lineTo(W - marginX, y); ctx.stroke();
+  y += 14 * scale;
+  ctx.font = `${9 * scale}px 'Noto Sans JP', sans-serif`;
+  ctx.fillStyle = '#9ca3af';
+  const disclaimerLines = wrapText(ctx, SERVICE_NOTE, contentW);
+  disclaimerLines.forEach(function(line) { ctx.fillText(line, marginX, y); y += lineH * 0.85; });
 
   // ── split into A4 pages and save ────
   const { jsPDF } = window.jspdf;
