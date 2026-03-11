@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="shortcut icon" href="/favicon.svg?v=3">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>返金ポリシー – Lexoria</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -43,12 +45,12 @@ h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-wei
 .contact-box{background:#fff;border:1px solid var(--border);border-radius:4px;padding:28px 32px;margin-top:8px}
 .contact-box a{font-size:1rem;font-weight:600;color:var(--gold);display:block;margin-bottom:8px}
 .contact-box p{font-size:.78rem;color:var(--slate);line-height:1.8}
-.ft{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.ft-links{display:flex;gap:16px;flex-wrap:wrap}
+.ft{background:var(--ink);padding:36px 48px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0}
+.ft-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .ft-links a{font-size:.7rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
 .ft-links a:hover{color:#fff}
 .ft p{font-size:.72rem;color:rgba(255,255,255,.3)}
-@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}.ft{padding:20px;flex-direction:column;text-align:center}.tbl th{width:40%}}
+@media(max-width:640px){nav{padding:14px 20px}.wrap{padding:44px 16px 80px}.ft{padding:24px 20px}.tbl th{width:40%}}
 </style>
 </head>
 <body>
@@ -103,14 +105,38 @@ h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-wei
     <p>ご不明な点・解約のお申し込みは以下までご連絡ください。通常2営業日以内にご返答いたします。</p>
     <div class="contact-box">
       <p style="font-size:.8rem;font-weight:600;color:var(--ink2);margin-bottom:10px">お問い合わせ先</p>
-      <a href="/cdn-cgi/l/email-protection#90f9e7f1f8f1e2e5bea4a2a2b6b3a6a4abffe5e4fcfffffbbefae0" style="font-size:.95rem">iwaharu.422&#64;outlook.jp</a>
+      <a href="mailto:support@lexoriaai.com">support@lexoriaai.com</a>
       <p>受付時間：平日 9:00〜18:00（土日祝・年末年始を除く）</p>
       <p style="font-size:.74rem;margin-top:6px">通常2営業日以内にご返答いたします</p>
     </div>
   </div>
 </div>
 <footer class="ft">
-  <a href="/index.html" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;text-decoration:none;letter-spacing:.04em">Intake<span style="color:#b8975a">AI</span></a>
-  <div class="ft-links">
-    <a href="/privacy.html">プライバシーポリシー</a>
-  
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;width:100%">
+    <!-- ロゴ -->
+    <a href="/index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" style="flex-shrink:0">
+        <rect width="32" height="32" rx="4" fill="#0d0d14"/>
+        <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="none" stroke="#6e5830" stroke-width="0.75"/>
+        <rect x="9" y="7" width="4" height="18" fill="#b8975a"/>
+        <rect x="9" y="21" width="14" height="4" fill="#b8975a"/>
+      </svg>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;letter-spacing:.04em">Lexoria</span>
+    </a>
+    <!-- リンク -->
+    <div class="ft-links">
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/terms.html">利用規約</a>
+      <a href="/tokusho.html">特定商取引法に基づく表記</a>
+      <a href="/refund.html">返金ポリシー</a>
+      <a href="/antisocial.html">反社会的勢力への基本方針</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </div>
+    <!-- メール -->
+    <a href="mailto:support@lexoriaai.com" style="font-size:.72rem;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:.03em">support@lexoriaai.com</a>
+    <!-- コピーライト -->
+    <p>© 2025 Lexoria. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
