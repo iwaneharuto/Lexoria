@@ -1,20 +1,12 @@
 {
   "functions": {
-    "api/intake/organize.js": {
-      "memory": 256,
-      "maxDuration": 30
-    },
-    "api/invite/send.js": {
+    "api/checkout/create.js": {
       "memory": 128,
       "maxDuration": 10
     },
     "api/webhooks/stripe.js": {
       "memory": 128,
       "maxDuration": 30
-    },
-    "api/checkout/create.js": {
-      "memory": 128,
-      "maxDuration": 10
     }
   },
   "rewrites": [
