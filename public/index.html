@@ -923,8 +923,8 @@ footer{padding:28px 20px;text-align:center}
             <li class="dim"><span class="fi ng">✗</span> チーム利用・メンバー追加</li>
             <li class="dim"><span class="fi ng">✗</span> 事務員・スタッフの追加</li>
           </ul>
-          <a class="btn-plan btn-pro" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'personal'});openCheckout('personal')">無料トライアルを開始 →</a>
-          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+          <a class="btn-plan btn-pro" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'personal'});startTrial('personal')">無料トライアルを開始 →</a>
+          <div class="plan-note">✅ まずアカウント登録・7日間無料</div>
         </div>
 
         <!-- スモールプラン -->
@@ -947,8 +947,8 @@ footer{padding:28px 20px;text-align:center}
             <li><span class="fi ok">✓</span> メンバー管理・招待機能</li>
             <li><span class="fi ok">✓</span> 弁護士・事務員・スタッフ同一扱い</li>
           </ul>
-          <a class="btn-plan btn-office" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'small'});openCheckout('small')">無料トライアルを開始 →</a>
-          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+          <a class="btn-plan btn-office" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'small'});startTrial('small')">無料トライアルを開始 →</a>
+          <div class="plan-note">✅ まずアカウント登録・7日間無料</div>
         </div>
 
         <!-- ラージプラン -->
@@ -978,8 +978,8 @@ footer{padding:28px 20px;text-align:center}
             <li><span class="fi ok">✓</span> メンバー管理・招待機能</li>
             <li><span class="fi ok">✓</span> 弁護士・事務員・スタッフ同一扱い</li>
           </ul>
-          <a class="btn-plan btn-team" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'large'});openCheckout('large')">無料トライアルを開始 →</a>
-          <div class="plan-note">🔒 Stripeの安全な決済ページへ</div>
+          <a class="btn-plan btn-team" href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'large'});startTrial('large')">無料トライアルを開始 →</a>
+          <div class="plan-note">✅ まずアカウント登録・7日間無料</div>
         </div>
 
       </div>
@@ -1514,7 +1514,7 @@ footer{padding:28px 20px;text-align:center}
     <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
 
       <!-- パーソナルプラン -->
-      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'personal'});closePlanModal();openCheckout('personal')"
+      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'personal'});closePlanModal();startTrial('personal')"
          style="display:block;padding:16px 20px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
          onmouseover="this.style.borderColor='var(--gold)';this.style.boxShadow='0 4px 16px rgba(184,151,90,.15)'"
          onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
@@ -1532,7 +1532,7 @@ footer{padding:28px 20px;text-align:center}
       </a>
 
       <!-- スモールプラン -->
-      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'small'});closePlanModal();openCheckout('small')"
+      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'small'});closePlanModal();startTrial('small')"
          style="display:block;padding:18px 20px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#fff"
          onmouseover="this.style.borderColor='#4a7c6f';this.style.boxShadow='0 4px 16px rgba(74,124,111,.15)'"
          onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
@@ -1551,7 +1551,7 @@ footer{padding:28px 20px;text-align:center}
       </a>
 
       <!-- ラージプラン（おすすめ） -->
-      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'large'});closePlanModal();openCheckout('large')"
+      <a href="#" onclick="event.preventDefault();track('click_plan_select',{plan:'large'});closePlanModal();startTrial('large')"
          style="display:block;padding:18px 20px;border:2px solid #5a4a8a;border-radius:6px;text-decoration:none;color:var(--ink);transition:all .2s;background:#f8f6ff;position:relative"
          onmouseover="this.style.boxShadow='0 4px 20px rgba(90,74,138,.2)'"
          onmouseout="this.style.boxShadow='none'">
@@ -1833,11 +1833,39 @@ function register() {
     } catch(e) {}
   }
   enterApp(users[email]); track('sign_up');
+  // 料金プランから来た場合のトライアル開始案内
+  try {
+    const pp = sessionStorage.getItem('pendingPlan');
+    if (pp) {
+      const pNames = {personal:'パーソナル',small:'スモール',large:'ラージ'};
+      setTimeout(() => toast('7日間の無料トライアル開始！' + (pNames[pp]||pp) + 'プランをお試しいただけます。'), 500);
+      sessionStorage.removeItem('pendingPlan');
+    }
+  } catch(e) {}
 }
 
 function togglePassVis(id,btn){var el=document.getElementById(id);if(!el)return;var h=el.type==="password";el.type=h?"text":"password";btn.textContent=h?"🙈":"👁";}
 
 // Stripe Checkout: Price IDを直接指定して決済画面へ
+// ── トライアル開始フロー ─────────────────────────────────────────
+// 料金カードの「無料トライアルを開始」を押したとき呼ばれる
+// → Checkout直行せず、まずアカウント登録画面へ
+// → 選択プランをsessionStorageに保存し、登録完了後に案内
+function startTrial(plan) {
+  // 選択プランを保存（登録完了後の参照用）
+  try { sessionStorage.setItem('pendingPlan', plan); } catch(e){}
+  track('click_start_trial', { plan });
+
+  if (me) {
+    // ログイン済み → そのままアプリへ（トライアル中として使える）
+    go('app');
+    toast('7日間の無料トライアルをご利用ください。');
+  } else {
+    // 未ログイン → アカウント登録画面へ
+    go('auth', 'reg');
+  }
+}
+
 async function openCheckout(plan) {
   const email = me ? me.email : '';
   try {
