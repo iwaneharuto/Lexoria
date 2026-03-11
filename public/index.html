@@ -217,9 +217,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .notice-list li{font-size:.76rem;color:var(--slate);display:flex;gap:10px;line-height:1.7}
 .notice-list li::before{content:'—';color:var(--gold);flex-shrink:0}
 .footer-disclaimer{font-size:.68rem;color:rgba(255,255,255,.3);text-align:center;padding:12px 24px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:16px;line-height:1.8}
-footer{background:var(--ink);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-footer .logo{color:#fff}
-footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer{background:var(--ink);padding:40px 48px 32px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+footer .logo{color:#fff;font-size:1.4rem;margin-bottom:16px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3);margin:0}
 
 .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
 .fade-up.on{opacity:1;transform:none}
@@ -520,7 +520,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 .privacy-note span::before{content:'🔒';font-size:.8rem}
 
 /* ── FOOTER LINKS ── */
-.footer-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
 .footer-link{font-size:.72rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;letter-spacing:.04em}
 .footer-link:hover{color:rgba(255,255,255,.8)}
 
@@ -539,7 +539,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
   .cta{padding:64px 24px}
   .notice{padding:32px 20px}
   .footer-disclaimer{font-size:.68rem;color:rgba(255,255,255,.3);text-align:center;padding:12px 24px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:16px;line-height:1.8}
-footer{padding:24px;flex-direction:column;text-align:center}
+footer{padding:28px 20px;text-align:center}
   .pricing-sec{padding:64px 24px}
 }
 
@@ -1102,7 +1102,7 @@ footer{padding:24px;flex-direction:column;text-align:center}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">iwaharu.422&#64;outlook.jp までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+            <div class="faq-ans">support@lexoriaai.com までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">オフラインでも使えますか？<span class="faq-chevron">▼</span></button>
@@ -1136,7 +1136,7 @@ footer{padding:24px;flex-direction:column;text-align:center}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">機能追加・改善の要望はどこに送ればいいですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">お問い合わせページ、またはiwaharu.422&#64;outlook.jpへご連絡ください。いただいたご意見は今後のアップデートに反映させていただきます。</div>
+            <div class="faq-ans">お問い合わせページ、またはsupport@lexoriaai.comへご連絡ください。いただいたご意見は今後のアップデートに反映させていただきます。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">返金・キャンセルポリシーを教えてください<span class="faq-chevron">▼</span></button>
@@ -1268,7 +1268,17 @@ footer{padding:24px;flex-direction:column;text-align:center}
   </section>
 
   <footer>
-    <div class="logo">Lexoria</div>
+    <!-- ロゴ：SVGアイコン + テキスト -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" style="flex-shrink:0">
+        <rect width="32" height="32" rx="4" fill="#0d0d14"/>
+        <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="none" stroke="#6e5830" stroke-width="0.75"/>
+        <rect x="9" y="7" width="4" height="18" fill="#b8975a"/>
+        <rect x="9" y="21" width="14" height="4" fill="#b8975a"/>
+      </svg>
+      <div class="logo">Lexoria</div>
+    </div>
+    <!-- リンク -->
     <div class="footer-links">
       <a class="footer-link" href="./privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>
       <a class="footer-link" href="./terms.html" target="_blank" rel="noopener">利用規約</a>
@@ -1277,6 +1287,11 @@ footer{padding:24px;flex-direction:column;text-align:center}
       <a class="footer-link" href="./antisocial.html" target="_blank" rel="noopener">反社会的勢力への基本方針</a>
       <a class="footer-link" href="./contact.html" target="_blank" rel="noopener">お問い合わせ</a>
     </div>
+    <!-- メール -->
+    <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:10px">
+      <a href="mailto:support@lexoriaai.com" style="color:rgba(255,255,255,.5);text-decoration:none;letter-spacing:.03em">support@lexoriaai.com</a>
+    </p>
+    <!-- コピーライト -->
     <p>© 2025 Lexoria. All rights reserved.</p>
     <div class="footer-disclaimer">本サービスは弁護士・法律事務所向けの情報整理支援ツールです。法律相談、法的判断、代理判断その他の法律事務を提供するものではありません。</div>
 </footer>
@@ -1677,7 +1692,7 @@ footer{padding:24px;flex-direction:column;text-align:center}
 
 // ── 定数・プラン管理 ──────────────────────────────────
 const _D  = atob('aXdhaGFydS40MjJAb3V0bG9vay5qcA=='); // dev
-const _U2 = atob('aXdhX2hhcnUuNDIyQGljbG91ZC5jb20='); // iwa_haru.422@icloud.com - Largeプラン契約
+const _U2 = atob('aXdhX2hhcnUuNDIyQGljbG91ZC5jb20='); // support@lexoriaai.com - Largeプラン契約
 const DEV_PLAN = 'large';
 // 特定メールアドレスへの固定プラン付与テーブル
 const FIXED_PLANS = {
