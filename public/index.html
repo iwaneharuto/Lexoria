@@ -241,7 +241,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);margin:0}
 .auth-form.on{display:flex}
 .fg{display:flex;flex-direction:column;gap:6px}
 .fg label{font-size:.75rem;font-weight:500;letter-spacing:.06em}
-.fg input{border:1px solid var(--border);border-radius:3px;padding:11px 14px;font-size:.85rem;color:var(--ink);font-family:inherit;outline:none;transition:border-color .2s}
+.fg input{border:1px solid var(--border);border-radius:3px;padding:11px 14px;font-size:.85rem;color:var(--ink);font-family:inherit;outline:none;transition:border-color .2s;width:100%;box-sizing:border-box}
 .fg input:focus{border-color:var(--gold)}
 .ferr{font-size:.74rem;color:var(--red);display:none;margin-top:2px}
 .ferr.on{display:block}
@@ -679,7 +679,7 @@ footer{padding:28px 20px;text-align:center}
           <span class="trust-badge"><span class="ti">🔒</span>クレジットカード不要</span>
         </div>
       </div>
-      <div class="fade-up">
+      <div>
         <div class="mock">
           <div class="mock-hd">
             <div class="dot" style="background:#e74c3c"></div>
@@ -1102,7 +1102,7 @@ footer{padding:28px 20px;text-align:center}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">問題が発生した場合の問い合わせ先は？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans"><a href="mailto:support@lexoriaai.com">support@lexoriaai.com</a> までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
+            <div class="faq-ans"><a href="/cdn-cgi/l/email-protection#94e7e1e4e4fbe6e0d4f8f1ecfbe6fdf5f5fdbaf7fbf9"><span class="__cf_email__" data-cfemail="5a292f2a2a35282e1a363f223528333b3b3374393537">[email&#160;protected]</span></a> までご連絡ください。通常2営業日以内にご返答いたします（有料プランは優先対応）。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">オフラインでも使えますか？<span class="faq-chevron">▼</span></button>
@@ -1136,7 +1136,7 @@ footer{padding:28px 20px;text-align:center}
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">機能追加・改善の要望はどこに送ればいいですか？<span class="faq-chevron">▼</span></button>
-            <div class="faq-ans">お問い合わせページ、または<a href="mailto:support@lexoriaai.com">support@lexoriaai.com</a>へご連絡ください。いただいたご意見は今後のアップデートに反映させていただきます。</div>
+            <div class="faq-ans">お問い合わせページ、または<a href="/cdn-cgi/l/email-protection#f5868085859a8781b599908d9a879c94949cdb969a98"><span class="__cf_email__" data-cfemail="83f0f6f3f3ecf1f7c3efe6fbecf1eae2e2eaade0ecee">[email&#160;protected]</span></a>へご連絡ください。いただいたご意見は今後のアップデートに反映させていただきます。</div>
           </div>
           <div class="faq-item">
             <button class="faq-btn" onclick="faqOpen(this)">返金・キャンセルポリシーを教えてください<span class="faq-chevron">▼</span></button>
@@ -1289,7 +1289,7 @@ footer{padding:28px 20px;text-align:center}
     </div>
     <!-- メール -->
     <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:10px">
-      <a href="mailto:support@lexoriaai.com">support@lexoriaai.com</a>
+      <a href="/cdn-cgi/l/email-protection#d8abada8a8b7aaac98b4bda0b7aab1b9b9b1f6bbb7b5"><span class="__cf_email__" data-cfemail="d8abada8a8b7aaac98b4bda0b7aab1b9b9b1f6bbb7b5">[email&#160;protected]</span></a>
     </p>
     <!-- コピーライト -->
     <p>© 2025 Lexoria. All rights reserved.</p>
@@ -1343,7 +1343,7 @@ footer{padding:28px 20px;text-align:center}
       <div class="auth-form" id="form-login">
         <div class="fg">
           <label>メールアドレス</label>
-          <input type="email" id="login-email" placeholder="example@lawfirm.jp">
+          <input type="email" id="login-email" placeholder="example@lawfirm.jp" style="width:100%;box-sizing:border-box">
           <div class="ferr" id="e-login-email">メールアドレスを入力してください</div>
         </div>
         <div class="fg">
@@ -1694,7 +1694,7 @@ footer{padding:28px 20px;text-align:center}
 
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 // ── 定数・プラン管理 ──────────────────────────────────
 const _D  = atob('aXdhaGFydS40MjJAb3V0bG9vay5qcA=='); // dev
@@ -2374,8 +2374,7 @@ function renderAcct() {
       <div class="info-row"><span class="info-lbl">氏名</span><span class="info-val">${u.name}</span></div>
       ${isPro&&!isDev?`<div class="info-row"><span class="info-lbl">次回更新日</span><span class="info-val">${cs?nextRenewal+'（解約予定）':nextRenewal}</span></div>`:''}
       <div class="ab-group">
-        ${!isPro&&!isDev?`<button class="ab ab-gold" onclick="openUpgrade()">✨ 有料プランに登録</button>`:''}
-        ${isPro&&!isDev?`<button class="ab ab-gold" onclick="openChangePlanModal()">🔄 プランを変更する</button>`:''}
+        \${!isDev?`<button class="ab ab-gold" onclick="openPlanModal()">\${isPro?'🔄 プランを変更する':'✨ 有料プランに登録する'}</button>`:''}
         ${isPro&&!isDev?`<button class="ab ab-outline" onclick="window.open(STRIPE_PORTAL,'_blank')">請求情報・領収書を確認する</button>`:''}
         ${isPro&&!isDev&&!cs?`<button class="ab ab-danger" onclick="cancelPlan()">プランを解約する</button>`:''}
       </div>
@@ -2624,26 +2623,35 @@ function toast(msg){
 }
 document.getElementById('upg-modal').addEventListener('click',function(e){if(e.target===this)closeUpgrade();});
 document.getElementById('cancel-modal').addEventListener('click',function(e){if(e.target===this)closeCancelModal();});
-
-// ── fade-up IntersectionObserver ──────────────────────────
+// ── fade-up & モック表示制御 ─────────────────────────────
 (function(){
-  // ヒーローのモック（画面内に最初からある要素）は即時表示
-  document.querySelectorAll('.hero .fade-up').forEach(function(el){
-    el.classList.add('on');
-  });
-  // その他のfade-up要素はスクロール時に発火
-  if('IntersectionObserver' in window){
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){ entry.target.classList.add('on'); obs.unobserve(entry.target); }
-      });
-    },{threshold:0.12});
-    document.querySelectorAll('.fade-up:not(.hero .fade-up)').forEach(function(el){
-      obs.observe(el);
+  function initFadeUp() {
+    // ヒーロー内のモックは即時・強制表示
+    document.querySelectorAll('.hero .fade-up, .hero .mock').forEach(function(el){
+      el.classList.add('on');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
     });
+    // その他のfade-up要素はスクロール時に表示
+    var others = [];
+    document.querySelectorAll('.fade-up').forEach(function(el){
+      if(!el.closest('.hero')) others.push(el);
+    });
+    if('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ entry.target.classList.add('on'); obs.unobserve(entry.target); }
+        });
+      },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+      others.forEach(function(el){ obs.observe(el); });
+    } else {
+      others.forEach(function(el){ el.classList.add('on'); });
+    }
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', initFadeUp);
   } else {
-    // フォールバック: 全部表示
-    document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('on'); });
+    initFadeUp();
   }
 })();
 </script>
