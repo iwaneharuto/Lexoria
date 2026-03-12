@@ -1381,17 +1381,17 @@ footer{padding:28px 20px;text-align:center}
         <div class="form-sw">アカウントをお持ちでない方は <a onclick="authTab('reg')">新規登録</a></div>
         <!-- パスワード再設定（ローカル版） -->
         <div id="forgot-pw-box" style="display:none;background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:16px;margin-top:4px">
-          <p style="font-size:.78rem;color:var(--ink);margin-bottom:10px;font-weight:500">パスワードをリセットする</p>
+          <p style="font-size:.78rem;color:var(--ink);margin-bottom:6px;font-weight:600">パスワードをリセットする</p><p style="font-size:.72rem;color:var(--slate);margin-bottom:10px">STEP 1: 登録済みのメールアドレスを入力してください</p>
           <div class="fg">
             <label>登録済みのメールアドレス</label>
             <input type="email" id="forgot-email" placeholder="example@lawfirm.jp">
           </div>
           <div class="ferr" id="e-forgot-email"></div>
-          <button class="btn-submit" style="margin-top:10px;font-size:.8rem;padding:10px" onclick="doForgotPw()">新しいパスワードを設定する</button>
+          <button id="btn-forgot-pw" class="btn-submit" style="margin-top:10px;font-size:.8rem;padding:10px" onclick="doForgotPw()">メールアドレスを確認する</button>
           <div id="forgot-new-pw-wrap" style="display:none;margin-top:10px">
-            <div class="fg"><label>新しいパスワード（8文字以上）</label><input type="password" id="forgot-new-pw" placeholder="新しいパスワード"></div>
+            <p style="font-size:.72rem;color:var(--slate);margin-bottom:8px;font-weight:500">STEP 2: 新しいパスワードを設定してください</p><div class="fg"><label>新しいパスワード（8文字以上）</label><input type="password" id="forgot-new-pw" placeholder="新しいパスワード（8文字以上）"></div>
             <div class="ferr" id="e-forgot-new-pw"></div>
-            <button class="btn-submit" style="margin-top:8px;font-size:.8rem;padding:10px" onclick="doResetPw()">パスワードを変更する</button>
+            <button id="btn-reset-pw" class="btn-submit" style="margin-top:8px;font-size:.8rem;padding:10px" onclick="doResetPw()">新しいパスワードを設定する</button>
           </div>
         </div>
       </div>
@@ -1437,8 +1437,8 @@ footer{padding:28px 20px;text-align:center}
         <a class="teb-btn" href="#" onclick="event.preventDefault();closeUpgrade();openPlanModal()">有料プランへ →</a>
       </div>
       <div class="card">
-        <label class="card-label" style="display:flex;align-items:center;gap:6px">📋 相談タイトル <span style="font-size:.7rem;color:var(--slate);font-weight:400">（任意）</span></label>
-        <input type="text" id="case-title" placeholder="例：交通事故の後遺障害相談　など" style="width:100%;box-sizing:border-box;margin-bottom:14px;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:#fff;color:var(--ink);outline:none">
+        <label class="card-label" style="display:flex;align-items:center;gap:6px">📋 相談タイトル <span style="font-size:.7rem;color:var(--slate);font-weight:400">（AI自動生成・編集可）</span></label>
+        <input type="text" id="case-title" placeholder="AIが自動生成します（手動で編集も可能）" style="width:100%;box-sizing:border-box;margin-bottom:14px;padding:10px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:#fff;color:var(--ink);outline:none">
         <label class="card-label">相談メモ</label>
         <textarea id="memo" class="textarea" placeholder="初回相談で聞き取った内容を入力してください。&#10;&#10;（例：相談者の状況、経緯、相手方との関係、希望する解決内容など）"></textarea>
         <div class="inp-actions">
@@ -1454,7 +1454,7 @@ footer{padding:28px 20px;text-align:center}
 
       <div id="res-wrap" style="display:none">
         <div id="res-loading" class="loading" style="display:none">
-          <div class="spinner"></div>AIが相談内容を分析しています...
+          <div class="spinner"></div>AIが相談内容を分析しています… (10〜20秒かかる場合があります)
         </div>
         <div id="res-card" class="res-card" style="display:none">
           <div class="res-hd">
@@ -1843,6 +1843,7 @@ function authTab(t) {
   clearErrs();
 }
 function clearErrs() { document.querySelectorAll('.ferr,.aerr').forEach(e => e.classList.remove('on')); }
+function clearErr(id) { const el = document.getElementById(id); if (el) { el.textContent=''; el.classList.remove('on'); } }
 function err(id, msg) { const el = document.getElementById(id); if (el) { el.textContent=msg; el.classList.add('on'); } }
 
 function register() {
@@ -1906,9 +1907,10 @@ function showForgotPw() {
 
 function doForgotPw() {
   const emailEl = document.getElementById('forgot-email');
-  const btn     = document.querySelector('button[onclick="doForgotPw()"]');
+  const btn     = document.getElementById('btn-forgot-pw');
   const email   = emailEl ? emailEl.value.trim() : '';
   clearErr('e-forgot-email');
+  if (email) window._forgotEmailCache = email; // 確認後も参照できるよう保存
 
   if (!email) { err('e-forgot-email', 'メールアドレスを入力してください'); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -1919,8 +1921,9 @@ function doForgotPw() {
   if (btn) { btn.disabled = true; btn.textContent = '確認中…'; }
 
   setTimeout(() => {
-    if (btn) { btn.disabled = false; btn.textContent = '新しいパスワードを設定する'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'メールアドレスを確認する'; }
 
+    window._forgotEmailCache = email;
     if (users[email]) {
       // 登録済み → 新パスワード入力欄を表示
       const wrap = document.getElementById('forgot-new-pw-wrap');
@@ -1937,9 +1940,9 @@ function doForgotPw() {
 
 function doResetPw() {
   const emailEl = document.getElementById('forgot-email');
+  const email   = (emailEl ? emailEl.value.trim() : '') || window._forgotEmailCache || '';
   const newPwEl = document.getElementById('forgot-new-pw');
-  const btn     = document.querySelector('button[onclick="doResetPw()"]');
-  const email   = emailEl ? emailEl.value.trim() : '';
+  const btn     = document.getElementById('btn-reset-pw');
   const newPw   = newPwEl ? newPwEl.value : '';
   clearErr('e-forgot-new-pw');
 
@@ -1966,7 +1969,9 @@ function doResetPw() {
     if (emailEl) emailEl.value = '';
     if (newPwEl) newPwEl.value = '';
 
-    toast('✅ パスワードを変更しました。新しいパスワードでログインしてください。');
+    window._forgotEmailCache = '';
+    toast('✅ パスワードを更新しました。新しいパスワードでログインしてください。');
+    authTab('login');
   }, 400);
 }
 
@@ -2167,29 +2172,44 @@ async function analyze() {
 
   result = null; // グローバルをリセット（let宣言しない）
 
-  // AbortController で20秒タイムアウト
-  const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), 20000);
+  // タイムアウト制御（AbortSignalを使わずPromise.raceで実装）
+  const TIMEOUT_MS = 55000;
+  let _timeoutReject;
+  const timeoutPromise = new Promise((_, reject) => {
+    _timeoutReject = reject;
+    setTimeout(() => reject(Object.assign(new Error('処理がタイムアウトしました。しばらく待ってから再試行してください。'), { name: 'AbortError' })), TIMEOUT_MS);
+  });
 
   try {
     console.log('fetch start');
-    const res = await fetch('/api/intake/organize', {
+    const fetchPromise = fetch('/api/intake/organize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ consultationText: memo, isPro }),
-      signal: controller.signal
     });
-    clearTimeout(timeoutId);
+    const res = await Promise.race([fetchPromise, timeoutPromise]);
     console.log('fetch done', res.status);
+
+    // 404/500 時はHTMLが返るのでJSONパース前にチェック
+    if (res.status === 404) {
+      throw new Error('AIのAPIが見つかりません（404）。デプロイを確認してください。');
+    }
+    if (res.status === 503) {
+      throw new Error('AI処理サービスが利用できません。環境変数 ANTHROPIC_API_KEY を確認してください。');
+    }
 
     const raw = await res.text();
     let data;
     try { data = JSON.parse(raw); }
-    catch (e) { throw new Error('JSON parse error: ' + raw.slice(0, 300)); }
+    catch (e) {
+      // JSONでない（HTMLエラーページ等）場合
+      const preview = raw.replace(/<[^>]+>/g,'').trim().slice(0, 120);
+      throw new Error(`サーバーエラー (${res.status}): ${preview || 'レスポンスをJSONとして読み込めませんでした'}`);
+    }
     console.log('API response data =', data);
 
     if (!res.ok) {
-      throw new Error(data.error || '整理に失敗しました');
+      throw new Error(data.error || `整理に失敗しました (${res.status})`);
     }
 
     if (!data.parsed || typeof data.parsed !== 'object') {
@@ -2203,18 +2223,25 @@ async function analyze() {
     const rawEl = document.getElementById('result-raw');
     if (rawEl) rawEl.style.display = 'none';
 
-    result = { memo, ...data.parsed, date: new Date().toISOString(), isPro };
+    // APIから返ったtitleをタイトル欄に自動セット
+    const autoTitle = data.parsed.title || '';
+    const titleEl   = document.getElementById('case-title');
+    if (titleEl && !titleEl.value.trim()) {
+      // ユーザーが手入力していない場合のみ自動セット
+      titleEl.value = autoTitle;
+    }
+
+    result = { memo, ...data.parsed, title: titleEl?.value || autoTitle, date: new Date().toISOString(), isPro };
     showResult(data.parsed);
     autoSave(result);
     console.log('render done');
     track('analyze_success', { plan: isPro ? 'pro' : 'free' });
 
   } catch (err) {
-    clearTimeout(timeoutId);
     console.error('[Lexoria] analyze error:', err.message);
 
     const msg = err.name === 'AbortError'
-      ? '混み合っています。短くして再試行してください。'
+      ? '処理がタイムアウトしました。しばらく待ってから再試行してください。'
       : (err.message || '整理結果の生成に失敗しました。再試行してください。');
 
     // toast + 画面内メッセージの両方に表示
@@ -2574,7 +2601,7 @@ function autoSave(r) {
   if (!u.history) u.history=[];
   const team = findMyTeam();
   const titleEl = document.getElementById('case-title');
-  const title = titleEl?.value.trim() || '';
+  const title = (titleEl?.value.trim()) || result?.title || '無題の相談';
   const entry = {
     ...r,
     title: title,
@@ -2809,13 +2836,14 @@ function renderTeam() {
         <thead><tr><th>氏名</th><th>メールアドレス</th><th>役割</th><th>状態</th><th>参加日</th>${isAdmin?'<th></th>':''}</tr></thead>
         <tbody>
           ${(team.members||[]).map(m2=>`<tr><td>${m2.name}</td><td style="color:var(--slate);font-size:.78rem">${m2.email}</td><td><span class="rbdg ${m2.role==='admin'?'rbdg-admin':'rbdg-member'}">${m2.role==='admin'?'管理者':'メンバー'}</span></td><td><span class="sbdg-active">有効</span></td><td style="color:var(--slate);font-size:.76rem">${m2.joinedAt?new Date(m2.joinedAt).toLocaleDateString('ja-JP'):'—'}</td>${isAdmin&&m2.role!=='admin'?`<td><button class="btn-del" onclick="removeMember('${m2.email}')">削除</button></td>`:isAdmin?'<td></td>':''}</tr>`).join('')}
-          ${(team.invites||[]).map(iv=>`<tr><td style="color:var(--slate)">（招待中）</td><td style="color:var(--slate);font-size:.78rem">${iv.email}</td><td><span class="rbdg rbdg-member">メンバー</span></td><td><span class="sbdg-pending">招待中</span></td><td style="color:var(--slate);font-size:.76rem">${iv.invitedAt?new Date(iv.invitedAt).toLocaleDateString('ja-JP'):'—'}</td>${isAdmin?`<td><button class="btn-del" onclick="cancelInvite('${iv.email}')">取消</button></td>`:''}</tr>`).join('')}
+          ${(team.invites||[]).map(iv=>`<tr><td style="color:var(--slate)">（招待中）</td><td style="color:var(--slate);font-size:.78rem">${iv.email}</td><td><span class="rbdg ${iv.role==='admin'?'rbdg-admin':'rbdg-member'}">${iv.role==='admin'?'管理者':'メンバー'}</span></td><td><span class="sbdg-pending">招待中</span></td><td style="color:var(--slate);font-size:.76rem">${iv.invitedAt?new Date(iv.invitedAt).toLocaleDateString('ja-JP'):'—'}</td>${isAdmin?`<td><button class="btn-del" onclick="cancelInvite('${iv.email}')">取消</button></td>`:''}</tr>`).join('')}
         </tbody>
       </table>
     </div>
     ${isAdmin?`<div class="sec-box"><h3>✉️ メンバーを招待する</h3>${activeCount+pendingCount>=maxM?`<p style="color:#d97706;font-size:.82rem">⚠️ 上限（${maxM}名）に達しています。</p>`:`<div class="inv-form">
   <div class="fg"><label>氏名</label><input type="text" id="inv-name" placeholder="山田 太郎"></div>
   <div class="fg"><label>メールアドレス</label><input type="email" id="inv-email" placeholder="example@law.jp"></div>
+'  <div class="fg"><label>役割</label><select id="inv-role" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:.84rem;font-family:inherit;background:#fff;color:var(--ink)"><option value="member" selected>&#128100; メンバー</option><option value="admin">&#128081; 管理者</option></select></div>'
   <button onclick="generateInviteLink()" style="background:var(--gold);color:#fff;border:none;padding:10px 20px;border-radius:4px;cursor:pointer;font-size:.85rem;font-weight:600">招待リンクを生成</button>
   <div class="terr" id="inv-err"></div>
   <div id="inv-link-box" style="display:none;margin-top:12px;background:#f5f0eb;border:1px solid var(--border);border-radius:6px;padding:12px">
@@ -2851,7 +2879,7 @@ function handleInviteToken() {
 
   try {
     const data = JSON.parse(atob(decodeURIComponent(token)));
-    const { email: invEmail, teamAdmin, ts } = data;
+    const { email: invEmail, teamAdmin, role: invRole, ts } = data;
 
     // 有効期限チェック（7日間）
     if (Date.now() - ts > 7 * 24 * 60 * 60 * 1000) {
@@ -2872,7 +2900,8 @@ function handleInviteToken() {
       team.invites  = team.invites.filter(iv => iv.email !== invEmail);
       team.members  = team.members  || [];
       const exists  = team.members.some(m => m.email === invEmail);
-      if (!exists) team.members.push({ email: invEmail, name: me.name || invEmail, role: 'member', status: 'active', joinedAt: new Date().toISOString() });
+      const hRole = inv?.role || 'member';
+      if (!exists) team.members.push({ email: invEmail, name: me.name || invEmail, role: hRole, status: 'active', joinedAt: new Date().toISOString() });
       saveTeam(team);
       toast('✅ ' + (team.adminEmail) + ' のチームに参加しました');
       renderTeam();
@@ -2909,7 +2938,8 @@ function processInviteAfterRegister(email) {
     team.invites = team.invites.filter(iv => iv.email !== data.email);
     team.members = team.members || [];
     if (!team.members.some(m => m.email === email)) {
-      team.members.push({ email, name: users[email]?.name || email, role: 'member', status: 'active', joinedAt: new Date().toISOString() });
+      const invRole = inv?.role || data?.role || 'member';
+      team.members.push({ email, name: users[email]?.name || email, role: invRole, status: 'active', joinedAt: new Date().toISOString() });
     }
     saveTeam(team);
     sessionStorage.removeItem('inviteToken');
@@ -2924,12 +2954,14 @@ function generateInviteLink() {
   if (!team || team.adminEmail !== me.email) return;
 
   const nameEl  = document.getElementById('inv-name');
+  const roleEl = document.getElementById('inv-role');
   const emailEl = document.getElementById('inv-email');
   const errEl   = document.getElementById('inv-err');
   if (errEl) errEl.classList.remove('on');
 
   const name  = nameEl?.value.trim() || '';
   const email = emailEl?.value.trim() || '';
+  const role  = (roleEl?.value === 'admin') ? 'admin' : 'member'; // admin以外はmemberに強制
   if (!name)  return err('inv-err', '氏名を入力してください');
   if (!email) return err('inv-err', 'メールアドレスを入力してください');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err('inv-err', 'メールアドレスの形式が正しくありません');
@@ -2942,7 +2974,7 @@ function generateInviteLink() {
 
   // 既存ユーザーは即参加
   if (users[email]) {
-    team.members.push({ email, name: users[email].name || name, role: 'member', status: 'active', joinedAt: new Date().toISOString() });
+    team.members.push({ email, name: users[email].name || name, role, status: 'active', joinedAt: new Date().toISOString() });
     saveTeam(team);
     if (nameEl) nameEl.value = '';
     if (emailEl) emailEl.value = '';
@@ -2952,21 +2984,28 @@ function generateInviteLink() {
   }
 
   // 招待リストに追加してトークン生成
-  const token     = btoa(JSON.stringify({ email, teamAdmin: me.email, ts: Date.now() }));
+  const token     = btoa(JSON.stringify({ email, teamAdmin: me.email, role, ts: Date.now() }));
   const inviteUrl = window.location.origin + window.location.pathname + '?invite=' + encodeURIComponent(token);
 
   if (!team.invites.some(iv => iv.email === email)) {
-    team.invites.push({ email, name, token, invitedAt: new Date().toISOString() });
+    team.invites.push({ email, name, role, token, invitedAt: new Date().toISOString() });
     saveTeam(team);
   }
 
-  // リンクボックスを表示
-  const box      = document.getElementById('inv-link-box');
-  const linkInput = document.getElementById('inv-link-input');
-  if (box)       box.style.display = 'block';
-  if (linkInput) linkInput.value   = inviteUrl;
-
+  // renderTeam()でDOMが再構築されるので、先にrenderTeam()を呼んでからリンクを表示
   renderTeam();
+
+  // renderTeam()後にDOMが再生成されるので、改めて取得してセット
+  setTimeout(() => {
+    const box2       = document.getElementById('inv-link-box');
+    const linkInput2 = document.getElementById('inv-link-input');
+    const copyBtn2   = document.getElementById('inv-copy-btn');
+    if (box2)       { box2.style.display = 'block'; }
+    if (linkInput2) { linkInput2.value   = inviteUrl; }
+    if (copyBtn2)   { copyBtn2.textContent = '📋 コピー'; copyBtn2.style.background = ''; }
+    // 生成成功トースト
+    toast('✅ 招待リンクを生成しました。コピーして招待先にお送りください。');
+  }, 50);
 }
 
 // 招待リンクをクリップボードにコピー
