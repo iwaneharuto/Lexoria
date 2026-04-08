@@ -14,6 +14,8 @@
 //   invoice.payment_failed           → 決済失敗
 
 import Stripe from 'stripe';
+import { buildPriceToUiPlanMap } from '../../lib/stripe/priceIds.js';
+import { getStoredUser, putStoredUser, normalizeEmail } from '../../lib/authStore.js';
 
 // Vercel はデフォルトでリクエストボディをパースするが、
 // Stripe 署名検証には生のバイト列が必要なため bodyParser を無効化
@@ -33,38 +35,67 @@ function getRawBody(req) {
   });
 }
 
-// ── 商品・プラン設定 ─────────────────────────────────────────────
-// 商品ID: prod_U79MghzsXxusgz
-const PRODUCT_ID = 'prod_U79MghzsXxusgz';
+// Price ID → UI plan（lib/stripe/priceIds.js の現行 ID + 旧 US Webhook 用レガシー）
+// 確認: Dashboard → 商品 → 各 Price の ID、または `stripe prices list`
+const PRICE_TO_PLAN = buildPriceToUiPlanMap();
+const PLAN_TO_SEAT_LIMIT = Object.freeze({
+  personal: 2, // Starter
+  small: 5,    // Standard
+  large: 10,   // Pro
+});
 
-// Price ID → プラン名 マッピング
-// 確認方法: Stripe Dashboard → 商品カタログ → prod_U79MghzsXxusgz → 各価格のID
-// または Stripe CLI: stripe prices list --product prod_U79MghzsXxusgz
-const PRICE_TO_PLAN = {
-  'price_1T8v3PAPYDSR7srNMboKV12t': 'personal', // パーソナルプラン ¥9,800/月  1ユーザー
-  'price_1T9E61APYDSR7srNHlKLA9VT': 'small',    // スモールプラン  ¥39,800/月  最大5ユーザー
-  'price_1T9K14APYDSR7srN7qvPVkFr': 'large',    // ラージプラン    ¥74,900/月  最大10ユーザー
-};
+function resolveBillingCycleFromPrice(price) {
+  const interval = price?.recurring?.interval;
+  return interval === 'year' ? 'yearly' : 'monthly';
+}
 
-// プランを解決（静的マッピング → 金額フォールバックの順で判定）
-async function resolvePlan(stripe, subscription) {
+// プランを解決（price.idベースのみ）
+function resolvePlanFromSubscription(subscription) {
   const item  = subscription?.items?.data?.[0];
   const price = item?.price;
-  if (!price) return 'personal';
+  if (!price?.id) return null;
+  return PRICE_TO_PLAN[price.id] || null;
+}
 
-  // 静的マッピングで解決できる場合
-  if (PRICE_TO_PLAN[price.id]) return PRICE_TO_PLAN[price.id];
+function resolveBillingSnapshot(subscription, customerId) {
+  const item = subscription?.items?.data?.[0];
+  const price = item?.price || null;
+  const plan = resolvePlanFromSubscription(subscription);
+  if (!plan) return null;
+  return {
+    plan,
+    billingCycle: resolveBillingCycleFromPrice(price),
+    seatLimit: PLAN_TO_SEAT_LIMIT[plan] || 0,
+    subscriptionStatus: String(subscription?.status || ''),
+    stripeSubscriptionId: String(subscription?.id || ''),
+    stripeCustomerId: String(customerId || subscription?.customer || ''),
+    currentPeriodEnd: subscription?.current_period_end
+      ? new Date(subscription.current_period_end * 1000).toISOString()
+      : null,
+  };
+}
 
-  // 同じ商品に属するpriceなら金額でプランを推定
-  if (price.product === PRODUCT_ID) {
-    const amount = price.unit_amount; // JPY（¥単位）
-    if      (amount >= 74900) return 'large';
-    else if (amount >= 39800) return 'small';
-    else                      return 'personal';
+async function saveBillingStateByEmail(email, snapshot) {
+  const em = normalizeEmail(email);
+  if (!em) return { ok: false, reason: 'email_not_found' };
+  const user = await getStoredUser(em);
+  if (!user) {
+    console.warn('[Webhook] DB user not found for billing update:', em);
+    return { ok: false, reason: 'user_not_found' };
   }
-
-  console.warn('[Webhook] 未知のPrice ID:', price.id, '→ personal にフォールバック');
-  return 'personal';
+  const next = {
+    ...user,
+    plan: snapshot.plan,
+    billingCycle: snapshot.billingCycle,
+    seatLimit: snapshot.seatLimit,
+    subscriptionStatus: snapshot.subscriptionStatus,
+    stripeSubscriptionId: snapshot.stripeSubscriptionId,
+    stripeCustomerId: snapshot.stripeCustomerId,
+    currentPeriodEnd: snapshot.currentPeriodEnd,
+    updated_at: new Date().toISOString(),
+  };
+  await putStoredUser(em, next);
+  return { ok: true };
 }
 
 // メインハンドラー
@@ -126,22 +157,33 @@ export default async function handler(req, res) {
           break;
         }
 
-        // サブスクリプション詳細を取得してプランを特定
-        let plan = 'personal';
+        // サブスクリプション詳細を取得して price.id ベースでプランを特定しDB保存
+        let snapshot = null;
         if (subscriptionId) {
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          plan = await resolvePlan(stripe, subscription);
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId, { expand: ['items.data.price'] });
+          snapshot = resolveBillingSnapshot(subscription, customerId);
         }
+        if (!snapshot) {
+          console.error('[Webhook] checkout.session.completed: unknown or missing price.id', {
+            sessionId: session.id,
+            customerEmail,
+            subscriptionId,
+          });
+          break;
+        }
+        const dbRes = await saveBillingStateByEmail(customerEmail, snapshot);
 
-        console.log(`[Webhook] 購入完了: ${customerEmail} → ${plan}プラン (customer: ${customerId})`);
-
-        // TODO: データベースが導入された際はここでユーザーのプラン・顧客IDを更新
-        // 現在はlocalStorageベースのため、サーバー側での永続化は未実装
-        // 将来の実装例:
-        // await db.users.update({ email: customerEmail }, {
-        //   plan, isPro: true, stripeCustomerId: customerId,
-        //   stripeSubscriptionId: subscriptionId, planActivatedAt: new Date()
-        // });
+        console.log('[Webhook] 購入完了/DB更新', {
+          email: customerEmail,
+          plan: snapshot.plan,
+          billingCycle: snapshot.billingCycle,
+          seatLimit: snapshot.seatLimit,
+          subscriptionStatus: snapshot.subscriptionStatus,
+          subscriptionId: snapshot.stripeSubscriptionId,
+          customerId: snapshot.stripeCustomerId,
+          currentPeriodEnd: snapshot.currentPeriodEnd,
+          dbUpdated: dbRes.ok,
+        });
 
         break;
       }
@@ -150,17 +192,17 @@ export default async function handler(req, res) {
       case 'customer.subscription.created': {
         const subscription = event.data.object;
         const customerId   = subscription.customer;
-        const plan         = await resolvePlan(stripe, subscription);
+        const snapshot     = resolveBillingSnapshot(subscription, customerId);
         const status       = subscription.status; // active / trialing / incomplete 等
 
-        console.log(`[Webhook] サブスク作成: customer=${customerId} plan=${plan} status=${status}`);
+        console.log(`[Webhook] サブスク作成: customer=${customerId} plan=${snapshot ? snapshot.plan : '-'} status=${status}`);
 
         // メールアドレスをcustomerIdから取得
         const customer = await stripe.customers.retrieve(customerId);
         const email    = customer.email;
-        if (email) {
-          console.log(`[Webhook] → ユーザー: ${email} プラン有効化: ${plan}`);
-          // TODO: DB更新 → users.update({ email }, { plan, isPro: true, stripeCustomerId: customerId })
+        if (email && snapshot) {
+          await saveBillingStateByEmail(email, snapshot);
+          console.log(`[Webhook] → ユーザー: ${email} プラン有効化: ${snapshot.plan}`);
         }
 
         break;
@@ -170,21 +212,20 @@ export default async function handler(req, res) {
       case 'customer.subscription.updated': {
         const subscription = event.data.object;
         const customerId   = subscription.customer;
-        const plan         = await resolvePlan(stripe, subscription);
+        const snapshot     = resolveBillingSnapshot(subscription, customerId);
         const status       = subscription.status;
         const cancelAtEnd  = subscription.cancel_at_period_end;
 
-        console.log(`[Webhook] サブスク更新: customer=${customerId} plan=${plan} status=${status} cancelAtEnd=${cancelAtEnd}`);
+        console.log(`[Webhook] サブスク更新: customer=${customerId} plan=${snapshot ? snapshot.plan : '-'} status=${status} cancelAtEnd=${cancelAtEnd}`);
 
         const customer = await stripe.customers.retrieve(customerId);
         const email    = customer.email;
-        if (email) {
+        if (email && snapshot) {
+          await saveBillingStateByEmail(email, snapshot);
           if (status === 'active' && !cancelAtEnd) {
-            console.log(`[Webhook] → ${email} プラン更新: ${plan}`);
-            // TODO: DB更新 → users.update({ email }, { plan, isPro: true, cancelScheduled: false })
+            console.log(`[Webhook] → ${email} プラン更新: ${snapshot.plan}`);
           } else if (cancelAtEnd) {
             console.log(`[Webhook] → ${email} 解約予約済み（期間末に停止）`);
-            // TODO: DB更新 → users.update({ email }, { cancelScheduled: true })
           }
         }
 
@@ -201,8 +242,19 @@ export default async function handler(req, res) {
         const customer = await stripe.customers.retrieve(customerId);
         const email    = customer.email;
         if (email) {
+          const ended = {
+            plan: 'free',
+            billingCycle: 'monthly',
+            seatLimit: 0,
+            subscriptionStatus: String(subscription?.status || 'canceled'),
+            stripeSubscriptionId: String(subscription?.id || ''),
+            stripeCustomerId: String(customerId || ''),
+            currentPeriodEnd: subscription?.current_period_end
+              ? new Date(subscription.current_period_end * 1000).toISOString()
+              : null,
+          };
+          await saveBillingStateByEmail(email, ended);
           console.log(`[Webhook] → ${email} プラン無効化`);
-          // TODO: DB更新 → users.update({ email }, { plan: 'free', isPro: false, cancelScheduled: false })
         }
 
         break;

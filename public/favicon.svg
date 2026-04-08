@@ -3,8 +3,7 @@
   <rect width="32" height="32" rx="4" fill="#0d0d14"/>
   <!-- Gold border -->
   <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="none" stroke="#6e5830" stroke-width="0.75"/>
-  <!-- L monogram — vertical stroke -->
+  <!-- L monogram — gold -->
   <rect x="9" y="7" width="4" height="18" fill="#b8975a"/>
-  <!-- L monogram — horizontal foot -->
   <rect x="9" y="21" width="14" height="4" fill="#b8975a"/>
 </svg>

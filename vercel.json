@@ -1,4 +1,7 @@
 {
+  "crons": [
+    { "path": "/api/post-x", "schedule": "0 12 * * *" }
+  ],
   "functions": {
     "api/intake/organize.js": {
       "memory": 256,
@@ -8,12 +11,114 @@
       "memory": 128,
       "maxDuration": 30
     },
+    "api/stripe-webhook.js": {
+      "memory": 128,
+      "maxDuration": 30
+    },
     "api/checkout/create.js": {
+      "memory": 128,
+      "maxDuration": 15
+    },
+    "api/post-x.js": {
+      "memory": 128,
+      "maxDuration": 30
+    },
+    "api/history/index.js": {
+      "memory": 256,
+      "maxDuration": 30
+    },
+    "api/auth/index.js": {
       "memory": 128,
       "maxDuration": 15
     }
   },
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "lexoria-ai.vercel.app"
+        }
+      ],
+      "destination": "https://lexoriaai.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "lexoria-main.vercel.app"
+        }
+      ],
+      "destination": "https://lexoriaai.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lexoriaai.com"
+        }
+      ],
+      "destination": "https://lexoriaai.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lexoria-main.vercel.app"
+        }
+      ],
+      "destination": "https://lexoriaai.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/jp",
+      "destination": "/jp/index.html"
+    },
+    {
+      "source": "/us",
+      "destination": "/us/index.html"
+    },
+    {
+      "source": "/us/legal-intake-ai",
+      "destination": "/us/legal-intake-ai.html"
+    },
+    {
+      "source": "/us/guides",
+      "destination": "/us/guides/index.html"
+    },
+    {
+      "source": "/us/guides/legal-intake-software",
+      "destination": "/us/guides/legal-intake-software.html"
+    },
+    {
+      "source": "/us/guides/what-is-legal-intake",
+      "destination": "/us/guides/what-is-legal-intake.html"
+    },
+    {
+      "source": "/us/guides/ai-legal-intake",
+      "destination": "/us/guides/ai-legal-intake.html"
+    },
+    {
+      "source": "/us/guides/legal-intake-process",
+      "destination": "/us/guides/legal-intake-process.html"
+    },
     {
       "source": "/blog/lawyer-intake-memo",
       "destination": "/blog/lawyer-intake-memo.html"
@@ -45,6 +150,44 @@
     {
       "source": "/templates/lawyer-first-consultation-checklist",
       "destination": "/templates/lawyer-first-consultation-checklist.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" }
+      ]
+    },
+    {
+      "source": "/favicon.ico",
+      "headers": [
+        { "key": "Content-Type", "value": "image/x-icon" },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/favicon-v2.ico",
+      "headers": [
+        { "key": "Content-Type", "value": "image/x-icon" },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/favicon-32x32.png",
+      "headers": [
+        { "key": "Content-Type", "value": "image/png" },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
+      ]
     }
   ]
 }

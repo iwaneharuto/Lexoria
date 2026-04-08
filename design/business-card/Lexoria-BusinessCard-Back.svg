@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="97mm" height="61mm" viewBox="0 0 97 61">
+  <title>Lexoria Business Card - Back</title>
+  <desc>QR 30mm. Safe area 5mm inside trim. Fonts in fonts/ folder.</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      @font-face {
+        font-family: 'NotoSansJP';
+        font-weight: 400;
+        src: url('fonts/NotoSansJP-Regular.otf') format('opentype');
+      }
+      @font-face {
+        font-family: 'NotoSansJP';
+        font-weight: 700;
+        src: url('fonts/NotoSansJP-Bold.otf') format('opentype');
+      }
+      .label { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 2.5mm; fill: rgb(28,42,57); letter-spacing: 0.08em; }
+      .sample { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 2.35mm; fill: rgb(28,42,57); letter-spacing: 0.02em; }
+      .crop { stroke: rgb(55,55,55); stroke-width: 0.12; fill: none; }
+      .safe { fill: none; stroke: rgb(200,196,188); stroke-width: 0.08; stroke-dasharray: 0.7 0.6; }
+    ]]></style>
+  </defs>
+  <g id="Layer_01_Background" data-name="01 Background">
+    <rect width="97" height="61" fill="#f5f1e8"/>
+  </g>
+  <g id="Layer_02_SafeArea" data-name="02 Safe area (template)">
+    <rect class="safe" x="8" y="8" width="81" height="45"/>
+  </g>
+  <g id="Layer_03_CropMarks" data-name="03 Crop marks">
+    <rect x="3" y="3" width="91" height="55" fill="none" stroke="#c8c4bc" stroke-width="0.06" stroke-dasharray="0.6 0.5"/>
+    <path class="crop" d="M0,3 H3 M3,0 V3"/>
+    <path class="crop" d="M94,3 H97 M94,0 V3"/>
+    <path class="crop" d="M0,58 H3 M3,58 V61"/>
+    <path class="crop" d="M94,58 H97 M94,58 V61"/>
+  </g>
+  <g id="Layer_04_Label" data-name="04 Label">
+    <text x="48.5" y="11.6" text-anchor="middle" class="label">&#x3053;&#x306e;&#x76f8;&#x8ac7;&#x6587;&#x3067;&#x8a66;&#x305b;&#x307e;&#x3059;</text>
+  </g>
+  <g id="Layer_05_QR" data-name="05 QR">
+    <image xlink:href="qr-code.png" href="qr-code.png" x="33.5" y="13.8" width="30" height="30" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+  <g id="Layer_06_Sample" data-name="06 Sample text">
+    <text x="48.5" y="46.2" text-anchor="middle" class="sample">&#x592b;&#x3068;&#x96e2;&#x5a5a;&#x3057;&#x305f;&#x3044;&#x304c;&#x3001;</text>
+    <text x="48.5" y="49.2" text-anchor="middle" class="sample">&#x5b50;&#x3069;&#x3082;&#x306e;&#x89aa;&#x6a29;&#x3067;&#x3082;&#x3081;&#x3066;&#x3044;&#x308b;&#x3002;</text>
+    <text x="48.5" y="52.2" text-anchor="middle" class="sample">&#x8ca1;&#x7523;&#x5206;&#x4e0e;&#x3082;&#x4e0d;&#x5b89;&#x3002;</text>
+  </g>
+</svg>

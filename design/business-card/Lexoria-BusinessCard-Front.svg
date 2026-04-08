@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="97mm" height="61mm" viewBox="0 0 97 61">
+  <title>Lexoria Business Card - Front</title>
+  <desc>91x55mm trim, 3mm bleed. Safe area 5mm inside trim.</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      @font-face {
+        font-family: 'NotoSansJP';
+        font-weight: 400;
+        src: url('fonts/NotoSansJP-Regular.otf') format('opentype');
+      }
+      @font-face {
+        font-family: 'NotoSansJP';
+        font-weight: 700;
+        src: url('fonts/NotoSansJP-Bold.otf') format('opentype');
+      }
+      .ruby { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 2.3mm; fill: rgb(110,106,98); letter-spacing: 0.12em; }
+      .name { font-family: 'NotoSansJP', sans-serif; font-weight: 700; font-size: 6.9mm; fill: rgb(28,42,57); letter-spacing: 0.06em; }
+      .brand { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 2.45mm; fill: rgb(28,42,57); letter-spacing: 0.28em; }
+      .catch { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 3.05mm; fill: rgb(28,42,57); letter-spacing: 0.02em; }
+      .mail { font-family: 'NotoSansJP', sans-serif; font-weight: 400; font-size: 2.05mm; fill: rgb(55,55,55); letter-spacing: 0.02em; }
+      .crop { stroke: rgb(55,55,55); stroke-width: 0.12; fill: none; }
+      .safe { fill: none; stroke: rgb(200,196,188); stroke-width: 0.08; stroke-dasharray: 0.7 0.6; }
+    ]]></style>
+  </defs>
+  <g id="Layer_01_Background" data-name="01 Background">
+    <rect width="97" height="61" fill="#f5f1e8"/>
+  </g>
+  <g id="Layer_02_SafeArea" data-name="02 Safe area (template)">
+    <rect class="safe" x="8" y="8" width="81" height="45"/>
+  </g>
+  <g id="Layer_03_CropMarks" data-name="03 Crop marks">
+    <rect x="3" y="3" width="91" height="55" fill="none" stroke="#c8c4bc" stroke-width="0.06" stroke-dasharray="0.6 0.5"/>
+    <path class="crop" d="M0,3 H3 M3,0 V3"/>
+    <path class="crop" d="M94,3 H97 M94,0 V3"/>
+    <path class="crop" d="M0,58 H3 M3,58 V61"/>
+    <path class="crop" d="M94,58 H97 M94,58 V61"/>
+  </g>
+  <g id="Layer_04_Typography" data-name="04 Typography">
+    <text x="48.5" y="11.8" text-anchor="middle" class="ruby">&#x3044;&#x308f;&#x306d; &#x306f;&#x308b;&#x3068;</text>
+    <text x="48.5" y="21.2" text-anchor="middle" class="name">&#x5ca9;&#x6839;&#x4ea8;&#x675c;</text>
+    <text x="48.5" y="27.8" text-anchor="middle" class="brand">Lexoria</text>
+    <text x="48.5" y="35.2" text-anchor="middle" class="catch">&#x521d;&#x56de;&#x76f8;&#x8ac7;&#x30e1;&#x30e2;&#x3092;</text>
+    <text x="48.5" y="40.5" text-anchor="middle" class="catch">10&#x79d2;&#x3067;&#x6574;&#x7406;</text>
+    <text x="48.5" y="51.2" text-anchor="middle" class="mail">support@lexoriaai.com</text>
+  </g>
+</svg>

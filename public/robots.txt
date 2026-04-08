@@ -2,7 +2,10 @@ User-agent: *
 Allow: /
 Allow: /blog/
 Allow: /templates/
+Allow: /jp
+Allow: /us
+Allow: /us/
 
 Disallow: /api/
 
-Sitemap: https://intakeai.com/sitemap.xml
+Sitemap: https://lexoriaai.com/sitemap.xml

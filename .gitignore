@@ -1,0 +1,6 @@
+.vercel
+.env*.local
+.data/
+node_modules/
+public/favicon-*-tmp.png
+public/.favicon-tmp-*.png

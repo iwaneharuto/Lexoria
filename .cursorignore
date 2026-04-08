@@ -1,0 +1,12 @@
+﻿# Binary / generated favicons - do not open as text (avoids broken diffs & failed Keep).
+public/favicon.ico
+public/favicon-v2.ico
+public/favicon-32x32.png
+public/favicon-512.png
+public/favicon-48.png
+public/favicon-16x16.png
+public/favicon.png
+public/**/*.ico
+
+# Dependencies (huge; never patch via AI)
+node_modules/

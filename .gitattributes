@@ -1,0 +1,16 @@
+# LF in repo for web text so editor patches (e.g. Cursor Keep) match line endings.
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+*.mjs text eol=lf
+
+# Treat icons and raster assets as binary so core.autocrlf never corrupts them on Windows.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary

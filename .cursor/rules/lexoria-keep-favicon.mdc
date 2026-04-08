@@ -1,0 +1,29 @@
+---
+description: Avoid Cursor Keep failures — favicon binaries, LF HTML, small diffs only
+alwaysApply: true
+---
+
+# Lexoria: Keep しやすい編集方針
+
+## 触らない（テキスト編集禁止）
+
+- `public/favicon.ico`, `public/favicon-v2.ico` および `public/favicon-*.png`（バイナリ）
+- 変更は **`npm run build:favicons`**（`public/favicon.svg` をソースに生成）のみ
+
+## `public/index.html`
+
+- **改行は LF のみ**（CRLF にしない）。提案・適用前に `npm run normalize:index` を推奨。
+- **文字コード UTF-8、BOM なし**。
+- ファイルは **約 1 万行・500KB 超**。差分は **`<head>` 先頭付近（おおよそ先頭 30 行以内）に限定**すること。本文・FAQ など広範囲の置換は **分割**（例：① head の link のみ ② 別ターンで別セクション）。
+
+## 提案の出し方（ユーザーが Keep しやすい順）
+
+1. 第 1 ターン: `<head>` 内の **favicon の `<link>` だけ**（数行）
+2. 第 2 ターン: `vercel.json` の headers など **別ファイル**
+3. 全文や数千行の差分は出さない
+
+## Keep が失敗しがちなパターン
+
+- 提案が **CRLF**、実ファイルが **LF**（または逆）
+- **バイナリ**を同じチャットの変更に混ぜた
+- ユーザーが **手で保存したあと**、古い提案を Keep しようとした（ベースがズレる）

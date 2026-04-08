@@ -2,8 +2,22 @@
   "name": "lexoria",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "build:favicons": "node scripts/build-favicons.mjs",
+    "normalize:index": "node scripts/normalize-index-lf.mjs",
+    "postinstall": "node scripts/postinstall-favicons.mjs"
+  },
   "dependencies": {
-    "stripe": "^16.0.0"
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@supabase/supabase-js": "^2.100.0",
+    "@vercel/kv": "^3.0.0",
+    "dotenv": "^17.3.1",
+    "stripe": "^16.0.0",
+    "twitter-api-v2": "^1.29.0"
+  },
+  "devDependencies": {
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.33.5"
   },
   "type": "module",
   "engines": {
